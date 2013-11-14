@@ -82,7 +82,13 @@
 
                 // do now allow two touch points to drag the same element
                 if (orig.targetTouches.length > 1){
-                    console.log('double touched - use to flip cards over?');
+                    var back = $(this).attr("back");
+                    var front = $(this).attr("src");
+                    console.log($(this).attr("back"));
+                    $(this).attr("src", back);
+                    $(this).attr("back", front);
+                    $(this).width(175);
+                    $(this).height(246);
                     return;
                 }
                 
