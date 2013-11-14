@@ -1,0 +1,19 @@
+#header{
+	position: absolute;
+	left:42%;	
+	top:10%;
+	font-size: 150%;
+	line-height: 60%;
+}
+
+.draggable{
+	position:absolute; 
+}
+
+.button{
+    padding: 10px 15px;
+    background: #181818;
+    color: #FFF;
+    margin-left:-5px;
+    margin-top:-70px;
+}
