@@ -54,6 +54,17 @@
                 offsetstop = {};
                 offsetsleft = {};
 
+                //bring to front
+                var highZ = 0;
+                var allCards = $('.draggable');
+                $.each(allCards, function(i,val){
+                    if($(val).css("zIndex") > highZ){
+                        highZ = $(val).css("zIndex");
+                    }
+                })
+                $(this).css("zIndex", parseInt(highZ)+1);
+                //might have to reset them all if it gets too high.. 
+
                 if(grouped){
                     offset = {
                         x: orig.changedTouches[0].pageX,

@@ -8,10 +8,21 @@
 		<h2>Drag Me!</h2>
         <button class = "button" id="enable">Group</button>
         <button class = "button" id="disable">Ungroup</button>
+        <button class = "button" id = "shuffle">Shuffle</button>
     </div>
-	<img class = "draggable" back="back.jpg" style="top:200px; left:565px;" src="ace.jpg">
-	<img class = "draggable" back="back.jpg" style="top:200px; left:365px;"src="king.jpg">
-	<img class = "draggable" back="back.jpg" style="top:200px; left:765px;"src="king.jpg">
+	<img class = "draggable" back="images/back.jpg" style="top:200px; left:565px;" src="images/as.jpg">
+	<img class = "draggable" back="images/back.jpg" style="top:200px; left:365px;"src="images/ks.jpg">
+	<img class = "draggable" back="images/back.jpg" style="top:200px; left:765px;"src="images/qs.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:200px; left:165px;" src="images/js.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:200px; left:965px;"src="images/10s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:500px; left:765px;"src="images/9s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:800px; left:365px;" src="images/8s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:500px; left:365px;"src="images/7s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:500px; left:165px;"src="images/6s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:500px; left:565px;" src="images/5s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:500px; left:965px;"src="images/4s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:800px; left:765px;"src="images/3s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:800px; left:565px;"src="images/2s.jpg">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script src="drag.js"></script>
 	<script>
@@ -24,6 +35,26 @@
             	$(".draggable").draggableTouch("disable");
                 $(".draggable").draggableTouch("disgroup");
             });
+            $("#shuffle").click(function(){
+                var diff = 0;
+                var cards = $('.draggable');
+                $.each(cards, function(i,val){
+                    $(val).css('zIndex', Math.round(Math.random()*52));
+                    $(val).css({
+                        top: 200+diff,
+                        left: 565+diff
+                    });
+                    var back = $(val).attr("back");
+                    var front = $(val).attr("src");
+                    if(front!='images/back.jpg'){
+                        $(val).attr("src", back);
+                        $(val).attr("back", front);
+                        $(val).width(175);
+                        $(val).height(246);
+                    }
+                    diff++;
+                })
+            })
         });
 		$(".draggable").draggableTouch();
 	</script>
