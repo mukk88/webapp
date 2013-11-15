@@ -17,4 +17,27 @@
     color: #FFF;
     margin-left:-5px;
     margin-top:-70px;
+    position:fixed;
+    right:10px;
+    width: 100px;
+    z-index: 999;
+}
+
+#icon{
+	top:20px;
+	left:20px;
+	position: fixed;;
+	z-index: 999;
+}
+
+#enable{
+	top:100px;
+}
+
+#shuffle{
+	top:200px;
+}
+
+#disable{
+	top:150px;
 }

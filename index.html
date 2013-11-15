@@ -2,27 +2,28 @@
 <head>
 	<title>card app</title>
 	<link rel="stylesheet" type="text/css" href="card.css">
+    <link rel="shortcut icon" href="images/icon.ico">
 </head>
 <body>
     <div id="header">
-		<h2>Drag Me!</h2>
         <button class = "button" id="enable">Group</button>
         <button class = "button" id="disable">Ungroup</button>
         <button class = "button" id = "shuffle">Shuffle</button>
     </div>
-	<img class = "draggable" back="images/back.jpg" style="top:200px; left:565px;" src="images/as.jpg">
-	<img class = "draggable" back="images/back.jpg" style="top:200px; left:365px;"src="images/ks.jpg">
-	<img class = "draggable" back="images/back.jpg" style="top:200px; left:765px;"src="images/qs.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:200px; left:165px;" src="images/js.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:200px; left:965px;"src="images/10s.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:500px; left:765px;"src="images/9s.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:800px; left:365px;" src="images/8s.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:500px; left:365px;"src="images/7s.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:500px; left:165px;"src="images/6s.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:500px; left:565px;" src="images/5s.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:500px; left:965px;"src="images/4s.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:800px; left:765px;"src="images/3s.jpg">
-    <img class = "draggable" back="images/back.jpg" style="top:800px; left:565px;"src="images/2s.jpg">
+    <img id = "icon" src="images/icon.png" height = "64">
+	<img class = "draggable" back="images/back.jpg" style="top:100px; left:565px;" src="images/as.jpg">
+	<img class = "draggable" back="images/back.jpg" style="top:100px; left:365px;"src="images/ks.jpg">
+	<img class = "draggable" back="images/back.jpg" style="top:100px; left:765px;"src="images/qs.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:100px; left:165px;" src="images/js.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:100px; left:965px;"src="images/10s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:400px; left:765px;"src="images/9s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:700px; left:365px;" src="images/8s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:400px; left:365px;"src="images/7s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:400px; left:165px;"src="images/6s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:400px; left:565px;" src="images/5s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:400px; left:965px;"src="images/4s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:700px; left:765px;"src="images/3s.jpg">
+    <img class = "draggable" back="images/back.jpg" style="top:700px; left:565px;"src="images/2s.jpg">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script src="drag.js"></script>
 	<script>
@@ -56,7 +57,7 @@
                 })
             })
         });
-		$(".draggable").draggableTouch();
+		$(".draggable").draggableTouch('disgroup');
 	</script>
 </body>
 </html>

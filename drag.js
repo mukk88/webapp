@@ -58,11 +58,13 @@
                 var highZ = 0;
                 var allCards = $('.draggable');
                 $.each(allCards, function(i,val){
-                    if($(val).css("zIndex") > highZ){
-                        highZ = $(val).css("zIndex");
+                    if(parseInt($(val).css("zIndex")) > highZ){
+                        highZ = parseInt($(val).css("zIndex"));
                     }
                 })
                 $(this).css("zIndex", parseInt(highZ)+1);
+                highZ = 0;
+                console.log(highZ + ' ' + $(this).css("zIndex"));
                 //might have to reset them all if it gets too high.. 
 
                 if(grouped){
