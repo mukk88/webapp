@@ -13,8 +13,8 @@ $(document).ready(function() {
         $.each(cards, function(i,val){
             $(val).css('zIndex', Math.round(Math.random()*52));
             $(val).css({
-                top: 200+diff,
-                left: 565+diff
+                top: $(window).height()/2-170+diff,
+                left: $(window).width()/2-260+diff
             });
             var back = $(val).attr("back");
             var front = $(val).attr("src");
@@ -28,10 +28,43 @@ $(document).ready(function() {
         })
     })
     $("#deal").click(function(){
-        var people = 4;
-        var cards = -1;
+        var people;
+        var cards;
         try{
             people = parseInt($('#peopleinput').val());
+            cards = parseInt($('#peopleinput').val());
+            if(isNaN(people)){
+                people = 4;
+            }
+            if(isNaN(cards)){
+                cards = 13;
+            }
+            $('#shuffle').click();
+            var allcards = $('.draggable');
+            var w = $(window).width();
+            var h = $(window).height();
+            var positions = [[10,h/2-100],[w/2-50, h-300],[w-200,h/2-100],[w/2-50, 10]];
+            var playpos = [];
+            for(var i =0;i<people;i++){
+                playpos.push([positions[i]]);
+            }
+            var counter = 1;
+            var delay = 300;
+            $.each(allcards,function(index,val){
+                setTimeout((function(v){
+                    return function(){
+                        if(counter>people*cards){
+                            return false;
+                        }
+                        $(v).css({
+                            top: playpos[counter%people][0][1] + counter,
+                            left:playpos[counter%people][0][0] + counter
+                        });
+                        counter++;
+                    }
+                })(val), delay);
+                delay+=500;
+            });
         }catch(err){
             console.log(err);
         }
