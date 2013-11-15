@@ -3,12 +3,19 @@
 	<title>card app</title>
 	<link rel="stylesheet" type="text/css" href="card.css">
     <link rel="shortcut icon" href="images/icon.ico">
+    <link rel="stylesheet" type="text/css" href="../blog/bootstrap.css">
 </head>
 <body>
     <div id="header">
         <button class = "button" id="enable">Group</button>
         <button class = "button" id="disable">Ungroup</button>
         <button class = "button" id = "shuffle">Shuffle</button>
+        <div id = "border"></div>
+        <span class = "menu" id = "players">Players:</span>
+        <input class = "menu" id = "peopleinput" type = "text">
+        <span class = "menu" id = "cards">Cards:</span>
+        <input class = "menu" id = "cardsinput" type = "text">
+        <button class = "button" id = "deal">Deal!</button>
     </div>
     <img id = "icon" src="images/icon.png" height = "64">
 	<img class = "draggable" back="images/back.jpg" style="top:100px; left:565px;" src="images/as.jpg">
@@ -26,38 +33,6 @@
     <img class = "draggable" back="images/back.jpg" style="top:700px; left:565px;"src="images/2s.jpg">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script src="drag.js"></script>
-	<script>
-        $(document).ready(function() {
-            $("#enable").click(function() {
-            	$(".draggable").draggableTouch("disable");
-                $(".draggable").draggableTouch();
-            });
-            $("#disable").click(function() {
-            	$(".draggable").draggableTouch("disable");
-                $(".draggable").draggableTouch("disgroup");
-            });
-            $("#shuffle").click(function(){
-                var diff = 0;
-                var cards = $('.draggable');
-                $.each(cards, function(i,val){
-                    $(val).css('zIndex', Math.round(Math.random()*52));
-                    $(val).css({
-                        top: 200+diff,
-                        left: 565+diff
-                    });
-                    var back = $(val).attr("back");
-                    var front = $(val).attr("src");
-                    if(front!='images/back.jpg'){
-                        $(val).attr("src", back);
-                        $(val).attr("back", front);
-                        $(val).width(175);
-                        $(val).height(246);
-                    }
-                    diff++;
-                })
-            })
-        });
-		$(".draggable").draggableTouch('disgroup');
-	</script>
+    <script src="load.js"></script>
 </body>
 </html>
