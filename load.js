@@ -27,5 +27,14 @@ $(document).ready(function() {
             diff++;
         })
     })
+    $("#deal").click(function(){
+        var people = 4;
+        var cards = -1;
+        try{
+            people = parseInt($('#peopleinput').val());
+        }catch(err){
+            console.log(err);
+        }
+    })
 });
 $(".draggable").draggableTouch('disgroup');

@@ -50,6 +50,7 @@
 	position: fixed;
 	width: 100px;
 	right:10px;
+	z-index: 999;
 }
 
 #peopleinput{
@@ -86,4 +87,6 @@ input::-webkit-input-placeholder {
 	right:5px;
 	border:1px solid;
 	border-radius: 2px;
+	z-index: 999;
+	background-color: #ffffff;
 }
