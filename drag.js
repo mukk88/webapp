@@ -53,10 +53,9 @@
                 offsets = {};
                 offsetstop = {};
                 offsetsleft = {};
+
                 if(grouped){
                     offset = {
-                        // x: orig.changedTouches[0].pageX - pos.left,
-                        // y: orig.changedTouches[0].pageY - pos.top,
                         x: orig.changedTouches[0].pageX,
                         y: orig.changedTouches[0].pageY,
                     };
@@ -66,9 +65,27 @@
                             offsetstop[i] = orig.changedTouches[0].pageY - parseInt(val.style.top);
                             offsetsleft[i] = orig.changedTouches[0].pageX - parseInt(val.style.left);
                             offsets[i] = val;
+                            if (orig.targetTouches.length > 1){
+                                var back = $(val).attr("back");
+                                var front = $(val).attr("src");
+                                console.log($(val).attr("back"));
+                                $(val).attr("src", back);
+                                $(val).attr("back", front);
+                                $(val).width(175);
+                                $(val).height(246);
+                            }
                         }
                     });
                 }else{
+                    if (orig.targetTouches.length > 1){
+                        var back = $(this).attr("back");
+                        var front = $(this).attr("src");
+                        console.log($(this).attr("back"));
+                        $(this).attr("src", back);
+                        $(this).attr("back", front);
+                        $(this).width(175);
+                        $(this).height(246);
+                    }
                     offset = {
                         x: orig.changedTouches[0].pageX - pos.left,
                         y: orig.changedTouches[0].pageY - pos.top,
@@ -82,13 +99,6 @@
 
                 // do now allow two touch points to drag the same element
                 if (orig.targetTouches.length > 1){
-                    var back = $(this).attr("back");
-                    var front = $(this).attr("src");
-                    console.log($(this).attr("back"));
-                    $(this).attr("src", back);
-                    $(this).attr("back", front);
-                    $(this).width(175);
-                    $(this).height(246);
                     return;
                 }
                 
