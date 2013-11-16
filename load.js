@@ -1,3 +1,10 @@
+jQuery.fn.rotate = function(degrees) {
+    $(this).css({'-webkit-transform' : 'rotate('+ degrees +'deg)',
+                 '-moz-transform' : 'rotate('+ degrees +'deg)',
+                 '-ms-transform' : 'rotate('+ degrees +'deg)',
+                 'transform' : 'rotate('+ degrees +'deg)'});
+};
+
 $(document).ready(function() {
     $("#enable").click(function() {
     	$(".draggable").draggableTouch("disable");
@@ -8,14 +15,14 @@ $(document).ready(function() {
         $(".draggable").draggableTouch("disgroup");
     });
     $("#shuffle").click(function(){
-        var diff = 0;
         var cards = $('.draggable');
         $.each(cards, function(i,val){
             $(val).css('zIndex', Math.round(Math.random()*300));
             $(val).css({
-                top: $(window).height()/2-170+diff,
-                left: $(window).width()/2-260+diff
+                top: $(window).height()/2-170,
+                left: $(window).width()/2-260
             });
+            $(val).rotate(Math.round(Math.random()*5-2));
             var back = $(val).attr("back");
             var front = $(val).attr("src");
             if(front!='images/back.jpg'){
@@ -24,7 +31,6 @@ $(document).ready(function() {
                 $(val).width(175);
                 $(val).height(246);
             }
-            diff++;
         })
     })
     $("#deal").click(function(){
@@ -32,7 +38,7 @@ $(document).ready(function() {
         var cards;
         try{
             people = parseInt($('#peopleinput').val());
-            cards = parseInt($('#peopleinput').val());
+            cards = parseInt($('#cardsinput').val());
             if(isNaN(people)){
                 people = 4;
             }
@@ -61,7 +67,7 @@ $(document).ready(function() {
                             return false;
                         }
                         $(v).css({
-                            top: playpos[counter%people][0][1] + counter,
+                            top: playpos[counter%people][0][1],
                             left:playpos[counter%people][0][0] + counter
                         });
                         counter++;
@@ -70,7 +76,7 @@ $(document).ready(function() {
                 delay+=100;
             });
             $('#peopleinput').val('');
-            $('#peopleinput').val('');
+            $('#cardsinput').val(''); 
         }catch(err){
             console.log(err);
         }
