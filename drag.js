@@ -125,6 +125,12 @@
                     }
                 }
 
+                if( parseInt($(this).css('top')) < -50){
+                    $(this).css({
+                        top: orig.changedTouches[0].pageY - $(window).height()/4
+                    });
+                    $(this).appendTo('body');
+                }
             });
             element.bind("touchend", end);
             element.bind("touchcancel", end);
