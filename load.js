@@ -53,6 +53,7 @@ $(document).ready(function() {
             }
             var counter = 1;
             var delay = 100;
+            console.log(cards);
             $.each(allcards,function(index,val){
                 setTimeout((function(v){
                     return function(){
@@ -68,6 +69,8 @@ $(document).ready(function() {
                 })(val), delay);
                 delay+=100;
             });
+            $('#peopleinput').val('');
+            $('#peopleinput').val('');
         }catch(err){
             console.log(err);
         }
