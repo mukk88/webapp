@@ -64,7 +64,6 @@
                 })
                 $(this).css("zIndex", parseInt(highZ)+1);
                 highZ = 0;
-                console.log(highZ + ' ' + $(this).css("zIndex"));
                 //might have to reset them all if it gets too high.. 
 
                 if(grouped){
@@ -81,7 +80,6 @@
                             if (orig.targetTouches.length > 1){
                                 var back = $(val).attr("back");
                                 var front = $(val).attr("src");
-                                console.log($(val).attr("back"));
                                 $(val).attr("src", back);
                                 $(val).attr("back", front);
                                 $(val).width(175);
@@ -93,7 +91,6 @@
                     if (orig.targetTouches.length > 1){
                         var back = $(this).attr("back");
                         var front = $(this).attr("src");
-                        console.log($(this).attr("back"));
                         $(this).attr("src", back);
                         $(this).attr("back", front);
                         $(this).width(175);

@@ -11,7 +11,7 @@ $(document).ready(function() {
         var diff = 0;
         var cards = $('.draggable');
         $.each(cards, function(i,val){
-            $(val).css('zIndex', Math.round(Math.random()*52));
+            $(val).css('zIndex', Math.round(Math.random()*300));
             $(val).css({
                 top: $(window).height()/2-170+diff,
                 left: $(window).width()/2-260+diff
@@ -40,7 +40,10 @@ $(document).ready(function() {
                 cards = 13;
             }
             $('#shuffle').click();
-            var allcards = $('.draggable');
+            var allcards = $('.draggable').sort(function(a,b){
+                console.log($(a).css("zIndex"));
+                return $(a).css("zIndex") - $(b).css("zIndex");
+            });
             var w = $(window).width();
             var h = $(window).height();
             var positions = [[10,h/2-100],[w/2-50, h-300],[w-320,h/2-100],[w/2-50, 10]];
@@ -49,7 +52,7 @@ $(document).ready(function() {
                 playpos.push([positions[i]]);
             }
             var counter = 1;
-            var delay = 300;
+            var delay = 100;
             $.each(allcards,function(index,val){
                 setTimeout((function(v){
                     return function(){
@@ -63,7 +66,7 @@ $(document).ready(function() {
                         counter++;
                     }
                 })(val), delay);
-                delay+=500;
+                delay+=100;
             });
         }catch(err){
             console.log(err);
