@@ -43,7 +43,7 @@ $(document).ready(function() {
             var allcards = $('.draggable');
             var w = $(window).width();
             var h = $(window).height();
-            var positions = [[10,h/2-100],[w/2-50, h-300],[w-200,h/2-100],[w/2-50, 10]];
+            var positions = [[10,h/2-100],[w/2-50, h-300],[w-320,h/2-100],[w/2-50, 10]];
             var playpos = [];
             for(var i =0;i<people;i++){
                 playpos.push([positions[i]]);
