@@ -111,7 +111,7 @@
                 if (orig.targetTouches.length > 1){
                     return;
                 }
-                
+ 
                 $(this).css({
                     top: orig.changedTouches[0].pageY - offset.y,
                     left: orig.changedTouches[0].pageX - offset.x
@@ -130,6 +130,18 @@
                         top: orig.changedTouches[0].pageY - $(window).height()/4
                     });
                     $(this).appendTo('body');
+                }
+
+                var mats  = $('.mats');
+                var matno = -1;
+                $.each(mats, function(index ,val){
+                    if(parseInt($(val).css('height'))>$(window).height()/4){
+                        matno = index;
+                    }
+                });
+                if(matno>-1 &&  $(this).parent().is('body') && parseInt($(this).css('top')) > $(window).height()/4+50){
+                        offset.y = $(window).height()/10*4+50;
+                        $(this).appendTo('#mat' + matno);
                 }
             });
             element.bind("touchend", end);
