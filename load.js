@@ -9,10 +9,46 @@ jQuery.fn.flip = function() {
     var back = $(this).attr("back");
     var front = $(this).attr("src");
     $(this).attr("src", back);
-    $(this).attr("back", front);
+    $(this).attr("back", front);    
     $(this).width(175);
     $(this).height(246);
 };
+
+jQuery.fn.minimize = function(){
+    this.each(function(){
+        var element = $(this);
+        var offset = 0;
+        element.bind("touchstart", function(e){
+            var orig = e.originalEvent;
+            offset = orig.changedTouches[0].pageY;
+        });
+        element.bind("touchmove", function(e){
+            e.preventDefault();
+            var orig = e.originalEvent;
+            if (orig.targetTouches.length > 1){
+                return;
+            }
+            if(orig.changedTouches[0].pageY - offset > 100){
+                element.height(70);
+            }
+            if(orig.changedTouches[0].pageY - offset < 100){
+                element.height($(window).height()*0.6);
+            }
+        });
+        element.bind("touchend", function(e){
+
+        });
+    });
+}
+
+jQuery.fn.selectMat = function(){
+    this.each(function(){
+        $(this).bind('click', function(e){
+            $('.mats').css('height',1);
+            $('#mat' + $(this).attr('id')[10]).css('height',70);
+        });
+    });
+}
 
 $(document).ready(function() {
     $("#enable").click(function() {
@@ -35,13 +71,9 @@ $(document).ready(function() {
                 left: $(window).width()/2-260
             });
             $(val).rotate(Math.round(Math.random()*5-2));
-            var back = $(val).attr("back");
             var front = $(val).attr("src");
             if(front!='images/back.jpg'){
-                $(val).attr("src", back);
-                $(val).attr("back", front);
-                $(val).width(175);
-                $(val).height(246);
+                $(val).flip();
             }
         })
     })
@@ -58,9 +90,9 @@ $(document).ready(function() {
                 cards = 13;
             }
             $('#shuffle').click();
-            $('.viewbar').append('<a href="#table" class = "button view" id ="tablebutton" style="left:120px">Table</a>');
+            $('.viewbar').append('<button class = "button view" id ="tablebutton" style="left:120px">Table</button>');
             for(i=0;i<people;i++){
-                $('.viewbar').append('<a href="#mat'+i+'" class = "button view" style="left:'+(230+i*110)+'px">Player '+(i+1)+'</a>');
+                $('.viewbar').append('<button id="#matbutton'+i+'" class = "button view" style="left:'+(230+i*110)+'px">Player '+(i+1)+'</a>');
             }
             for(i=0;i<people;i++){
                 $('.matsbar').append('<div class = "mats" id = "mat'+i+'"><span class = "playernumber">Player '+(i+1)+'</span></div>');
@@ -68,6 +100,8 @@ $(document).ready(function() {
             $('body').bind("touchend", function(e){
                 $("<a href='#table'></a>").click(); 
             });
+            $('.mats').minimize();
+            $('.view').selectMat();
             var allcards = $('.draggable').sort(function(a,b){
                 return $(a).css("zIndex") - $(b).css("zIndex");
             });
@@ -90,6 +124,7 @@ $(document).ready(function() {
                 })(val), delay);
                 delay+=10;
             });
+            $('#mat0').height(70);
             $('#peopleinput').val('');
             $('#cardsinput').val(''); 
         }catch(err){

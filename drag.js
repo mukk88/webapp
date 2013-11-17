@@ -129,7 +129,7 @@
                     $(this).css({
                         top: orig.changedTouches[0].pageY - $(window).height()/4
                     });
-                    $(this).appendTo('body');
+                    $(this).appendTo('body');   
                 }
 
                 var mats  = $('.mats');
