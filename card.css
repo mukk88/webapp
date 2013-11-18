@@ -1,13 +1,13 @@
-body{
-	background-image:url('images/woodtable.jpg');
-}
-
 #header{
 	position: absolute;
 	left:42%;	
 	top:10%;
 	font-size: 150%;
 	line-height: 60%;
+}
+
+body{
+	background-image:url('images/woodtable.jpg') !important; 
 }
 
 .draggable{
