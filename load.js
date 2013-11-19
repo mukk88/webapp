@@ -18,6 +18,10 @@ jQuery.fn.minimize = function(){
     this.each(function(){
         var element = $(this);
         var offset = 0;
+        var height = $(window).height();
+        if(height==0){
+            height = window.innerHeight;
+        }
         element.bind("touchstart", function(e){
             var orig = e.originalEvent;
             offset = orig.changedTouches[0].pageY;
@@ -32,7 +36,7 @@ jQuery.fn.minimize = function(){
                 element.height(70);
             }
             if(orig.changedTouches[0].pageY - offset < 100){
-                element.height($(window).height()*0.6);
+                element.height(height*0.6);
             }
         });
         element.bind("touchend", function(e){
@@ -51,6 +55,10 @@ jQuery.fn.selectMat = function(){
 }
 
 $(document).ready(function() {
+    var height = $(window).height();
+    if(height==0){
+        height = window.innerHeight;
+    }
     $("#enable").click(function() {
     	$(".draggable").draggableTouch("disable");
         $(".draggable").draggableTouch();
@@ -67,7 +75,7 @@ $(document).ready(function() {
         $.each(cards, function(i,val){
             $(val).css('zIndex', Math.round(Math.random()*300));
             $(val).css({
-                top: $(window).height()/2-170,
+                top: height/2-170,
                 left: $(window).width()/2-260
             });
             $(val).rotate(Math.round(Math.random()*5-2));
