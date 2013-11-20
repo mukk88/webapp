@@ -49,7 +49,7 @@ jQuery.fn.selectMat = function(){
     this.each(function(){
         $(this).bind('click', function(e){
             $('.mats').css('height',1);
-            $('#mat' + $(this).attr('id')[10]).css('height',70);
+            $('#mat' + $(this).attr('id')[10]).css('height',500);
         });
     });
 }
