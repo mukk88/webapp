@@ -47,7 +47,7 @@ $(document).ready(function(){
 				}
 				
 				// Put together our final background position
-				var coords = '50% '+ yPos + 'px';
+				var coords = '50% '+ (yPos+200) + 'px';
 
 				// Move the background
 				$self.css({ backgroundPosition: coords });
@@ -65,21 +65,6 @@ $(document).ready(function(){
 					$sprite.css({ backgroundPosition: coords });													
 					
 				}); // sprites
-			
-				// Check for any Videos that need scrolling
-				$('[data-type="video"]', $self).each(function() {
-					
-					// Cache the video
-					var $video = $(this);
-					
-					// There's some repetition going on here, so 
-					// feel free to tidy this section up. 
-					var yPos = -($window.scrollTop() / $video.data('speed'));					
-					var coords = (yPos + $video.data('offsetY')) + 'px';
-	
-					$video.css({ top: coords });													
-					
-				}); // video	
 			
 			}; // in view
 	

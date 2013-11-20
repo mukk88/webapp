@@ -33,5 +33,26 @@
 
 #title{
 	margin-left:20px;
-	vertical-align: middle;
+	display: inline-block;
+	position: fixed;
+	top:10px;
+}
+
+
+@media (max-width: 400px){
+	#title{
+		visibility: hidden;
+	}	
+	#second article{
+		max-width: 200px;
+		margin-left: 0;
+	}
+
+	article h2{
+		font-size: 30px;
+	}
+
+	#first article{
+		margin-top: -40px;
+	}
 }

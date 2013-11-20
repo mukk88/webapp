@@ -37,4 +37,9 @@ article h2 { font-family: 'Lobster Two'; font-size: 60px; margin: 25px 0; line-h
 #second article p { margin-bottom: 25px; }
 #second article a { color: #ff0;}
 
+#third article { width: 100%; position: absolute; text-align: right; }
+#third #tabletimage{top:40px; right:200px;display: inline; position: absolute;}
+#third #tablettext{position: absolute;top:130px;left:200px;text-align:left;width:500px;}
+#third #tabletsubtext{position: relative;font-size: 20px;padding-top: 20px;width: 400px;left:50px;}
+
 
