@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title>card app</title>
+    <link rel="shortcut icon" href="images/icon.ico">
+    <link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/card.css">
+    <style>
+        body{
+            background-image:url('images/woodtable.jpg') !important; 
+        }
+    </style>
+
+</head>
+<body  bgcolor="#E6E6FA">
+    <div style="height:10px;width:10px;background-color:#181818">hi</div>
+    <div id="header">
+        <button class = "button" id="enable">Group</button>
+        <button class = "button" id="disable">Ungroup</button>
+        <button class = "button" id = "shuffle">Shuffle</button>
+        <div id = "border"></div>
+        <span class = "menu" id = "players">Players:</span>
+        <input class = "menu" id = "peopleinput" type = "text">
+        <span class = "menu" id = "cards">Cards:</span>
+        <input class = "menu" id = "cardsinput" type = "text">
+        <button class = "button" id = "deal">Deal!</button>
+        <input id="demo" type="text" value="99" name="demo">
+    </div>
+    <img id = "icon" src="images/icon.png" height = "64"> 
+    <div class = "viewbar"></div>
+    <div class = "matsbar"></div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="js/bootstrap.touchspin.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="drag.js"></script>
+    <script src="deck.js"></script>
+    <script src="load.js"></script>
+    <script>
+        $("input[name='demo']").TouchSpin({
+        min: 0, // Minimum value.
+        max: 100, // Maximum value.
+        boostat: 5, // Boost at every nth step.
+        maxboostedstep: 10, // Maximum step when boosted.
+        postfix: '%', // Text after the input.
+        prefix: '$', // Text before the input.
+        step: 1, // Incremental/decremental step on up/down change.
+        stepinterval: 100, // Refresh rate of the spinner in milliseconds.
+        stepintervaldelay: 500 // Time in milliseconds before the spinner starts to spin.
+        });
+    </script>
+</body>
+</html>

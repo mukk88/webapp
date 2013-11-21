@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>card app</title>
+    <link rel="shortcut icon" href="images/icon.ico">
+    <link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/card.css">
+    <style>
+        body{
+            background-image:url('images/woodtable.jpg') !important; 
+        }
+    </style>
+
+</head>
+<body  bgcolor="#E6E6FA">
+    <ul class = "data"></ul>
+    <div id="header">
+        <button class = "button" id="enable">Group</button>
+        <button class = "button" id="disable">Ungroup</button>
+        <button class = "button" id = "shuffle">Shuffle</button>
+        <div id = "border"></div>
+        <span class = "menu" id = "players">Players:</span>
+        <input class = "menu" id = "peopleinput" type = "text">
+        <span class = "menu" id = "cards">Cards:</span>
+        <input class = "menu" id = "cardsinput" type = "text">
+        <button class = "button" id = "deal">Deal!</button>
+        <button class= "button" id = "submit">Submit</button>
+    </div>
+    <img id = "icon" src="images/icon.png" height = "64"> 
+    <div class = "viewbar"></div>
+    <div class = "matsbar"></div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="js/drag.js"></script>
+    <script src="js/deck.js"></script>
+    <script src="js/load.js"></script>
+    <script>
+        var source = new EventSource('/api/getUpdatedCards');
+        source.addEventListener('message', function(e) {
+          console.log(e.data);
+          var d = JSON.parse(e.data);
+          //for loop through all cards
+          console.log(d['10c']['top']);
+          $('ul').append(d);
+        }, false);
+    </script>
+
+</body>
+</html>
