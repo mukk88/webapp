@@ -4,15 +4,8 @@
     <link rel="shortcut icon" href="../public/images/icon.ico">
     <link rel="stylesheet" href="../public/css/bootstrap.css">
 	<link rel="stylesheet" href="../public/css/card.css">
-    <style>
-        body{
-            background-image:url('../public/images/woodtable.jpg') !important; 
-        }
-    </style>
-
 </head>
 <body  bgcolor="#E6E6FA">
-    <div style="height:10px;width:10px;background-color:#181818">hi</div>
     <div id="header">
         <button class = "button" id="enable">Group</button>
         <button class = "button" id="disable">Ungroup</button>
@@ -23,7 +16,7 @@
         <span class = "menu" id = "cards">Cards:</span>
         <input class = "menu" id = "cardsinput" type = "text">
         <button class = "button" id = "deal">Deal!</button>
-        <input id="demo" type="text" value="99" name="demo">
+        <!-- <input id="demo" type="text" value="4" name="demo" style="width:100px"> -->
     </div>
     <img id = "icon" src="../public/images/icon.png" height = "64"> 
     <div class = "viewbar"></div>
@@ -37,25 +30,13 @@
     <script>
         $("input[name='demo']").TouchSpin({
             min: 0, // Minimum value.
-            max: 100, // Maximum value.
-            boostat: 5, // Boost at every nth step.
-            maxboostedstep: 10, // Maximum step when boosted.
-            postfix: '%', // Text after the input.
-            prefix: '$', // Text before the input.
+            max: 9, // Maximum value.
+            maxboostedstep: 1, // Maximum step when boosted.
+            prefix: 'players', // Text before the input.
             step: 1, // Incremental/decremental step on up/down change.
             stepinterval: 100, // Refresh rate of the spinner in milliseconds.
             stepintervaldelay: 500 // Time in milliseconds before the spinner starts to spin.
         });
-    </script>
-    <script>
-        var source = new EventSource('/api/getUpdatedCards');
-        source.addEventListener('message', function(e) {
-          console.log(e.data);
-          var d = JSON.parse(e.data);
-          //for loop through all cards
-          console.log(d['10c']['top']);
-          $('ul').append(d);
-        }, false);
-    </script>
+    </script src= "../public/js/event.js"></script>
 </body>
 </html>
