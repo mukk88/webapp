@@ -1,4 +1,5 @@
-
+// var TaskList = require('./routes/tasklist');
+// var taskList = new TaskList(process.env.CUSTOMCONNSTR_MONGOLAB_URI);
 /**
  * Module dependencies
  */
