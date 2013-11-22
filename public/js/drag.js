@@ -147,13 +147,15 @@
                         offset.y = height/10*4+50;
                         $(this).appendTo('#mat' + matno);
                 }
-                var carddata = {'1':'1'};
+                var idblah = $(this).attr('id');
+                console.log(idblah);
+                var carddata = {'id':idblah,'info':{'top':$(this).css('top'), 'left':$(this).css('left')}};
                 $.ajax({
                     url:"/api/updateCards",
                     type:"post",
                     data:carddata
                 }).done(function(){
-                    alert('done');
+                    // alert('done');
                 });
             });
             element.bind("touchend", end);

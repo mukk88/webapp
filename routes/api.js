@@ -59,7 +59,6 @@ exports.getAllCards = function (req, res) {
 };
 
 exports.updateCards = function (req, res) {
-
   publisherClient.publish( 'updates', (JSON.stringify(req.body)) );
 
   res.writeHead(200, {'Content-Type': 'text/html'});
