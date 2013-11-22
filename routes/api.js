@@ -11,8 +11,8 @@ var autoIncrement = require('mongoose-auto-increment');
 var connection = mongoose.createConnection("mongodb://localhost/test");
 autoIncrement.initialize(connection);
 
-var redis = require('redis'),
-    publisherClient = redis.createClient();
+// var redis = require('redis'),
+//     publisherClient = redis.createClient();
 
 
 // models
@@ -25,7 +25,7 @@ var cardSchema = mongoose.Schema({
   show: Boolean
 });
 
-// gameSchema.plugin(autoIncrement.plugin, { model: 'Game' });
+//gameSchema.pugin(autoIncrement.plugin, { model: 'Game' });
 
 var Card = mongoose.model('Card', cardSchema);
 var kinds = ["c","d","h","s"];
