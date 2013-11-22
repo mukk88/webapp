@@ -53,14 +53,14 @@ jQuery.fn.selectMat = function(){
         }
         $(this).bind('click', function(e){
             $('.mats').css('height',1);
-            $('#mat' + $(this).attr('id')[10]).css('height',height*0.6);
+            $('#mat' + $(this).attr('id')[10]).css('height',70);
         });
     });
 }
 
-function sendCardData(me, top, left, z, parent){
-    console.log('a');
-}
+// function sendCardData(me, top, left, z, parent){
+//     console.log('a');
+// }
 
 function sendPlayers(number, cards){
     console.log('sending player info');
@@ -74,8 +74,37 @@ function sendPlayers(number, cards){
     });
 }
 
+function sendShuffle(){
+    var player = {'shuffle':true};
+    $.ajax({
+        url:"/api/updateCards?gid=1",
+        type:"post",
+        data:player
+    }).done(function(){
+        // alert('done');
+    });
+}
+
+function shuffle(){
+    $('.draggable').appendTo('body');
+    $('.matsbar').empty();
+    $('.viewbar').empty();
+    var cards = $('.draggable');
+    $.each(cards, function(i,val){
+        $(val).css('zIndex', Math.round(Math.random()*300));
+        $(val).css({
+            top: height/2-170,
+            left: $(window).width()/2-260
+        });
+        $(val).rotate(Math.round(Math.random()*5-2));
+        var front = $(val).attr("src");
+        if(front!='images/back.jpg'){
+            $(val).flip();
+        }
+    })
+}
+
 function deal(people, cards){
-    $('#shuffle').click();
     $('.viewbar').append('<button class = "button view" id ="tablebutton" style="left:120px">Table</button>');
     for(i=0;i<people;i++){
         $('.viewbar').append('<button id="#matbutton'+i+'" class = "button view" style="left:'+(230+i*110)+'px">Player '+(i+1)+'</a>');
@@ -126,22 +155,7 @@ $(document).ready(function() {
         $(".draggable").draggableTouch("disgroup");
     });
     $("#shuffle").click(function(){
-        $('.draggable').appendTo('body');
-        $('.matsbar').empty();
-        $('.viewbar').empty();
-        var cards = $('.draggable');
-        $.each(cards, function(i,val){
-            $(val).css('zIndex', Math.round(Math.random()*300));
-            $(val).css({
-                top: height/2-170,
-                left: $(window).width()/2-260
-            });
-            $(val).rotate(Math.round(Math.random()*5-2));
-            var front = $(val).attr("src");
-            if(front!='images/back.jpg'){
-                $(val).flip();
-            }
-        })
+        sendShuffle();
     })
     $("#deal").click(function(){
         var people;
@@ -155,6 +169,7 @@ $(document).ready(function() {
             if(isNaN(cards)){
                 cards = 13;
             }
+            $('#shuffle').click();
             sendPlayers(people,cards); 
         }catch(err){
             console.log(err);
@@ -176,7 +191,7 @@ source.addEventListener('message', function(e) {
             zIndex: data['info']['z']
         });
         $(id).appendTo(data['info']['parent']);
-        if(data['info']['back']!=$(id).attr("back");){
+        if(data['info']['back']!=$(id).attr("back")){
             $(id).flip();
         }  
     }
@@ -185,5 +200,9 @@ source.addEventListener('message', function(e) {
     var cards = data['cards'];
     if(players!=undefined && cards!=undefined){
         deal(players,cards);
+    }
+    var shuf = data['shuffle'];
+    if(shuf!=undefined){
+        shuffle();
     }
 }, false);

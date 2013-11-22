@@ -83,7 +83,8 @@ exports.updateCards = function (req, res) {
   // for (var i = 0; i < result.d.length; i++) { 
   //   alert(result.d[i].EmployeeName);
   // }
-  var gid = req.body[0].gid
+  // var gid = req.body[0].gid
+  var gid = req.query.gid
   publisherClient.publish('updates'+gid, (JSON.stringify(req.body)));
   console.log("someone updated "+gid);
 

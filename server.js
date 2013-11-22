@@ -37,7 +37,7 @@ app.get('/', routes.index);
 // JSON API
 // app.get('/api/name', api.name);
 app.get('/api/createGame', api.createGame);
-app.get('/api/getAllCards', api.getAllCards);
+app.get('/api/getCards', api.getCards);
 app.post('/api/updateCards', api.updateCards);
 app.get('/api/getUpdatedCards', api.getUpdatedCards);
 
