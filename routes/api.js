@@ -26,37 +26,54 @@ var cardSchema = mongoose.Schema({
   gid: Number
 });
 
-//gameSchema.pugin(autoIncrement.plugin, { model: 'Game' });
+var gameSchema = mongoose.Schema({
+  _id: Number
+});
+
+gameSchema.plugin(autoIncrement.plugin, { model: 'Game' });
 
 var Card = mongoose.model('Card', cardSchema);
+var Game = mongoose.model('Game', gameSchema);
+
+
 var kinds = ["c","d","h","s"];
 
 exports.createGame = function (req, res) {
-  var gid = req.query.gid
-  var results = new Array();
-  var top = 199;
-  var left = 564;
-  var i = 0;
-  for(var k=0; k<4; k++){
-    for(var n=1; n<=13; n++){
-      var newCard = new Card();
-      newCard._id = n+kinds[k];
-      newCard.top = top++;
-      newCard.left = left++;
-      newCard.z = 1;
-      newCard.show = false;
-      newCard.gid = gid;
-      newCard.save();
-      results[i] = newCard;
-      i++;
+  var newGame = new Game();
+  Game.nextCount(function(err, count) {
+    newGame.save()
+    var results = new Array();
+    var top = 199;
+    var left = 564;
+    var i = 0;
+    for(var k=0; k<4; k++){
+      for(var n=1; n<=13; n++){
+        var newCard = new Card();
+        newCard._id = n+kinds[k];
+        newCard.top = top++;
+        newCard.left = left++;
+        newCard.z = 1;
+        newCard.show = false;
+        newCard.gid = count;
+        newCard.save();
+        results[i] = newCard;
+        i++;
+      }
     }
-  }
-  res.json(results);
+    res.json(results);
+  });
+};
+
+exports.getAllGames = function (req, res) {
+  Game.find({}, function (err, games) {
+    res.json(games);
+  });
 };
 
 exports.getCards = function (req, res) {
   var gid = req.query.gid
-  Card.find({"gid" : gid}, function (err, cards) {
+  console.log(gid)
+  Card.find({gid : gid}, function (err, cards) {
     res.json(cards);
   });
 };
@@ -68,7 +85,7 @@ exports.updateCards = function (req, res) {
   // }
   var gid = req.body[0].gid
   publisherClient.publish('updates'+gid, (JSON.stringify(req.body)));
-  console.log("someone updated "+ gid)
+  console.log("someone updated "+gid);
 
   res.writeHead(200, {'Content-Type': 'text/html'});
   res.write('All clients have received update!');
@@ -83,7 +100,7 @@ exports.getUpdatedCards = function (req, res) {
   var subscriber = redis.createClient();
 
   subscriber.subscribe("updates"+gid);
-  console.log("someone subscribing "+ gid)
+  console.log("someone subscribing "+gid);
 
   // In case we encounter an error...print it out to the console
   subscriber.on("error", function(err) {
