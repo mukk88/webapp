@@ -47,9 +47,13 @@ jQuery.fn.minimize = function(){
 
 jQuery.fn.selectMat = function(){
     this.each(function(){
+        var height = $(window).height();
+        if(height==0){
+            height = window.innerHeight;
+        }
         $(this).bind('click', function(e){
             $('.mats').css('height',1);
-            $('#mat' + $(this).attr('id')[10]).css('height',500);
+            $('#mat' + $(this).attr('id')[10]).css('height',height*0.6);
         });
     });
 }
@@ -80,7 +84,7 @@ $(document).ready(function() {
             });
             $(val).rotate(Math.round(Math.random()*5-2));
             var front = $(val).attr("src");
-            if(front!='images/back.jpg'){
+            if(front!='../public/images/back.jpg'){
                 $(val).flip();
             }
         })

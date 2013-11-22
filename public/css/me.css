@@ -38,6 +38,16 @@
 	top:10px;
 }
 
+.share{
+	height:128px;
+	width:128px;
+	margin-left: 64px;
+}
+
+#plus{
+	height:128px;
+	width:128px;
+}
 
 @media (max-width: 400px){
 	#title{
@@ -45,7 +55,8 @@
 	}	
 	#second article{
 		max-width: 200px;
-		margin-left: 0;
+		margin-left: 10px;
+		background: url('') repeat #333;
 	}
 
 	article h2{
@@ -54,5 +65,43 @@
 
 	#first article{
 		margin-top: -40px;
+	}
+
+	#first{
+		height:500px;
+	}
+
+	#third{
+		height:900px;
+	}
+
+	#third #tabletimage{top:40px; right:10px;display: inline-block; position: absolute;width:80%;}
+	#third #tablettext{position: relative;top:500px;left:40px;text-align:center;width:80%;}
+	#third #tabletsubtext{position: relative;font-size: 20px;padding-top: 0px;width: 100%;left:0px;}
+
+	#plus{
+		height:64px;
+		width:64px;
+	}
+
+	.share{
+		height:64px;
+		width:64px;
+		margin-left: 8px;
+	}
+
+	.storypic{
+		width: 100%;
+		height:auto;
+	}
+
+	#fourth{
+		background: url(../images/holiday.png) 40% 0 no-repeat fixed;
+	}
+
+	#fourth article{
+		max-width: 200px;
+		margin-left: 10px;
+		background: url('') repeat #333;
 	}
 }
