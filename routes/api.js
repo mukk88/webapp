@@ -11,8 +11,8 @@ var autoIncrement = require('mongoose-auto-increment');
 var connection = mongoose.createConnection("mongodb://localhost/test");
 autoIncrement.initialize(connection);
 
-// var redis = require('redis'),
-//     publisherClient = redis.createClient();
+var redis = require('redis'),
+    publisherClient = redis.createClient();
 
 
 // models

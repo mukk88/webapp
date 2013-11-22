@@ -147,6 +147,14 @@
                         offset.y = height/10*4+50;
                         $(this).appendTo('#mat' + matno);
                 }
+                var carddata = {'1':'1'};
+                $.ajax({
+                    url:"/api/updateCards",
+                    type:"post",
+                    data:carddata
+                }).done(function(){
+                    alert('done');
+                });
             });
             element.bind("touchend", end);
             element.bind("touchcancel", end);
