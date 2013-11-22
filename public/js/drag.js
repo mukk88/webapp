@@ -147,9 +147,8 @@
                         offset.y = height/10*4+50;
                         $(this).appendTo('#mat' + matno);
                 }
-                var idblah = $(this).attr('id');
-                console.log(idblah);
-                var carddata = {'id':idblah,'info':{'top':$(this).css('top'), 'left':$(this).css('left')}};
+                var id = $(this).attr('id');
+                var carddata = {'id':id,'info':{'top':$(this).css('top'), 'left':$(this).css('left')}};
                 $.ajax({
                     url:"/api/updateCards",
                     type:"post",
