@@ -22,7 +22,8 @@ var cardSchema = mongoose.Schema({
   top: Number,
   left: Number,
   z: Number,
-  show: Boolean
+  show: Boolean,
+  gid: Number
 });
 
 //gameSchema.pugin(autoIncrement.plugin, { model: 'Game' });
@@ -31,6 +32,7 @@ var Card = mongoose.model('Card', cardSchema);
 var kinds = ["c","d","h","s"];
 
 exports.createGame = function (req, res) {
+  var gid = req.query.gid
   var results = new Array();
   var top = 199;
   var left = 564;
@@ -43,23 +45,30 @@ exports.createGame = function (req, res) {
       newCard.left = left++;
       newCard.z = 1;
       newCard.show = false;
+      newCard.gid = gid;
       newCard.save();
       results[i] = newCard;
       i++;
     }
   }
-  console.log("results");
   res.json(results);
 };
 
-exports.getAllCards = function (req, res) {
-  Card.find({}, function (err, cards) {
+exports.getCards = function (req, res) {
+  var gid = req.query.gid
+  Card.find({"gid" : gid}, function (err, cards) {
     res.json(cards);
   });
 };
 
 exports.updateCards = function (req, res) {
-  publisherClient.publish( 'updates', (JSON.stringify(req.body)) );
+  //update to db
+  // for (var i = 0; i < result.d.length; i++) { 
+  //   alert(result.d[i].EmployeeName);
+  // }
+  var gid = req.body[0].gid
+  publisherClient.publish('updates'+gid, (JSON.stringify(req.body)));
+  console.log("someone updated "+ gid)
 
   res.writeHead(200, {'Content-Type': 'text/html'});
   res.write('All clients have received update!');
@@ -67,12 +76,14 @@ exports.updateCards = function (req, res) {
 };
 
 exports.getUpdatedCards = function (req, res) {
+  var gid = req.query.gid
   // let request last as long as possible
   req.socket.setTimeout(Infinity);
 
   var subscriber = redis.createClient();
 
-  subscriber.subscribe("updates");
+  subscriber.subscribe("updates"+gid);
+  console.log("someone subscribing "+ gid)
 
   // In case we encounter an error...print it out to the console
   subscriber.on("error", function(err) {
