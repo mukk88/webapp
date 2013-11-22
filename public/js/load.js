@@ -58,6 +58,60 @@ jQuery.fn.selectMat = function(){
     });
 }
 
+function sendCardData(me, top, left, z, parent){
+    console.log('a');
+}
+
+function sendPlayers(number, cards){
+    console.log('sending player info');
+    var player = {'players':number,'cards':cards};
+    $.ajax({
+        url:"/api/updateCards?gid=1",
+        type:"post",
+        data:player
+    }).done(function(){
+        // alert('done');
+    });
+}
+
+function deal(people, cards){
+    $('#shuffle').click();
+    $('.viewbar').append('<button class = "button view" id ="tablebutton" style="left:120px">Table</button>');
+    for(i=0;i<people;i++){
+        $('.viewbar').append('<button id="#matbutton'+i+'" class = "button view" style="left:'+(230+i*110)+'px">Player '+(i+1)+'</a>');
+    }
+    for(i=0;i<people;i++){
+        $('.matsbar').append('<div class = "mats" id = "mat'+i+'"><span class = "playernumber">Player '+(i+1)+'</span></div>');
+    }
+    $('.mats').minimize();
+    $('.view').selectMat();
+    var allcards = $('.draggable').sort(function(a,b){
+        return $(a).css("zIndex") - $(b).css("zIndex");
+    });
+    var counter = 1;
+    var delay = 10;
+    $.each(allcards,function(index,val){
+        setTimeout((function(v){
+            return function(){
+                if(counter>people*cards){
+                    return false;
+                }
+                $(v).css({
+                    top: 100,
+                    left:100 + counter*10
+                });
+                counter++;
+                $(v).appendTo('#mat'+ (counter%people));
+                $(v).flip();
+            }
+        })(val), delay);
+        delay+=10;
+    });
+    $('#mat0').height(70);
+    $('#peopleinput').val('');
+    $('#cardsinput').val('');
+}
+
 $(document).ready(function() {
     var height = $(window).height();
     if(height==0){
@@ -84,7 +138,7 @@ $(document).ready(function() {
             });
             $(val).rotate(Math.round(Math.random()*5-2));
             var front = $(val).attr("src");
-            if(front!='../public/images/back.jpg'){
+            if(front!='images/back.jpg'){
                 $(val).flip();
             }
         })
@@ -101,47 +155,35 @@ $(document).ready(function() {
             if(isNaN(cards)){
                 cards = 13;
             }
-            $('#shuffle').click();
-            $('.viewbar').append('<button class = "button view" id ="tablebutton" style="left:120px">Table</button>');
-            for(i=0;i<people;i++){
-                $('.viewbar').append('<button id="#matbutton'+i+'" class = "button view" style="left:'+(230+i*110)+'px">Player '+(i+1)+'</a>');
-            }
-            for(i=0;i<people;i++){
-                $('.matsbar').append('<div class = "mats" id = "mat'+i+'"><span class = "playernumber">Player '+(i+1)+'</span></div>');
-            }
-            $('body').bind("touchend", function(e){
-                $("<a href='#table'></a>").click(); 
-            });
-            $('.mats').minimize();
-            $('.view').selectMat();
-            var allcards = $('.draggable').sort(function(a,b){
-                return $(a).css("zIndex") - $(b).css("zIndex");
-            });
-            var counter = 1;
-            var delay = 10;
-            $.each(allcards,function(index,val){
-                setTimeout((function(v){
-                    return function(){
-                        if(counter>people*cards){
-                            return false;
-                        }
-                        $(v).css({
-                            top: 100,
-                            left:100 + counter*10
-                        });
-                        counter++;
-                        $(v).appendTo('#mat'+ (counter%people));
-                        $(v).flip();
-                    }
-                })(val), delay);
-                delay+=10;
-            });
-            $('#mat0').height(70);
-            $('#peopleinput').val('');
-            $('#cardsinput').val(''); 
+            sendPlayers(people,cards); 
         }catch(err){
             console.log(err);
         }
     })
 });
 $(".draggable").draggableTouch('disgroup');
+
+var source = new EventSource('/api/getUpdatedCards?gid=1');
+source.addEventListener('message', function(e) {
+  console.log(e.data);
+    var data = JSON.parse(e.data);
+    var id = data['id'];
+    if(id!=undefined){
+        id = '#'+id;
+        $(id).css({
+            top: data['info']['top'],
+            left: data['info']['left'],
+            zIndex: data['info']['z']
+        });
+        $(id).appendTo(data['info']['parent']);
+        if(data['info']['back']!=$(id).attr("back");){
+            $(id).flip();
+        }  
+    }
+    //put the card in the right parent
+    var players = data['players'];
+    var cards = data['cards'];
+    if(players!=undefined && cards!=undefined){
+        deal(players,cards);
+    }
+}, false);
