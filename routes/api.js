@@ -10,7 +10,8 @@ mongoose.connect(connectionString);
 
 //setup auto+
 var autoIncrement = require('mongoose-auto-increment');
-var connection = mongoose.createConnection("mongodb://localhost/test");
+// var connection = mongoose.createConnection("mongodb://localhost/test");
+var connection = mongoose.createConnection(connectionString);
 autoIncrement.initialize(connection);
 
 // var redis = require('redis'),
