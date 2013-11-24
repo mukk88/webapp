@@ -4,15 +4,17 @@
 
 //setup mongodb
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
+mongoose.connect(connectionString);
+// mongoose.connect('mongodb://localhost/test');
 
 //setup auto+
 var autoIncrement = require('mongoose-auto-increment');
 var connection = mongoose.createConnection("mongodb://localhost/test");
 autoIncrement.initialize(connection);
 
-var redis = require('redis'),
-    publisherClient = redis.createClient();
+// var redis = require('redis'),
+//     publisherClient = redis.createClient();
 
 
 // models

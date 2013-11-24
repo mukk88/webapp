@@ -177,22 +177,29 @@ $(document).ready(function() {
     })
 });
 $(".draggable").draggableTouch('disgroup');
+$(".draggable").on('doubletap', function(){
+    console.log('double tapped!');
+    $(this).flip();
+});
 
 var source = new EventSource('/api/getUpdatedCards?gid=1');
 source.addEventListener('message', function(e) {
-  console.log(e.data);
+  // console.log(e.data);
     var data = JSON.parse(e.data);
     var id = data['id'];
     if(id!=undefined){
+        // console.log('updating card info')
         id = '#'+id;
         $(id).css({
             top: data['info']['top'],
             left: data['info']['left'],
             zIndex: data['info']['z']
         });
-        $(id).appendTo(data['info']['parent']);
+        var parent = data['info']['parent'] == 'body' ? 'body' : '#' + data['info']['parent'];
+        $(id).appendTo(parent);
+        if(data['info']['parent'])
         if(data['info']['back']!=$(id).attr("back")){
-            $(id).flip();
+            // $(id).flip();
         }  
     }
     //put the card in the right parent
