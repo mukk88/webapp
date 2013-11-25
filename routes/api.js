@@ -60,17 +60,6 @@ exports.createGame = function (req, res) {
     }
     res.json(results);
   });
-  req.io.route('join');
-};
-
-exports.joinGame = function (req, res) {
-  var gid = req.query.gid;
-    var gid = req.query.gid;
-  console.log(gid)
-  Card.find({gid : gid}, function (err, cards) {
-    res.json(cards);
-  });
-  req.io.route('join');
 };
 
 exports.getAllGames = function (req, res) {
@@ -79,13 +68,13 @@ exports.getAllGames = function (req, res) {
   });
 };
 
-// exports.getCards = function (req, res) {
-//   var gid = req.query.gid;
-//   console.log(gid)
-//   Card.find({gid : gid}, function (err, cards) {
-//     res.json(cards);
-//   });
-// };
+exports.getCards = function (req, res) {
+  var gid = req.query.gid;
+  console.log(gid)
+  Card.find({gid : gid}, function (err, cards) {
+    res.json(cards);
+  });
+};
 
 exports.updateCards = function (req, res) {
   var gid = req.query.gid;
