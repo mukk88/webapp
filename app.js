@@ -4,13 +4,14 @@
  * Module dependencies
  */
 
-var express = require('express'),
+var express = require('express.io'),
     routes = require('./routes'),
     api = require('./routes/api'),
     http = require('http'),
     path = require('path');
 
 var app = module.exports = express();
+app.http().io();
 
 
 /**
@@ -49,10 +50,10 @@ app.get('/', routes.index);
 
 // JSON API
 app.get('/api/createGame', api.createGame);
+app.get('/api/joinGame', api.joinGame);
 app.get('/api/getAllGames', api.getAllGames);
 app.get('/api/getCards', api.getCards);
 app.post('/api/updateCards', api.updateCards);
-app.get('/api/getUpdatedCards', api.getUpdatedCards);
 // app.post('/login', passport.authenticate('local', { successRedirect: '/',
 //                                                     failureRedirect: '/login' }));
 
@@ -60,10 +61,24 @@ app.get('/api/getUpdatedCards', api.getUpdatedCards);
 app.get('*', routes.index);
 
 
+// express.io stuff
+app.io.route('updateCards', function(req) {
+    req.io.room(req.query.gid).broadcast('cardsUpdated', {message: req.body});
+})
+
+app.io.route('join', function(req) {
+    req.io.join(req.data);
+    console.log('done joining');
+})
+
+// app.get('/', function(req, res) {
+//     res.sendfile(__dirname + '/views/client.html');
+// })
+
 /**
  * Start Server
  */
 
-http.createServer(app).listen(app.get('port'), function () {
+app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
