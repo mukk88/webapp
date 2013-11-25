@@ -78,5 +78,4 @@ exports.getCards = function (req, res) {
 
 exports.updateCards = function (req, res) {
   var gid = req.query.gid;
-  req.io.route('updateCards');
 };

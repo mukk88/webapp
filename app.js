@@ -45,12 +45,11 @@ if (app.get('env') === 'production') {
  */
 
 // serve index and view partials
-app.get('/', routes.index);
+// app.get('/', routes.index);
 // app.get('/partials/:name', routes.partials);
 
 // JSON API
 app.get('/api/createGame', api.createGame);
-app.get('/api/joinGame', api.joinGame);
 app.get('/api/getAllGames', api.getAllGames);
 app.get('/api/getCards', api.getCards);
 app.post('/api/updateCards', api.updateCards);
@@ -58,12 +57,12 @@ app.post('/api/updateCards', api.updateCards);
 //                                                     failureRedirect: '/login' }));
 
 // redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
+// app.get('*', routes.index);
 
 
 // express.io stuff
 app.io.route('updateCards', function(req) {
-    req.io.room(req.query.gid).broadcast('cardsUpdated', {message: req.body});
+    req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
 })
 
 app.io.route('join', function(req) {
@@ -71,9 +70,9 @@ app.io.route('join', function(req) {
     console.log('done joining');
 })
 
-// app.get('/', function(req, res) {
-//     res.sendfile(__dirname + '/views/client.html');
-// })
+app.get('/', function(req, res) {
+    res.sendfile(__dirname + '/views/client.html');
+})
 
 /**
  * Start Server

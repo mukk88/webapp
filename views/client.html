@@ -2,7 +2,10 @@
 <script>
 io = io.connect()
 
+io.emit('join',"27")
 // Listen for the talk event.
+data = {gid:"27","card": "somthiing"}
+io.emit('updateCards',data)
 io.on('cardsUpdated', function(data) {
     alert(data.message)
 })  
