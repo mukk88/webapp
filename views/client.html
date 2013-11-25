@@ -1,0 +1,10 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+io = io.connect()
+
+// Listen for the talk event.
+io.on('cardsUpdated', function(data) {
+    alert(data.message)
+})  
+
+</script>
