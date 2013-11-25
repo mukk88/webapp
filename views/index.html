@@ -1,9 +1,9 @@
-<html>
+    <html>
 <head>
-	<title>card app</title>
+    <title>card app</title>
     <link rel="shortcut icon" href="images/icon.ico">
     <link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/card.css">
 </head>
 <body id ="body" bgcolor="#E6E6FA">
     <div id="header">
@@ -21,11 +21,16 @@
     <img id = "icon" src="images/icon.png" height = "64"> 
     <div class = "viewbar"></div>
     <div class = "matsbar"></div>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="js/jquery.mobile-events.min.js"></script>
     <script src="js/bootstrap.touchspin.js"></script>
     <script src="js/bootstrap.min.js"></script>
-	<script src="js/drag.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        io = io.connect()
+        io.emit('join',"1")
+    </script>
+    <script src="js/drag.js"></script>
     <script src="js/deck.js"></script>
     <script src="js/load.js"></script>
     <script>
@@ -41,3 +46,4 @@
     </script>
 </body>
 </html>
+

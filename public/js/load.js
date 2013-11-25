@@ -182,34 +182,33 @@ $(".draggable").on('doubletap', function(){
     $(this).flip();
 });
 
-var source = new EventSource('/api/getUpdatedCards?gid=1');
-source.addEventListener('message', function(e) {
-  // console.log(e.data);
-    var data = JSON.parse(e.data);
-    var id = data['id'];
+io.on('cardsUpdated', function(data) {
+    var id = data.message['id'];
+
+    console.log(id);
     if(id!=undefined){
-        // console.log('updating card info')
+        console.log('updating card info')
         id = '#'+id;
         $(id).css({
-            top: data['info']['top'],
-            left: data['info']['left'],
-            zIndex: data['info']['z']
+            top: data.message['info']['top'],
+            left: data.message['info']['left'],
+            zIndex: data.message['info']['z']
         });
-        var parent = data['info']['parent'] == 'body' ? 'body' : '#' + data['info']['parent'];
+        var parent = data.message['info']['parent'] == 'body' ? 'body' : '#' + data.message['info']['parent'];
         $(id).appendTo(parent);
-        if(data['info']['parent'])
-        if(data['info']['back']!=$(id).attr("back")){
+        if(data.message['info']['parent'])
+        if(data.message['info']['back']!=$(id).attr("back")){
             // $(id).flip();
         }  
     }
     //put the card in the right parent
-    var players = data['players'];
-    var cards = data['cards'];
+    var players = data.message['players'];
+    var cards = data.message['cards'];
     if(players!=undefined && cards!=undefined){
         deal(players,cards);
     }
-    var shuf = data['shuffle'];
+    var shuf = data.message['shuffle'];
     if(shuf!=undefined){
         shuffle();
     }
-}, false);
+})  

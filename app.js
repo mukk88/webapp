@@ -45,7 +45,8 @@ if (app.get('env') === 'production') {
  */
 
 // serve index and view partials
-// app.get('/', routes.index);
+app.get('/', routes.index);
+app.get('/splash.html', routes.splash);
 // app.get('/partials/:name', routes.partials);
 
 // JSON API
@@ -70,9 +71,9 @@ app.io.route('join', function(req) {
     console.log('done joining');
 })
 
-app.get('/', function(req, res) {
-    res.sendfile(__dirname + '/views/client.html');
-})
+// app.get('/', function(req, res) {
+//     res.sendfile(__dirname + '/views/index.html');
+// })
 
 /**
  * Start Server
