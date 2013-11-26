@@ -33,7 +33,7 @@ function GameCtrl($scope) {
 	  type:'GET',
 	}).done(function(data) {
 		gameinfo = data;
-		$scope.$apply(function{
+		$scope.$apply(function(){
 			for(var i=0;i<gameinfo.length;i++){
 				$scope.games.push({id:gameinfo[i]._id, name:gameinfo[i].name, max:gameinfo[i].max, current:1})
 			}
@@ -41,13 +41,18 @@ function GameCtrl($scope) {
 		console.log(data)
 	});
  
-  $scope.addGame = function() {
-  	console.log('game created');
-    $scope.games.push({id:-1,name:$scope.gameId, max:$scope.gameSize, current:0});
-    $scope.gameId = '';
-    $scope.gameSize = '';
-  };
- 
+	$scope.addGame = function() {
+		console.log('game created');
+		$scope.games.push({id:-1,name:$scope.gameId, max:$scope.gameSize, current:0});
+		$scope.gameId = '';
+		$scope.gameSize = '';
+	};
+ 	
+	$scope.joinGame = function(){
+		console.log('game joined');
+		// tell server you have joined the game
+	}
+
   // $scope.remaining = function() {
   //   var count = 0;
   //   angular.forEach($scope.todos, function(todo) {
