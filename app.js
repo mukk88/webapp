@@ -102,6 +102,7 @@ app.io.route('updateCards', function(req) {
 
 app.io.route('join', function(req) {
     req.io.join(req.data);
+    req.io.room(req.data).broadcast('playerEnters', {message: req.data.card});
     console.log('done joining');
 })
 ///////////////////////////////express.io stuff////////////////////////
