@@ -17,7 +17,7 @@ exports.authFacebook = function(req, res){
 };
 
 exports.authFacebookCallback = function(req, res){
-  res.redirect('index');
+  res.redirect('/index');
 };
 
 exports.logout = function(req, res){

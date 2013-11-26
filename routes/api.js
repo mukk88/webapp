@@ -5,7 +5,7 @@
 //setup mongodb
 var mongoose = require('mongoose');
 var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
-// var connectionString = "mongodb://localhost/test"; 
+//var connectionString = "mongodb://localhost/test"; 
 mongoose.connect(connectionString);
 
 //setup auto+
