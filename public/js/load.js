@@ -66,26 +66,11 @@ function sendPlayers(number, cards){
     console.log('sending player info');
     var player = {'gid':'1',card:{'players':number,'cards':cards}};
     io.emit('updateCards', player);
-    // var player = {'players':number,'cards':cards};
-    // $.ajax({
-    //     url:"/api/updateCards?gid=1",
-    //     type:"post",
-    //     data:player
-    // }).done(function(){
-    //     // alert('done');
-    // });
 }
 
 function sendShuffle(){
     var shuffle = {'gid':'1',card:{'shuffle':true}};
     io.emit('updateCards', shuffle);
-    // $.ajax({
-    //     url:"/api/updateCards?gid=1",
-    //     type:"post",
-    //     data:player
-    // }).done(function(){
-    //     // alert('done');
-    // });
 }
 
 function shuffle(){
@@ -158,6 +143,7 @@ $(document).ready(function() {
         $(".draggable").draggableTouch("disgroup");
     });
     $("#shuffle").click(function(){
+        shuffle();
         sendShuffle();
     })
     $("#deal").click(function(){
@@ -173,6 +159,7 @@ $(document).ready(function() {
                 cards = 13;
             }
             $('#shuffle').click();
+            deal();
             sendPlayers(people,cards); 
         }catch(err){
             console.log(err);
