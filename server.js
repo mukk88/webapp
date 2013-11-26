@@ -112,16 +112,16 @@ function ensureAuthenticated(req, res, next) {
 io.sockets.on('connection', function (socket) {
   console.log('sessionID '+socket.handshake.sessionID+' connected!');
 
-  // socket.on('updateCards', function (data) {
-  //   socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
-  // });
+  socket.on('updateCards', function (data) {
+    socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
+  });
 
-  // socket.on('join', function (data) {
-  //   console.log('sessionID '+socket.handshake.sessionID+' joined '+data);
-  //   socket.join(data);
-  //   // var clients = io.sockets.clients(data);
-  //   // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
-  // });
+  socket.on('join', function (data) {
+    console.log('sessionID '+socket.handshake.sessionID+' joined '+data);
+    socket.join(data);
+    // var clients = io.sockets.clients(data);
+    // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+  });
 
   socket.on('disconnect', function (data) {
     console.log('sessionID '+socket.handshake.sessionID+' disconnected!');
@@ -129,15 +129,4 @@ io.sockets.on('connection', function (socket) {
     // var clients = io.sockets.clients(data);
     // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
   });
-});
-
-io.sockets.on('updateCards', function (socket) {
-  socket.broadcast.to(socket.data.gid).emit('cardsUpdated', {message: socket/data.card})
-});
-
-io.sockets.on('join', function (socket) {
-  console.log('sessionID '+socket.handshake.sessionID+' joined '+socket.data);
-  socket.join(socket.data);
-  // var clients = io.sockets.clients(data);
-  // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
 });
