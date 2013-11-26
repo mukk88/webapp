@@ -20,6 +20,10 @@ exports.authFacebookCallback = function(req, res){
   res.redirect('/index');
 };
 
+exports.play = function(red, res){
+	res.render(play.html);
+}
+
 exports.logout = function(req, res){
   req.logout();
   res.redirect('/');
