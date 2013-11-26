@@ -8,6 +8,7 @@
 
 body{
 	background-image:url('../images/woodtable.jpg') !important; 
+	Touch-action: none;
 }
 
 .draggable{
@@ -111,6 +112,7 @@ input::-webkit-input-placeholder {
 	bottom:0px;
 	z-index: 998;
 	border: 2px solid;
+	Touch-action: none;
 }
 
 .mats:target{
