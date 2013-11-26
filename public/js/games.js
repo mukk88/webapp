@@ -34,12 +34,10 @@ function GameCtrl($scope) {
 	}).done(function(data) {
 		gameinfo = data;
 		for(var i=0;i<gameinfo.length;i++){
-			$scope.games.push({id:gameinfo[i].id, name:gameinfo[i].name, max:gameinfo[i].max, current:1})
+			$scope.games.push({id:gameinfo[i]._id, name:gameinfo[i].name, max:gameinfo[i].max, current:1})
 		}
 		console.log(data)
 	});
-
-
  
   $scope.addGame = function() {
   	console.log('game created');
