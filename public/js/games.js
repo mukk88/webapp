@@ -15,29 +15,31 @@
 
 
 function GameCtrl($scope) {
-	var games;
+	var gameinfo;
 
 	console.log('bonk');
-	$.ajax({
-	  url: "http://cardables.azurewebsites.net/api/createGame?name=bridge&max=3",
-	  type:'GET',
-	}).done(function(data) {
-		// games = data;
-		// console.log(data)
-	});
+	function create(){
+		$.ajax({
+		  url: "http://cardables.azurewebsites.net/api/createGame?name=bridge&max=3",
+		  type:'GET',
+		}).done(function(data) {
+			// games = data;
+			console.log(data)
+		});
+	}
 	$.ajax({
 	  url: "http://cardables.azurewebsites.net/api/getAllGames",
 	  type:'GET',
 	}).done(function(data) {
-		games = data;
+		gameinfo = data;
 		console.log(data)
 	});
 
 
-  $scope.games = [
-
-    {id:'Bridge Club', max:7, current:2},
-    {id:'Dai Di', max:5, current:1}];
+  $scope.games = [];
+  for(info in gameinfo){
+  	$scope.games.push({id:info.name, info.max, current:1})
+  }
  
   $scope.addGame = function() {
   	console.log('game created');
