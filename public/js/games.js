@@ -16,6 +16,7 @@
 
 function GameCtrl($scope) {
 	var gameinfo;
+  	$scope.games = [];
 
 	console.log('bonk');
 	function create(){
@@ -32,14 +33,13 @@ function GameCtrl($scope) {
 	  type:'GET',
 	}).done(function(data) {
 		gameinfo = data;
+		for(info in gameinfo){
+			$scope.games.push({id:info.name, max:info.max, current:1})
+		}
 		console.log(data)
 	});
 
 
-  $scope.games = [];
-  for(info in gameinfo){
-  	$scope.games.push({id:info.name, max:info.max, current:1})
-  }
  
   $scope.addGame = function() {
   	console.log('game created');
