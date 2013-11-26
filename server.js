@@ -6,25 +6,25 @@ var express = require('express.io'),
 
 var app = module.exports = express();
 
-// app.set('port', process.env.PORT || 3000);
-// app.set('views', __dirname + '/views');
-// // app.set('view engine', 'jade');
-// app.use(express.logger('dev'));
-// app.use(express.bodyParser());
-// app.use(express.methodOverride());
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use(app.router);
-// app.engine('html', require('ejs').renderFile);
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+// app.set('view engine', 'jade');
+app.use(express.logger('dev'));
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(app.router);
+app.engine('html', require('ejs').renderFile);
 
-// // development only
-// if (app.get('env') === 'development') {
-//   app.use(express.errorHandler());
-// }
+// development only
+if (app.get('env') === 'development') {
+  app.use(express.errorHandler());
+}
 
-// // production only
-// if (app.get('env') === 'production') {
-//   // TODO
-// };
+// production only
+if (app.get('env') === 'production') {
+  // TODO
+};
 
 // /**
 //  * Routes
