@@ -7,7 +7,7 @@ var express = require('express.io'),
     FacebookStrategy = require('passport-facebook').Strategy;
 
 ////////////////////////////////facebook stuff//////////////////////////
-var FACEBOOK_APP_ID = "708980782452903"
+var FACEBOOK_APP_ID = "708980782452903";
 var FACEBOOK_APP_SECRET = "95d578f5cf68f8ffcff84d1074c2313c";
 
 passport.serializeUser(function(user, done) {
@@ -21,7 +21,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: "http://cardables.azurewebsites.net/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
