@@ -1,6 +1,6 @@
 var express = require('express');
-    routes = require('./routes'),
-    api = require('./routes/api'),
+    // routes = require('./routes'),
+    // api = require('./routes/api'),
     http = require('http'),
     path = require('path');
 
@@ -36,10 +36,13 @@ app.get('/', routes.index);
 
 // JSON API
 // app.get('/api/name', api.name);
-app.get('/api/createGame', api.createGame);
-app.get('/api/getCards', api.getCards);
-app.post('/api/updateCards', api.updateCards);
-app.get('/api/getUpdatedCards', api.getUpdatedCards);
+
+
+
+// app.get('/api/createGame', api.createGame);
+// app.get('/api/getCards', api.getCards);
+// app.post('/api/updateCards', api.updateCards);
+// app.get('/api/getUpdatedCards', api.getUpdatedCards);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
