@@ -120,14 +120,16 @@ io.sockets.on('connection', function (socket) {
   socket.on('join', function (data) {
     console.log('sessionID '+socket.handshake.sessionID+' joined '+data);
     socket.join(data);
-    var clients = io.sockets.clients(data);
-    socket.broadcast.to(data.gid).emit('players', {message: clients})
+    // var clients = io.sockets.clients(data);
+    // console.log(clients);
+    // socket.broadcast.to(data).emit('players', {message: clients})
   });
 
   socket.on('disconnect', function (data) {
     console.log('sessionID '+socket.handshake.sessionID+' disconnected!');
     socket.leave(data);
-    var clients = io.sockets.clients(data);
-    socket.broadcast.to(data.gid).emit('players', {message: clients})
+    // var clients = io.sockets.clients(data);
+    // console.log(clients);
+    // socket.broadcast.to(data).emit('players', {message: clients})
   });
 });
