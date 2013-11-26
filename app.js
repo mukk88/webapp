@@ -81,6 +81,7 @@ if (app.get('env') === 'production') {
 
 app.get('/', routes.splash);
 app.get('/index', routes.index);
+app.get('/play.html', routes.play);
 //app.get('/index', ensureAuthenticated, routes.index);
 app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }), routes.authFacebookCallback);
@@ -102,24 +103,44 @@ app.get('*', routes.index);
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-sever.listen(app.get('port'), function () {
+server.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/auth/facebook')
+  res.redirect('/auth/fac  ebook')
 }
 
-// io.sockets.on('connection', function (socket) {
-//   console.log('A socket with sessionID '+socket.handshake.sessionID+' connected!');
-//   socket.on('updateCards', function (data) {
-//     socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
-//   });
-//   socket.on('join', function (data) {
-//     console.log('A socket with sessionID '+socket.handshake.sessionID+' joined '+data);
-//     socket.join(data);
-//     var clients = io.sockets.clients(data);
-//     socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
-//   });
-// });
+io.sockets.on('connection', function (socket) {
+  console.log('sessionID '+socket.handshake.sessionID+' connected!');
+
+  // socket.on('updateCards', function (data) {
+  //   socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
+  // });
+
+  // socket.on('join', function (data) {
+  //   console.log('sessionID '+socket.handshake.sessionID+' joined '+data);
+  //   socket.join(data);
+  //   // var clients = io.sockets.clients(data);
+  //   // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+  // });
+
+  socket.on('disconnect', function (data) {
+    console.log('sessionID '+socket.handshake.sessionID+' disconnected!');
+    // socket.leave(data);
+    // var clients = io.sockets.clients(data);
+    // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+  });
+});
+
+io.sockets.on('updateCards', function (socket) {
+  socket.broadcast.to(socket.data.gid).emit('cardsUpdated', {message: socket/data.card})
+});
+
+io.sockets.on('join', function (socket) {
+  console.log('sessionID '+socket.handshake.sessionID+' joined '+socket.data);
+  socket.join(socket.data);
+  // var clients = io.sockets.clients(data);
+  // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+});
