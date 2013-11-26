@@ -113,20 +113,21 @@ io.sockets.on('connection', function (socket) {
   console.log('sessionID '+socket.handshake.sessionID+' connected!');
 
   socket.on('updateCards', function (data) {
+    console.log('updateCards '+data.gid + ' ' + data.card);
     socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
   });
 
   socket.on('join', function (data) {
     console.log('sessionID '+socket.handshake.sessionID+' joined '+data);
     socket.join(data);
-    // var clients = io.sockets.clients(data);
-    // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+    var clients = io.sockets.clients(data);
+    socket.broadcast.to(data.gid).emit('players', {message: clients})
   });
 
   socket.on('disconnect', function (data) {
     console.log('sessionID '+socket.handshake.sessionID+' disconnected!');
     socket.leave(data);
-    // var clients = io.sockets.clients(data);
-    // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+    var clients = io.sockets.clients(data);
+    socket.broadcast.to(data.gid).emit('players', {message: clients})
   });
 });
