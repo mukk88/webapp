@@ -109,7 +109,7 @@ server.listen(app.get('port'), function () {
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/auth/fac  ebook')
+  res.redirect('/auth/facebook')
 }
 
 io.sockets.on('connection', function (socket) {

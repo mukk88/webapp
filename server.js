@@ -79,16 +79,20 @@ app.get('/api/deleteAllGames',api.deleteAllGames);
 app.get('*', routes.index);
 
 // express.io
-app.io.route('updateCards', function(req) {
-    req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
-})
+// app.io.route('updateCards', function(req) {
+//     req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
+// })
 
-app.io.route('join', function(req) {
-    req.io.join(req.data);
-    console.log('done joining');
-})
+// app.io.route('join', function(req) {
+//     req.io.join(req.data);
+//     console.log('done joining');
+// })
 
-app.listen(process.env.PORT, function () {
+
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
+server.listen(process.env.PORT, function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
@@ -104,3 +108,36 @@ function ensureAuthenticated(req, res, next) {
 //   res.writeHead(200, { 'Content-Type': 'text/plain' });
 //   res.end('Hello github\n');
 // }).listen(port);
+
+io.sockets.on('connection', function (socket) {
+  console.log('sessionID '+socket.handshake.sessionID+' connected!');
+
+  // socket.on('updateCards', function (data) {
+  //   socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
+  // });
+
+  // socket.on('join', function (data) {
+  //   console.log('sessionID '+socket.handshake.sessionID+' joined '+data);
+  //   socket.join(data);
+  //   // var clients = io.sockets.clients(data);
+  //   // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+  // });
+
+  socket.on('disconnect', function (data) {
+    console.log('sessionID '+socket.handshake.sessionID+' disconnected!');
+    // socket.leave(data);
+    // var clients = io.sockets.clients(data);
+    // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+  });
+});
+
+io.sockets.on('updateCards', function (socket) {
+  socket.broadcast.to(socket.data.gid).emit('cardsUpdated', {message: socket/data.card})
+});
+
+io.sockets.on('join', function (socket) {
+  console.log('sessionID '+socket.handshake.sessionID+' joined '+socket.data);
+  socket.join(socket.data);
+  // var clients = io.sockets.clients(data);
+  // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+});
