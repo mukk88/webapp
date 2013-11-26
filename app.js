@@ -11,7 +11,6 @@ var express = require('express.io'),
     path = require('path'),
     passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy;
-    // io = require('socket.io');
 
 
 
@@ -97,50 +96,13 @@ app.get('/api/deleteAllGames',api.deleteAllGames);
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
-///////////////////////////////express.io stuff////////////////////////
-// var rooms = {};
-app.io.route('updateCards', function(req) {
-    req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
-})
-
-app.io.route('join', function(req) {
-    req.io.join(req.data);
-    // if(rooms[req.data] == undefined){
-    //   rooms[req.data] = 0;
-    // }
-    // rooms[req.data]++;
-    // req.io.room(req.data).broadcast('playerEnters', {message: req.data.card});
-    console.log('done joining');
-})
-
-// app.io.route('getAllPlayers', function(req) {
-//     req.io.join(req.data);
-//     req.io.room(req.data).broadcast('playerEnters', {message: req.data.card});
-//     if(rooms[req.data] == undefined){
-//       rooms[req.data] = [];
-//     }
-//     rooms[req.data].push(req.id);
-//     console.log('someone joined');
-// })
-
-// io.sockets.on('connection', function (socket) {
-//     console.log('someone connected');
-//     socket.on('disconnect', function () {
-//         console.log('someone disconnected');
-//         count--;
-//         io.sockets.emit('count', {
-//             number: count
-//         });
-//     });
-// });
-///////////////////////////////express.io stuff////////////////////////
-
-
 /**
  * Start Server
  */
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
-app.listen(app.get('port'), function () {
+sever.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
@@ -148,3 +110,16 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/auth/facebook')
 }
+
+io.sockets.on('connection', function (socket) {
+  console.log('A socket with sessionID '+socket.handshake.sessionID+' connected!');
+  socket.on('updateCards', function (data) {
+    socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
+  });
+  socket.on('join', function (data) {
+    console.log('A socket with sessionID '+socket.handshake.sessionID+' joined '+data);
+    socket.join(data);
+    var clients = io.sockets.clients(data);
+    socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+  });
+});
