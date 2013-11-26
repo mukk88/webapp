@@ -21,19 +21,19 @@
 			    <br>
 				<span>Max Players:</span>
 			    <input ng-model="gameSize" style="width:50px">
-				<a href=""></a><button class="create btn" type="submit">Create Game</button>
+				<button class="create btn" type="submit">Create Game</button>
 			</form>
 			<h2>Join Game</h2>
-			<form ng-submit="joinGame()">
+			<!-- <form ng-submit="joinGame()"> -->
 				<div class="gamelist" >
 			      <h3>{{games.length}} games available</h3>
 			        <div class ="games" ng-repeat="game in games">
 			          <span>{{game.name}}</span>
 			          <span>Spaces: {{game.max-game.current}}</span>
-			          <button id="Game id-{{game.id}}" class=" join btn">Join Game</button>
+			          <button ng-click="joinGame()" id="{{game.id}}" class=" join btn">Join Game</button>
 			        </div>
 			  	</div>
-			</form>
+			<!-- </form> -->
 		</div>
 	</div>
 </body>
