@@ -190,7 +190,7 @@ io.on('cardsUpdated', function(data) {
         $(id).appendTo(parent);
         if(data.message['info']['parent'])
         if(data.message['info']['back']!=$(id).attr("back")){
-            // $(id).flip();
+            $(id).flip();
         }  
     }
     //put the card in the right parent
@@ -204,3 +204,8 @@ io.on('cardsUpdated', function(data) {
         shuffle();
     }
 })  
+
+io.on('players', function(data){
+    console.log(data.length);
+    $('.viewbar').html(data.length);
+})
