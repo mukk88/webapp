@@ -34,30 +34,18 @@ if (app.get('env') === 'production') {
 app.get('/', routes.index);
 // app.get('/partials/:name', routes.partials);
 
-// // JSON API
-// // app.get('/api/name', api.name);
+// JSON API
+// app.get('/api/name', api.name);
 
-// app.get('/api/createGame', api.createGame);
-// app.get('/api/getCards', api.getCards);
-// app.post('/api/updateCards', api.updateCards);
-// app.get('/api/getUpdatedCards', api.getUpdatedCards);
+app.get('/api/createGame', api.createGame);
+app.get('/api/getCards', api.getCards);
+app.post('/api/updateCards', api.updateCards);
+app.get('/api/getUpdatedCards', api.getUpdatedCards);
 
-// // redirect all others to the index (HTML5 history)
-// app.get('*', routes.index);
+// redirect all others to the index (HTML5 history)
+app.get('*', routes.index);
 
 
 app.listen(process.env.PORT, function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-
-// http.createServer(app).listen(app.get('port'), function () {
-//   console.log('Express server listening on port ' + app.get('port'));
-// });
-
-
-// var port = process.env.PORT || 1337;
-// http.createServer(function(req, res) {
-//   res.writeHead(200, { 'Content-Type': 'text/plain' });
-//   res.end('Hello World\n');
-// }).listen(port);
