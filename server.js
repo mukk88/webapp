@@ -8,7 +8,7 @@ var express = require('express.io'),
 
 ////////////////////////////////facebook stuff//////////////////////////
 var FACEBOOK_APP_ID = "708980782452903";
-var FACEBOOK_APP_SECRET = "95d578f5cf68f8ffcff84d1074c2313c";
+var FACEBOOK_APP_SECRET = "695824078d253ad54d17e1beb59d29a8s";
 
 passport.serializeUser(function(user, done) {
   done(null, user);
