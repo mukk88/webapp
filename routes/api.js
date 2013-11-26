@@ -15,7 +15,7 @@ autoIncrement.initialize(connection);
 
 // models
 var cardSchema = mongoose.Schema({
-  _id: String,
+  cid: String,
   card: String,
   top: Number,
   left: Number,
@@ -77,6 +77,15 @@ exports.createGame = function (req, res) {
 exports.getAllGames = function (req, res) {
   Game.find({}, function (err, games) {
     res.json(games);
+  });
+};
+
+exports.deleteAllGames = function (req, res) {
+  Game.remove({}, function (err, games) {
+    res.json(games);
+  });
+  Card.remove({}, function (err, cards) {
+    res.json(cards);
   });
 };
 

@@ -72,6 +72,7 @@ app.get('/api/createGame', api.createGame);
 app.get('/api/getAllGames', api.getAllGames);
 app.get('/api/getCards', api.getCards);
 app.post('/api/updateCards', api.updateCards);
+app.get('/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);

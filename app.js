@@ -11,6 +11,7 @@ var express = require('express.io'),
     path = require('path'),
     passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy;
+    // io = require('socket.io');
 
 
 
@@ -91,20 +92,47 @@ app.get('/api/createGame', api.createGame);
 app.get('/api/getAllGames', api.getAllGames);
 app.get('/api/getCards', api.getCards);
 app.post('/api/updateCards', api.updateCards);
+app.get('/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
-// app.get('*', routes.index);
+app.get('*', routes.index);
 
 ///////////////////////////////express.io stuff////////////////////////
+// var rooms = {};
 app.io.route('updateCards', function(req) {
     req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
 })
 
 app.io.route('join', function(req) {
     req.io.join(req.data);
-    req.io.room(req.data).broadcast('playerEnters', {message: req.data.card});
+    // if(rooms[req.data] == undefined){
+    //   rooms[req.data] = 0;
+    // }
+    // rooms[req.data]++;
+    // req.io.room(req.data).broadcast('playerEnters', {message: req.data.card});
     console.log('done joining');
 })
+
+// app.io.route('getAllPlayers', function(req) {
+//     req.io.join(req.data);
+//     req.io.room(req.data).broadcast('playerEnters', {message: req.data.card});
+//     if(rooms[req.data] == undefined){
+//       rooms[req.data] = [];
+//     }
+//     rooms[req.data].push(req.id);
+//     console.log('someone joined');
+// })
+
+// io.sockets.on('connection', function (socket) {
+//     console.log('someone connected');
+//     socket.on('disconnect', function () {
+//         console.log('someone disconnected');
+//         count--;
+//         io.sockets.emit('count', {
+//             number: count
+//         });
+//     });
+// });
 ///////////////////////////////express.io stuff////////////////////////
 
 
