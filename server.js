@@ -10,7 +10,7 @@ var express = require('express'),
     path = require('path');
 
 var app = module.exports = express();
-app.http().io();
+// app.http().io();
 
 
 /**
@@ -78,6 +78,6 @@ app.io.route('join', function(req) {
  * Start Server
  */
 
-app.listen(app.get('port'), function () {
+// http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
