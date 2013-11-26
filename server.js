@@ -1,66 +1,101 @@
-// var express = require('express.io'),
-//     routes = require('./routes'),
-//     api = require('./routes/api'),
-//     http = require('http'),
-//     path = require('path');
+var express = require('express.io'),
+    routes = require('./routes'),
+    api = require('./routes/api'),
+    http = require('http'),
+    path = require('path'),
+    passport = require('passport'),
+    FacebookStrategy = require('passport-facebook').Strategy;
 
-// var app = module.exports = express();
-// app.http().io();
+////////////////////////////////facebook stuff//////////////////////////
+var FACEBOOK_APP_ID = "708980782452903"
+var FACEBOOK_APP_SECRET = "95d578f5cf68f8ffcff84d1074c2313c";
 
-// app.set('port', process.env.PORT || 3000);
-// app.set('views', __dirname + '/views');
-// app.use(express.logger('dev'));
-// app.use(express.bodyParser());
-// app.use(express.methodOverride());
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use(app.router);
-// app.engine('html', require('ejs').renderFile);
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
 
-// // development only
-// if (app.get('env') === 'development') {
-//   app.use(express.errorHandler());
-// }
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
-// // production only
-// if (app.get('env') === 'production') {
-//   // TODO
-// };
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    //   return done(err, user);
+    // });
+    return done(null, profile);
+  }
+));
 
-// /**
-//  * Routes
-//  */
+var app = module.exports = express();
+app.http().io();
 
-// // serve index and view partials
-// app.get('/', routes.index);
-// app.get('/splash.html', routes.splash);
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+app.use(express.logger('dev'));
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(app.router);
+app.engine('html', require('ejs').renderFile);
 
-// // JSON API
-// app.get('/api/createGame', api.createGame);
-// app.get('/api/getAllGames', api.getAllGames);
-// app.get('/api/getCards', api.getCards);
-// app.post('/api/updateCards', api.updateCards);
+// development only
+if (app.get('env') === 'development') {
+  app.use(express.errorHandler());
+}
 
-// // redirect all others to the index (HTML5 history)
-// app.get('*', routes.index);
+// production only
+if (app.get('env') === 'production') {
+  // TODO
+};
 
-// // express.io
-// app.io.route('updateCards', function(req) {
-//     req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
-// })
+/**
+ * Routes
+ */
 
-// app.io.route('join', function(req) {
-//     req.io.join(req.data);
-//     console.log('done joining');
-// })
+// serve index and view partials
+app.get('/', routes.splash);
+app.get('/index', ensureAuthenticated, routes.index);
+app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }), routes.authFacebookCallback);
+app.get('/logout', routes.logout);
 
-// app.listen(process.env.PORT, function () {
-//   console.log('Express server listening on port ' + app.get('port'));
-// });
+// JSON API
+app.get('/api/createGame', api.createGame);
+app.get('/api/getAllGames', api.getAllGames);
+app.get('/api/getCards', api.getCards);
+app.post('/api/updateCards', api.updateCards);
+
+// redirect all others to the index (HTML5 history)
+app.get('*', routes.index);
+
+// express.io
+app.io.route('updateCards', function(req) {
+    req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
+})
+
+app.io.route('join', function(req) {
+    req.io.join(req.data);
+    console.log('done joining');
+})
+
+app.listen(process.env.PORT, function () {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/auth/facebook')
+}
 
 
-var http = require('http')
-var port = process.env.PORT || 1337;
-http.createServer(function(req, res) {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello github\n');
-}).listen(port);
+// var http = require('http')
+// var port = process.env.PORT || 1337;
+// http.createServer(function(req, res) {
+//   res.writeHead(200, { 'Content-Type': 'text/plain' });
+//   res.end('Hello github\n');
+// }).listen(port);
