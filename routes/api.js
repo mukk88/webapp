@@ -59,7 +59,7 @@ exports.createGame = function (req, res) {
     for(var k=0; k<4; k++){
       for(var n=1; n<=13; n++){
         var newCard = new Card();
-        newCard._id = n+kinds[k];
+        newCard.cid = n+kinds[k];
         newCard.top = top++;
         newCard.left = left++;
         newCard.z = 1;
