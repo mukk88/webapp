@@ -33,9 +33,11 @@ function GameCtrl($scope) {
 	  type:'GET',
 	}).done(function(data) {
 		gameinfo = data;
-		for(var i=0;i<gameinfo.length;i++){
-			$scope.games.push({id:gameinfo[i]._id, name:gameinfo[i].name, max:gameinfo[i].max, current:1})
-		}
+		$scope.$apply(function{
+			for(var i=0;i<gameinfo.length;i++){
+				$scope.games.push({id:gameinfo[i]._id, name:gameinfo[i].name, max:gameinfo[i].max, current:1})
+			}
+		});
 		console.log(data)
 	});
  
