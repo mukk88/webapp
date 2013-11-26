@@ -1,12 +1,10 @@
 var express = require('express.io'),
-    // routes = require('./routes'),
-    // api = require('./routes/api'),
+    routes = require('./routes'),
+    api = require('./routes/api'),
     http = require('http'),
     path = require('path');
 
-    // var io = requires('socket.io');
-
-// var app = module.exports = express();
+var app = module.exports = express();
 
 // app.set('port', process.env.PORT || 3000);
 // app.set('views', __dirname + '/views');
