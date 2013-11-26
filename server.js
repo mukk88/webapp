@@ -1,10 +1,10 @@
-var express = require('express'),
+var express = require('express.io'),
     // routes = require('./routes'),
     // api = require('./routes/api'),
     http = require('http'),
     path = require('path');
 
-    var io = requires('socket.io');
+    // var io = requires('socket.io');
 
 // var app = module.exports = express();
 
