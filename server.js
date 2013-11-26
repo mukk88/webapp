@@ -61,8 +61,8 @@ if (app.get('env') === 'production') {
 
 // serve index and view partials
 app.get('/', routes.splash);
-app.get('/index', routes.index);
-app.get('/', routes.play);
+app.get('/index.html', routes.index);
+app.get('/play.html', routes.play);
 //app.get('/index', ensureAuthenticated, routes.index);
 app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }), routes.authFacebookCallback);
