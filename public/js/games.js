@@ -30,8 +30,8 @@ function GameCtrl($scope) {
 	}
 
 	$.ajax({
-	  url: "http://cardables.azurewebsites.net/api/getAllGames",
-	  type:'GET',
+	 	url: "http://cardables.azurewebsites.net/api/getAllGames",
+	  	type:'GET',
 	}).done(function(data) {
 		gameinfo = data;
 		$scope.$apply(function(){
@@ -45,9 +45,9 @@ function GameCtrl($scope) {
 	$scope.addGame = function() {
 		console.log('game created');
 		$scope.games.push({id:-1,name:$scope.gameName, max:$scope.gameSize, current:0});
+		create($scope.gameName, $scope.gameSize);
 		$scope.gameName = '';
 		$scope.gameSize = '';
-		create($scope.gameName, $scope.gameSize);
 	};
  	
 	$scope.joinGame = function(){
