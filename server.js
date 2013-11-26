@@ -1,6 +1,6 @@
 var express = require('express.io');
-    routes = require('./routes'),
-    api = require('./routes/api'),
+    // routes = require('./routes'),
+    // api = require('./routes/api'),
     http = require('http'),
     path = require('path');
 
