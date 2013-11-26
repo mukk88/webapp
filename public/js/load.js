@@ -90,7 +90,6 @@ function shuffle(){
             $(val).flip();
         }
     })
-    sendShuffle();
 }
 
 function deal(people, cards){
@@ -145,7 +144,7 @@ $(document).ready(function() {
     });
     $("#shuffle").click(function(){
         shuffle();
-        // sendShuffle();
+        sendShuffle();
     })
     $("#deal").click(function(){
         var people;
@@ -159,9 +158,10 @@ $(document).ready(function() {
             if(isNaN(cards)){
                 cards = 13;
             }
-            $('#shuffle').click();
+            // $('#shuffle').click();
             shuffle();
-            deal();
+            deal(people,cards);
+            sendShuffle();
             sendPlayers(people,cards); 
         }catch(err){
             console.log(err);
