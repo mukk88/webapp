@@ -5,6 +5,7 @@ var express = require('express.io'),
     path = require('path');
 
 var app = module.exports = express();
+app.http().io();
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
