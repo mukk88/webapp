@@ -38,7 +38,7 @@ function GameCtrl($scope) {
 
   $scope.games = [];
   for(info in gameinfo){
-  	$scope.games.push({id:info.name, info.max, current:1})
+  	$scope.games.push({id:info.name, max:info.max, current:1})
   }
  
   $scope.addGame = function() {
