@@ -25,7 +25,7 @@ function GameCtrl($scope) {
 		}).done(function(data) {
 			console.log(data)
 			//redirect to the game
-			window.location.href = "http://cardables.azurewebsites.net/index.html";
+			window.location.href = "http://cardables.azurewebsites.net/index.html?1";
 		});
 	}
 
@@ -44,14 +44,18 @@ function GameCtrl($scope) {
  
 	$scope.addGame = function() {
 		console.log('game created');
-		$scope.games.push({id:-1,name:$scope.gameName, max:$scope.gameSize, current:0});
+		$scope.games.push({id:1,name:$scope.gameName, max:$scope.gameSize, current:0});
 		create($scope.gameName, $scope.gameSize);
 		$scope.gameName = '';
 		$scope.gameSize = '';
 	};
  	
-	$scope.joinGame = function(){
+	$scope.joinGame = function(gid){
+		console.log(gid);
 		console.log('game joined');
+		//get the id of the game i am joining
+		window.location.href = "http://cardables.azurewebsites.net/index.html?1";
+
 		// tell server you have joined the game
 	}
 

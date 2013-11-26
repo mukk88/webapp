@@ -28,7 +28,12 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         io = io.connect()
-        io.emit('join',"1")
+        var pathname = window.location.pathname;
+        var gid = pathname.split('?')[1];
+        if(gid!=undefined){
+            io.emit('join',gid);  
+        }
+        //change deck to get all cards.
     </script>
     <script src="js/drag.js"></script>
     <script src="js/deck.js"></script>
