@@ -51,13 +51,13 @@ app.get('*', routes.index);
 // });
 
 
-http.createServer(app).listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
-});
+// http.createServer(app).listen(app.get('port'), function () {
+//   console.log('Express server listening on port ' + app.get('port'));
+// });
 
 
-// var port = process.env.PORT || 1337;
-// http.createServer(function(req, res) {
-//   res.writeHead(200, { 'Content-Type': 'text/plain' });
-//   res.end('Hello World\n');
-// }).listen(port);
+var port = process.env.PORT || 1337;
+http.createServer(function(req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello World\n');
+}).listen(port);
