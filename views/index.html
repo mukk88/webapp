@@ -26,15 +26,7 @@
     <script src="js/bootstrap.touchspin.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        io = io.connect()
-        var pathname = window.location.pathname;
-        var gid = pathname.split('?')[1];
-        if(gid!=undefined){
-            io.emit('join',gid);  
-        }
-        //change deck to get all cards.
-    </script>
+    <script src="js/test.js"></script>
     <script src="js/drag.js"></script>
     <script src="js/deck.js"></script>
     <script src="js/load.js"></script>

@@ -100,7 +100,7 @@ app.get('*', routes.index);
 /**
  * Start Server
  */
-svar server = http.createServer(app);
+var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
 server.listen(app.get('port'), function () {
@@ -122,14 +122,14 @@ io.sockets.on('connection', function (socket) {
   socket.on('join', function (data) {
     console.log('sessionID '+socket.handshake.sessionID+' joined '+data);
     socket.join(data);
-    // var clients = io.sockets.clients(data);
-    // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+    var clients = io.sockets.clients(data);
+    socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
   });
 
   socket.on('disconnect', function (data) {
     console.log('sessionID '+socket.handshake.sessionID+' disconnected!');
-    // socket.leave(data);
-    // var clients = io.sockets.clients(data);
-    // socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
+    socket.leave(data);
+    var clients = io.sockets.clients(data);
+    socket.broadcast.to(data.gid).emit('playersChanged', {message: clients.length})
   });
 });
