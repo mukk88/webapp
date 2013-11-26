@@ -21,7 +21,7 @@ exports.authFacebookCallback = function(req, res){
 };
 
 exports.play = function(red, res){
-	res.render(play.html);
+	res.render('play.html');
 }
 
 exports.logout = function(req, res){
