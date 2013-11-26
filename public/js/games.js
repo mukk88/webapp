@@ -11,15 +11,22 @@
 // 	console.log('game created');
 // )
 
-$.ajax({
-  url: "http://cardables.azurewebsites.net/getAllGames",
-  type:'GET',
-}).done(function(data) {
-	console.log(data)
-});
+
 
 
 function GameCtrl($scope) {
+	var games;
+
+	console.log('bonk');
+	$.ajax({
+	  url: "http://cardables.azurewebsites.net/api/getAllGames",
+	  type:'GET',
+	}).done(function(data) {
+		games = data;
+		console.log(data)
+	});
+
+
   $scope.games = [
     {id:'Bridge Club', max:7, current:2},
     {id:'Dai Di', max:5, current:1}];
