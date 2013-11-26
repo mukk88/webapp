@@ -18,16 +18,17 @@ function GameCtrl($scope) {
 	var gameinfo;
   	$scope.games = [];
 
-	console.log('bonk');
-	function create(){
+	function create(name, max){
 		$.ajax({
-		  url: "http://cardables.azurewebsites.net/api/createGame?name=bridge&max=3",
+		  url: "http://cardables.azurewebsites.net/api/createGame?name=" + name+ "&max=" +max + "",
 		  type:'GET',
 		}).done(function(data) {
-			// games = data;
 			console.log(data)
+			//redirect to the game
+			window.location.href = "http://cardables.azurewebsites.net/index.html";
 		});
 	}
+
 	$.ajax({
 	  url: "http://cardables.azurewebsites.net/api/getAllGames",
 	  type:'GET',
@@ -43,9 +44,10 @@ function GameCtrl($scope) {
  
 	$scope.addGame = function() {
 		console.log('game created');
-		$scope.games.push({id:-1,name:$scope.gameId, max:$scope.gameSize, current:0});
-		$scope.gameId = '';
+		$scope.games.push({id:-1,name:$scope.gameName, max:$scope.gameSize, current:0});
+		$scope.gameName = '';
 		$scope.gameSize = '';
+		create($scope.gameName, $scope.gameSize);
 	};
  	
 	$scope.joinGame = function(){
