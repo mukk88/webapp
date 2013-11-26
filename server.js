@@ -36,15 +36,23 @@ app.get('/', routes.index);
 
 // JSON API
 // app.get('/api/name', api.name);
-
 app.get('/api/createGame', api.createGame);
+app.get('/api/getAllGames', api.getAllGames);
 app.get('/api/getCards', api.getCards);
 app.post('/api/updateCards', api.updateCards);
-app.get('/api/getUpdatedCards', api.getUpdatedCards);
 
 // redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
+// app.get('*', routes.index);
 
+// express.io stuff
+app.io.route('updateCards', function(req) {
+    req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
+})
+
+app.io.route('join', function(req) {
+    req.io.join(req.data);
+    console.log('done joining');
+})
 
 app.listen(process.env.PORT, function () {
   console.log('Express server listening on port ' + app.get('port'));
