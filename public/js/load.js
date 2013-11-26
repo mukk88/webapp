@@ -64,25 +64,28 @@ jQuery.fn.selectMat = function(){
 
 function sendPlayers(number, cards){
     console.log('sending player info');
-    var player = {'players':number,'cards':cards};
-    $.ajax({
-        url:"/api/updateCards?gid=1",
-        type:"post",
-        data:player
-    }).done(function(){
-        // alert('done');
-    });
+    var player = {'gid':'1',card:{'players':number,'cards':cards}};
+    io.emit('updateCards', player);
+    // var player = {'players':number,'cards':cards};
+    // $.ajax({
+    //     url:"/api/updateCards?gid=1",
+    //     type:"post",
+    //     data:player
+    // }).done(function(){
+    //     // alert('done');
+    // });
 }
 
 function sendShuffle(){
-    var player = {'shuffle':true};
-    $.ajax({
-        url:"/api/updateCards?gid=1",
-        type:"post",
-        data:player
-    }).done(function(){
-        // alert('done');
-    });
+    var shuffle = {'gid':'1',card:{'shuffle':true}};
+    io.emit('updateCards', shuffle);
+    // $.ajax({
+    //     url:"/api/updateCards?gid=1",
+    //     type:"post",
+    //     data:player
+    // }).done(function(){
+    //     // alert('done');
+    // });
 }
 
 function shuffle(){

@@ -12,20 +12,9 @@
  * you think this stuff is worth it, you can buy me a beer in return.
  */
 
-
-
-// var socket = io.connect();
 function sendCardData(id, top, left, z, parent, back){
-
     var carddata = {'gid':'1',card:{'id':id,'info':{'top':top, 'left':left, 'z':z, 'parent':parent, 'back':back}}};
     io.emit('updateCards', carddata);
-    // $.ajax({
-    //     url:"/api/updateCards?gid=1",
-    //     type:"post",
-    //     data:carddata
-    // }).done(function(){
-    //     // alert('done');
-    // });
 };
 
 ;(function($){

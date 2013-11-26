@@ -9,7 +9,6 @@ app.http().io();
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-// app.set('view engine', 'jade');
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -33,19 +32,18 @@ if (app.get('env') === 'production') {
 
 // serve index and view partials
 app.get('/', routes.index);
-// app.get('/partials/:name', routes.partials);
+app.get('/splash.html', routes.splash);
 
 // JSON API
-// app.get('/api/name', api.name);
 app.get('/api/createGame', api.createGame);
 app.get('/api/getAllGames', api.getAllGames);
 app.get('/api/getCards', api.getCards);
 app.post('/api/updateCards', api.updateCards);
 
 // redirect all others to the index (HTML5 history)
-// app.get('*', routes.index);
+app.get('*', routes.index);
 
-// express.io stuff
+// express.io
 app.io.route('updateCards', function(req) {
     req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
 })
