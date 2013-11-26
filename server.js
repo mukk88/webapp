@@ -1,10 +1,9 @@
-// var TaskList = require('./routes/tasklist');
-// var taskList = new TaskList(process.env.CUSTOMCONNSTR_MONGOLAB_URI);
+
 /**
  * Module dependencies
  */
 
-var express = require('express.io'),
+var express = require('express'),
     routes = require('./routes'),
     api = require('./routes/api'),
     http = require('http'),
