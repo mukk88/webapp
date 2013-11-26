@@ -5,7 +5,7 @@
 //setup mongodb
 var mongoose = require('mongoose');
 var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
-//var connectionString = "mongodb://localhost/test"; 
+// var connectionString = "mongodb://localhost/test"; 
 mongoose.connect(connectionString);
 
 //setup auto+
@@ -24,14 +24,24 @@ var cardSchema = mongoose.Schema({
   gid: Number
 });
 
+var userSchema = mongoose.Schema({
+  _id: String,
+  display: String,
+  gid: Number
+});
+
 var gameSchema = mongoose.Schema({
-  _id: Number
+  _id: Number,
+  name: String,
+  // password: String,
+  max: Number
 });
 
 gameSchema.plugin(autoIncrement.plugin, { model: 'Game' });
 
 var Card = mongoose.model('Card', cardSchema);
 var Game = mongoose.model('Game', gameSchema);
+var User = mongoose.model('User', gameSchema);
 
 
 var kinds = ["c","d","h","s"];
@@ -39,6 +49,8 @@ var kinds = ["c","d","h","s"];
 exports.createGame = function (req, res) {
   var newGame = new Game();
   Game.nextCount(function(err, count) {
+    newGame.name=req.query.name
+    newGame.max=req.query.max
     newGame.save()
     var results = new Array();
     var top = 199;

@@ -16,7 +16,7 @@ var express = require('express.io'),
 
 ////////////////////////////////facebook stuff//////////////////////////
 var FACEBOOK_APP_ID = "708980782452903"
-var FACEBOOK_APP_SECRET = "95d578f5cf68f8ffcff84d1074c2313c";
+var FACEBOOK_APP_SECRET = "695824078d253ad54d17e1beb59d29a8";
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -80,11 +80,11 @@ if (app.get('env') === 'production') {
 // serve index and view partials
 
 app.get('/', routes.splash);
-app.get('/index', ensureAuthenticated, routes.index);
+app.get('/index', routes.index);
+//app.get('/index', ensureAuthenticated, routes.index);
 app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }), routes.authFacebookCallback);
 app.get('/logout', routes.logout);
->>>>>>> 6cb7904e0ed2a54e13222e3472b0c37bfabd2d4d
 
 // JSON API
 app.get('/api/createGame', api.createGame);
@@ -102,10 +102,9 @@ app.io.route('updateCards', function(req) {
 
 app.io.route('join', function(req) {
     req.io.join(req.data);
+    req.io.room(req.data).broadcast('playerEnters', {message: req.data.card});
     console.log('done joining');
 })
-
-
 ///////////////////////////////express.io stuff////////////////////////
 
 

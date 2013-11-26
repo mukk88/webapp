@@ -8,7 +8,7 @@ var express = require('express.io'),
 
 ////////////////////////////////facebook stuff//////////////////////////
 var FACEBOOK_APP_ID = "708980782452903";
-var FACEBOOK_APP_SECRET = "695824078d253ad54d17e1beb59d29a8s";
+var FACEBOOK_APP_SECRET = "695824078d253ad54d17e1beb59d29a8";
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -40,6 +40,8 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(app.router);
 app.engine('html', require('ejs').renderFile);
 
