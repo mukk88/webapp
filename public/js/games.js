@@ -33,8 +33,8 @@ function GameCtrl($scope) {
 	  type:'GET',
 	}).done(function(data) {
 		gameinfo = data;
-		for(info in gameinfo){
-			$scope.games.push({id:info.name, max:info.max, current:1})
+		for(var i=0;i<gameinfo.length;i++){
+			$scope.games.push({id:gameinfo[i].id, name:gameinfo[i].name, max:gameinfo[i].max, current:1})
 		}
 		console.log(data)
 	});
@@ -43,7 +43,7 @@ function GameCtrl($scope) {
  
   $scope.addGame = function() {
   	console.log('game created');
-    $scope.games.push({id:$scope.gameId, max:$scope.gameSize, current:0});
+    $scope.games.push({id:-1,name:$scope.gameId, max:$scope.gameSize, current:0});
     $scope.gameId = '';
     $scope.gameSize = '';
   };
