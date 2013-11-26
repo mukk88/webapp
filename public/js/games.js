@@ -14,7 +14,6 @@
 $.ajax({
   url: "http://cardables.azurewebsites.net/getAllGames",
   type:'GET',
-  data:data
 }).done(function(data) {
 	console.log(data)
 });
