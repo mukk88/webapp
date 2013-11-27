@@ -207,6 +207,14 @@ io.on('cardsUpdated', function(data) {
 })  
 
 io.on('players', function(data){
-    console.log(data.length);
-    $('.info').append(data.length);
+    console.log(data.message.length);
+    var num = 0;
+    for(var i=0;i<data.message.length;i++){
+        if(io.socket.sessionid == data.message[i]){
+            num = i;
+            break;
+        }
+    }
+    
+    $('.info').append('number of players: ' + data.message.length + ' i am player: ' + num);
 })
