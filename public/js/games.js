@@ -4,13 +4,13 @@ function GameCtrl($scope) {
 
 	function create(name, max){
 		$.ajax({
-		  url: "http://cardables.azurewebsites.net/api/createGame?name=" + name+ "&max=" +max + "",
+		  url: "http://cardables.azurewebsites.net/api/createGame?name=" + name+ "&max=" +max ,
 		  type:'GET',
 		}).done(function(data) {
 			var gid = data[0].gid;
 			console.log(data[0].gid);
 			//redirect to the game
-			window.location.href = "http://cardables.azurewebsites.net/index.html?" + gid;
+			window.location.href = "http://cardables.azurewebsites.net/index.html:" + gid;
 		});
 	}
 
@@ -39,7 +39,7 @@ function GameCtrl($scope) {
 		console.log(gid);
 		console.log('game joined');
 		//get the id of the game i am joining
-		window.location.href = "http://cardables.azurewebsites.net/index.html?"+gid+"";
+		window.location.href = "http://cardables.azurewebsites.net/index.html:"+gid;
 	}
 
 }
