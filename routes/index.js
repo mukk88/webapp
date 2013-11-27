@@ -12,6 +12,10 @@ exports.splash = function(req, res){
   res.render('splash.html');
 };
 
+exports.pitch = function(req, res){
+  res.render('pitch.html');
+};
+
 exports.authFacebook = function(req, res){
   // should never be called
 };
