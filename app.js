@@ -113,7 +113,7 @@ function ensureAuthenticated(req, res, next) {
 }
 
 io.sockets.on('connection', function (socket) {
-  console.log('sessionID '+socket.handshake.sessionID+' connected!');
+  console.log('sessionID '+socket.id+' connected!');
 
   socket.on('updateCards', function (data) {
     console.log('updateCards '+data.gid + ' ' + data.card);
@@ -121,18 +121,24 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('join', function (data) {
-    console.log('sessionID '+socket.handshake.sessionID+' joined '+data);
+    console.log('sessionID '+socket.id+' joined '+data);
     socket.join(data);
-    // var clients = io.sockets.clients(data);
-    // console.log(clients);
-    // socket.broadcast.to(data).emit('players', {message: clients})
+    var results = new Array();
+    var clients = io.sockets.clients(data);
+    for(var i=0; i<clients.length; i++){
+      results.push(clients[i].id);
+    }
+    socket.broadcast.to(data).emit('players', {message: results})
   });
 
   socket.on('disconnect', function (data) {
-    console.log('sessionID '+socket.handshake.sessionID+' disconnected!');
+    console.log('sessionID '+socket.id+' disconnected!');
     socket.leave(data);
-    // var clients = io.sockets.clients(data);
-    // console.log(clients);
-    // socket.broadcast.to(data).emit('players', {message: clients})
+    var results = new Array();
+    var clients = io.sockets.clients(data);
+    for(var i=0; i<clients.length; i++){
+      results.push(clients[i].id);
+    }
+    socket.broadcast.to(data).emit('players', {message: results})
   });
 });

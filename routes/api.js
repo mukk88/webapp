@@ -84,8 +84,8 @@ exports.deleteAllGames = function (req, res) {
   Game.remove({}, function (err, games) {
     res.json(games);
   });
-  Card.remove({}, function (err, cards) {
-    res.json(cards);
+  Card.remove({}, function (err, games) {
+    res.json(games);
   });
 };
 
