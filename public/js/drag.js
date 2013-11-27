@@ -13,7 +13,7 @@
  */
 
 function sendCardData(id, top, left, z, parent, back){
-    var carddata = {'gid':'1',card:{'id':id,'info':{'top':top, 'left':left, 'z':z, 'parent':parent, 'back':back}}};
+    var carddata = {'gid':gid,card:{'id':id,'info':{'top':top, 'left':left, 'z':z, 'parent':parent, 'back':back}}};
     io.emit('updateCards', carddata);
 };
 
@@ -205,3 +205,9 @@ function sendCardData(id, top, left, z, parent, back){
         return this;
     };
 })(jQuery);
+
+$(".draggable").on('doubletap', function(){
+    console.log('double tapped!');
+    $(this).flip();
+    sendCardData($(this).attr('id'), $(this).css('top'),$(this).css('left'),$(this).css('zIndex'), $(this).parent().attr('id'), $(this).attr('back'));
+});

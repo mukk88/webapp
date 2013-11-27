@@ -53,7 +53,7 @@ jQuery.fn.selectMat = function(){
         }
         $(this).bind('click', function(e){
             $('.mats').css('height',1);
-            $('#mat' + $(this).attr('id')[10]).css('height',70);
+            $('#mat' + $(this).attr('id')[9]).css('height',height*0.6);
         });
     });
 }
@@ -64,22 +64,30 @@ jQuery.fn.selectMat = function(){
 
 function sendPlayers(number, cards){
     console.log('sending player info');
-    var player = {'gid':'1',card:{'players':number,'cards':cards}};
+    var player = {'gid':gid,card:{'players':number,'cards':cards}};
     io.emit('updateCards', player);
 }
 
-function sendShuffle(){
-    var shuffle = {'gid':'1',card:{'shuffle':true}};
+function sendShuffle(indexes){
+    var shuffle = {'gid':gid,card:{'shuffle':true, 'indexes':indexes}};
     io.emit('updateCards', shuffle);
 }
 
-function shuffle(){
+
+function shuffle(indexlist){
     $('.draggable').appendTo('body');
     $('.matsbar').empty();
     $('.viewbar').empty();
     var cards = $('.draggable');
+    var indexes = {};
     $.each(cards, function(i,val){
-        $(val).css('zIndex', Math.round(Math.random()*300));
+        if(indexlist==undefined){
+            var randno = Math.round(Math.random()*300);
+            $(val).css('zIndex', randno);
+            indexes[$(val).attr('id')] = randno;
+        }else{
+            $(val).css('zIndex', indexlist[$(val).attr('id')]);
+        }
         $(val).css({
             top: height/2-170,
             left: $(window).width()/2-260
@@ -90,18 +98,22 @@ function shuffle(){
             $(val).flip();
         }
     })
+    return indexes;
 }
 
 function deal(people, cards){
     $('.viewbar').append('<button class = "button view" id ="tablebutton" style="left:120px">Table</button>');
     for(i=0;i<people;i++){
-        $('.viewbar').append('<button id="#matbutton'+i+'" class = "button view" style="left:'+(230+i*110)+'px">Player '+(i+1)+'</a>');
+        $('.viewbar').append('<button id="matbutton'+i+'" class = "button view" style="left:230px">Hand</a>');
     }
     for(i=0;i<people;i++){
         $('.matsbar').append('<div class = "mats" id = "mat'+i+'"><span class = "playernumber">Player '+(i+1)+'</span></div>');
     }
     $('.mats').minimize();
     $('.view').selectMat();
+    $('.view').hide();
+    $('#matbutton' + position).show();
+    $('#tablebutton').show();
     var allcards = $('.draggable').sort(function(a,b){
         return $(a).css("zIndex") - $(b).css("zIndex");
     });
@@ -124,7 +136,7 @@ function deal(people, cards){
         })(val), delay);
         delay+=10;
     });
-    $('#mat0').height(70);
+    $('#mat' + position).height(70);
     $('#peopleinput').val('');
     $('#cardsinput').val('');
 }
@@ -159,21 +171,16 @@ $(document).ready(function() {
             if(isNaN(cards)){
                 cards = 13;
             }
-            // $('#shuffle').click();
-            shuffle();
-            deal(people,cards);
-            sendShuffle();
-            sendPlayers(people,cards); 
+            var results = shuffle();
+            deal(total,cards);
+            sendShuffle(results);
+            sendPlayers(total,cards); 
         }catch(err){
             console.log(err);
         }
     })
 });
 $(".draggable").draggableTouch('disgroup');
-$(".draggable").on('doubletap', function(){
-    console.log('double tapped!');
-    $(this).flip();
-});
 
 io.on('cardsUpdated', function(data) {
     var id = data.message['id'];
@@ -187,7 +194,7 @@ io.on('cardsUpdated', function(data) {
             left: data.message['info']['left'],
             zIndex: data.message['info']['z']
         });
-        var parent = data.message['info']['parent'] == 'body' ? 'body' : '#' + data.message['info']['parent'];
+        var parent = data.message['info']['parent'] == 'body' ? 'body' : data.message['info']['parent'];
         $(id).appendTo(parent);
         if(data.message['info']['parent'])
         if(data.message['info']['back']!=$(id).attr("back")){
@@ -202,20 +209,7 @@ io.on('cardsUpdated', function(data) {
     }
     var shuf = data.message['shuffle'];
     if(shuf!=undefined){
-        shuffle();
+        console.log(data.message['indexes']);
+        var discard = shuffle(data.message['indexes']);
     }
 })  
-
-io.on('players', function(data){
-    console.log(data.message.length);
-    var num = 0;
-    for(var i=0;i<data.message.length;i++){
-        if(io.socket.sessionid == data.message[i]){
-            num = i+1;
-            break;
-        }
-    }
-    position = num-1;
-    total = data.message.length;
-    $('.info').html('number of players: ' + data.message.length + ' i am player: ' + num);
-})
