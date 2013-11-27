@@ -194,7 +194,7 @@ io.on('cardsUpdated', function(data) {
             left: data.message['info']['left'],
             zIndex: data.message['info']['z']
         });
-        var parent = data.message['info']['parent'] == 'body' ? 'body' : data.message['info']['parent'];
+        var parent = data.message['info']['parent'] == 'body' ? 'body' : '#' + data.message['info']['parent'];
         $(id).appendTo(parent);
         if(data.message['info']['parent'])
         if(data.message['info']['back']!=$(id).attr("back")){
