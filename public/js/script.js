@@ -47,7 +47,15 @@ $(document).ready(function(){
 				}
 				
 				// Put together our final background position
-				var coords = '50% '+ (yPos+200) + 'px';
+				var upwards;
+
+				if($self.attr('id')=='second'){
+					upwards =  yPos + 200;
+				}else{
+					upwards = yPos + 500;
+				}
+
+				var coords = '50% '+ upwards + 'px';
 
 				// Move the background
 				$self.css({ backgroundPosition: coords });

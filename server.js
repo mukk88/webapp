@@ -127,6 +127,7 @@ io.sockets.on('connection', function (socket) {
       results.push(clients[i].id);
     }
     socket.broadcast.to(data).emit('players', {message: results})
+    socket.emit('players', {message: results});
   });
 
   socket.on('disconnect', function (data) {
@@ -138,6 +139,5 @@ io.sockets.on('connection', function (socket) {
       results.push(clients[i].id);
     }
     socket.broadcast.to(data).emit('players', {message: results})
-    socket.emit('players', {message: results});
   });
 });

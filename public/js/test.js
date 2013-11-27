@@ -6,4 +6,6 @@ if(gid!=undefined){
     io.emit('join',gid);  
 }
 
-        //change deck to get all cards.
+var position;
+var total;
+//change deck.js to get all cards.
