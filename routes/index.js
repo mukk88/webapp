@@ -4,11 +4,27 @@
  */
 
 exports.index = function(req, res){
-  // res.render('index');
   res.render('index.html');
 };
 
-// exports.partials = function (req, res) {
-//   var name = req.params.name;
-//   res.render('partials/' + name);
-// };
+
+exports.splash = function(req, res){
+  res.render('splash.html');
+};
+
+exports.authFacebook = function(req, res){
+  // should never be called
+};
+
+exports.authFacebookCallback = function(req, res){
+  res.redirect('/index');
+};
+
+exports.play = function(red, res){
+	res.render('play.html');
+}
+
+exports.logout = function(req, res){
+  req.logout();
+  res.redirect('/');
+};

@@ -4,107 +4,99 @@
 
 //setup mongodb
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
+// var connectionString = "mongodb://localhost/test"; 
+mongoose.connect(connectionString);
 
 //setup auto+
 var autoIncrement = require('mongoose-auto-increment');
-var connection = mongoose.createConnection("mongodb://localhost/test");
+var connection = mongoose.createConnection(connectionString);
 autoIncrement.initialize(connection);
-
-var redis = require('redis'),
-    publisherClient = redis.createClient();
-
 
 // models
 var cardSchema = mongoose.Schema({
-  _id: String,
+  cid: String,
   card: String,
   top: Number,
   left: Number,
   z: Number,
-  show: Boolean
+  show: Boolean,
+  gid: Number
 });
 
-// gameSchema.plugin(autoIncrement.plugin, { model: 'Game' });
+var userSchema = mongoose.Schema({
+  _id: String,
+  display: String,
+  gid: Number
+});
+
+var gameSchema = mongoose.Schema({
+  _id: Number,
+  name: String,
+  // password: String,
+  max: Number
+});
+
+gameSchema.plugin(autoIncrement.plugin, { model: 'Game' });
 
 var Card = mongoose.model('Card', cardSchema);
+var Game = mongoose.model('Game', gameSchema);
+var User = mongoose.model('User', gameSchema);
+
+
 var kinds = ["c","d","h","s"];
 
 exports.createGame = function (req, res) {
-  var results = new Array();
-  var top = 199;
-  var left = 564;
-  var i = 0;
-  for(var k=0; k<4; k++){
-    for(var n=1; n<=13; n++){
-      var newCard = new Card();
-      newCard._id = n+kinds[k];
-      newCard.top = top++;
-      newCard.left = left++;
-      newCard.z = 1;
-      newCard.show = false;
-      newCard.save();
-      results[i] = newCard;
-      i++;
+  var newGame = new Game();
+  Game.nextCount(function(err, count) {
+    newGame.name=req.query.name
+    newGame.max=req.query.max
+    newGame.save()
+    var results = new Array();
+    var top = 199;
+    var left = 564;
+    var i = 0;
+    for(var k=0; k<4; k++){
+      for(var n=1; n<=13; n++){
+        var newCard = new Card();
+        newCard._id = n+kinds[k];
+        newCard.top = top++;
+        newCard.left = left++;
+        newCard.z = 1;
+        newCard.show = false;
+        newCard.gid = count;
+        newCard.save();
+        results[i] = newCard;
+        i++;
+      }
     }
-  }
-  console.log("results");
-  res.json(results);
+    res.json(results);
+  });
 };
 
-exports.getAllCards = function (req, res) {
-  Card.find({}, function (err, cards) {
+exports.getAllGames = function (req, res) {
+  Game.find({}, function (err, games) {
+    res.json(games);
+  });
+};
+
+exports.deleteAllGames = function (req, res) {
+  Game.remove({}, function (err, games) {
+    res.json(games);
+  });
+  Card.remove({}, function (err, games) {
+    res.json(games);
+  });
+};
+
+exports.getCards = function (req, res) {
+  var gid = req.query.gid;
+  console.log(gid)
+  Card.find({gid : gid}, function (err, cards) {
     res.json(cards);
   });
 };
 
 exports.updateCards = function (req, res) {
-
-  publisherClient.publish( 'updates', (JSON.stringify(req.body)) );
-
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.write('All clients have received update!');
-  res.end();
+  var gid = req.query.gid;
 };
-
-exports.getUpdatedCards = function (req, res) {
-  // let request last as long as possible
-  req.socket.setTimeout(Infinity);
-
-  var subscriber = redis.createClient();
-
-  subscriber.subscribe("updates");
-
-  // In case we encounter an error...print it out to the console
-  subscriber.on("error", function(err) {
-    console.log("Redis Error: " + err);
-  });
-
-  // When we receive a message from the redis connection
-  subscriber.on("message", function(channel, message) {
-    res.write("data: " + message + '\n\n'); // Note the extra newline
-  });
-
-  //send headers for event-stream connection
-  res.writeHead(200, {
-    'Content-Type': 'text/event-stream',
-    'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive'
-  });
-  res.write('\n');
-
-  // The 'close' event is fired when a user closes their browser window.
-  // In that situation we want to make sure our redis channel subscription
-  // is properly shut down to prevent memory leaks...and incorrect subscriber
-  // counts to the channel.
-  req.on("close", function() {
-    subscriber.unsubscribe();
-    subscriber.quit();
-  });
-};
-
-// exports.name = function (req, res) {
-//   res.json({
-//   	name: 'Bob'
-//   });
-// };

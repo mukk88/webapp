@@ -11,6 +11,12 @@
  * notice you can do whatever you want with this stuff. If we meet some day, and 
  * you think this stuff is worth it, you can buy me a beer in return.
  */
+
+function sendCardData(id, top, left, z, parent, back){
+    var carddata = {'gid':'1',card:{'id':id,'info':{'top':top, 'left':left, 'z':z, 'parent':parent, 'back':back}}};
+    io.emit('updateCards', carddata);
+};
+
 ;(function($){
     $.fn.draggableTouch = function(action) {
         // check if the device has touch support, and if not, fallback to use mouse
@@ -101,6 +107,7 @@
                         y: orig.changedTouches[0].pageY - pos.top,
                     };
                 }
+                sendCardData($(this).attr('id'), $(this).css('top'),$(this).css('left'),$(this).css('zIndex'), $(this).parent().attr('id'), $(this).attr('back'));
                 element.trigger("dragstart", pos);
             });
             element.bind("touchmove", function(e) {
@@ -147,6 +154,7 @@
                         offset.y = height/10*4+50;
                         $(this).appendTo('#mat' + matno);
                 }
+                sendCardData($(this).attr('id'), $(this).css('top'),$(this).css('left'),$(this).css('zIndex'), $(this).parent().attr('id'), $(this).attr('back'));
             });
             element.bind("touchend", end);
             element.bind("touchcancel", end);

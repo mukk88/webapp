@@ -47,11 +47,86 @@ jQuery.fn.minimize = function(){
 
 jQuery.fn.selectMat = function(){
     this.each(function(){
+        var height = $(window).height();
+        if(height==0){
+            height = window.innerHeight;
+        }
         $(this).bind('click', function(e){
             $('.mats').css('height',1);
-            $('#mat' + $(this).attr('id')[10]).css('height',500);
+            $('#mat' + $(this).attr('id')[10]).css('height',70);
         });
     });
+}
+
+// function sendCardData(me, top, left, z, parent){
+//     console.log('a');
+// }
+
+function sendPlayers(number, cards){
+    console.log('sending player info');
+    var player = {'gid':'1',card:{'players':number,'cards':cards}};
+    io.emit('updateCards', player);
+}
+
+function sendShuffle(){
+    var shuffle = {'gid':'1',card:{'shuffle':true}};
+    io.emit('updateCards', shuffle);
+}
+
+function shuffle(){
+    $('.draggable').appendTo('body');
+    $('.matsbar').empty();
+    $('.viewbar').empty();
+    var cards = $('.draggable');
+    $.each(cards, function(i,val){
+        $(val).css('zIndex', Math.round(Math.random()*300));
+        $(val).css({
+            top: height/2-170,
+            left: $(window).width()/2-260
+        });
+        $(val).rotate(Math.round(Math.random()*5-2));
+        var front = $(val).attr("src");
+        if(front!='images/back.jpg'){
+            $(val).flip();
+        }
+    })
+}
+
+function deal(people, cards){
+    $('.viewbar').append('<button class = "button view" id ="tablebutton" style="left:120px">Table</button>');
+    for(i=0;i<people;i++){
+        $('.viewbar').append('<button id="#matbutton'+i+'" class = "button view" style="left:'+(230+i*110)+'px">Player '+(i+1)+'</a>');
+    }
+    for(i=0;i<people;i++){
+        $('.matsbar').append('<div class = "mats" id = "mat'+i+'"><span class = "playernumber">Player '+(i+1)+'</span></div>');
+    }
+    $('.mats').minimize();
+    $('.view').selectMat();
+    var allcards = $('.draggable').sort(function(a,b){
+        return $(a).css("zIndex") - $(b).css("zIndex");
+    });
+    var counter = 1;
+    var delay = 10;
+    $.each(allcards,function(index,val){
+        setTimeout((function(v){
+            return function(){
+                if(counter>people*cards){
+                    return false;
+                }
+                $(v).css({
+                    top: 100,
+                    left:100 + counter*10
+                });
+                counter++;
+                $(v).appendTo('#mat'+ (counter%people));
+                $(v).flip();
+            }
+        })(val), delay);
+        delay+=10;
+    });
+    $('#mat0').height(70);
+    $('#peopleinput').val('');
+    $('#cardsinput').val('');
 }
 
 $(document).ready(function() {
@@ -68,22 +143,9 @@ $(document).ready(function() {
         $(".draggable").draggableTouch("disgroup");
     });
     $("#shuffle").click(function(){
-        $('.draggable').appendTo('body');
-        $('.matsbar').empty();
-        $('.viewbar').empty();
-        var cards = $('.draggable');
-        $.each(cards, function(i,val){
-            $(val).css('zIndex', Math.round(Math.random()*300));
-            $(val).css({
-                top: height/2-170,
-                left: $(window).width()/2-260
-            });
-            $(val).rotate(Math.round(Math.random()*5-2));
-            var front = $(val).attr("src");
-            if(front!='images/back.jpg'){
-                $(val).flip();
-            }
-        })
+        console.log(io);
+        shuffle();
+        sendShuffle();
     })
     $("#deal").click(function(){
         var people;
@@ -97,47 +159,62 @@ $(document).ready(function() {
             if(isNaN(cards)){
                 cards = 13;
             }
-            $('#shuffle').click();
-            $('.viewbar').append('<button class = "button view" id ="tablebutton" style="left:120px">Table</button>');
-            for(i=0;i<people;i++){
-                $('.viewbar').append('<button id="#matbutton'+i+'" class = "button view" style="left:'+(230+i*110)+'px">Player '+(i+1)+'</a>');
-            }
-            for(i=0;i<people;i++){
-                $('.matsbar').append('<div class = "mats" id = "mat'+i+'"><span class = "playernumber">Player '+(i+1)+'</span></div>');
-            }
-            $('body').bind("touchend", function(e){
-                $("<a href='#table'></a>").click(); 
-            });
-            $('.mats').minimize();
-            $('.view').selectMat();
-            var allcards = $('.draggable').sort(function(a,b){
-                return $(a).css("zIndex") - $(b).css("zIndex");
-            });
-            var counter = 1;
-            var delay = 10;
-            $.each(allcards,function(index,val){
-                setTimeout((function(v){
-                    return function(){
-                        if(counter>people*cards){
-                            return false;
-                        }
-                        $(v).css({
-                            top: 100,
-                            left:100 + counter*10
-                        });
-                        counter++;
-                        $(v).appendTo('#mat'+ (counter%people));
-                        $(v).flip();
-                    }
-                })(val), delay);
-                delay+=10;
-            });
-            $('#mat0').height(70);
-            $('#peopleinput').val('');
-            $('#cardsinput').val(''); 
+            // $('#shuffle').click();
+            shuffle();
+            deal(people,cards);
+            sendShuffle();
+            sendPlayers(people,cards); 
         }catch(err){
             console.log(err);
         }
     })
 });
 $(".draggable").draggableTouch('disgroup');
+$(".draggable").on('doubletap', function(){
+    console.log('double tapped!');
+    $(this).flip();
+});
+
+io.on('cardsUpdated', function(data) {
+    var id = data.message['id'];
+
+    console.log(id);
+    if(id!=undefined){
+        console.log('updating card info')
+        id = '#'+id;
+        $(id).css({
+            top: data.message['info']['top'],
+            left: data.message['info']['left'],
+            zIndex: data.message['info']['z']
+        });
+        var parent = data.message['info']['parent'] == 'body' ? 'body' : '#' + data.message['info']['parent'];
+        $(id).appendTo(parent);
+        if(data.message['info']['parent'])
+        if(data.message['info']['back']!=$(id).attr("back")){
+            $(id).flip();
+        }  
+    }
+    //put the card in the right parent
+    var players = data.message['players'];
+    var cards = data.message['cards'];
+    if(players!=undefined && cards!=undefined){
+        deal(players,cards);
+    }
+    var shuf = data.message['shuffle'];
+    if(shuf!=undefined){
+        shuffle();
+    }
+})  
+
+io.on('players', function(data){
+    console.log(data.message.length);
+    var num = 0;
+    for(var i=0;i<data.message.length;i++){
+        if(io.socket.sessionid == data.message[i]){
+            num = i;
+            break;
+        }
+    }
+    
+    $('.info').append('number of players: ' + data.message.length + ' i am player: ' + num);
+})

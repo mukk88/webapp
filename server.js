@@ -1,9 +1,3 @@
-// var TaskList = require('./routes/tasklist');
-// var taskList = new TaskList(process.env.CUSTOMCONNSTR_MONGOLAB_URI);
-/**
- * Module dependencies
- */
-
 var express = require('express.io'),
     routes = require('./routes'),
     api = require('./routes/api'),
@@ -12,10 +6,8 @@ var express = require('express.io'),
     passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy;
 
-
-
 ////////////////////////////////facebook stuff//////////////////////////
-var FACEBOOK_APP_ID = "708980782452903"
+var FACEBOOK_APP_ID = "708980782452903";
 var FACEBOOK_APP_SECRET = "695824078d253ad54d17e1beb59d29a8";
 
 passport.serializeUser(function(user, done) {
@@ -29,7 +21,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: "http://cardables.azurewebsites.net/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
@@ -39,20 +31,11 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-////////////////////////////////facebook stuff//////////////////////////
-
 var app = module.exports = express();
 app.http().io();
 
-
-/**
- * Configuration
- */
-
-// all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-// app.set('view engine', 'jade');
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -72,15 +55,13 @@ if (app.get('env') === 'production') {
   // TODO
 };
 
-
 /**
  * Routes
  */
 
 // serve index and view partials
-
 app.get('/', routes.splash);
-app.get('/index', routes.index);
+app.get('/index.html', routes.index);
 app.get('/play.html', routes.play);
 //app.get('/index', ensureAuthenticated, routes.index);
 app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
@@ -97,13 +78,21 @@ app.get('/api/deleteAllGames',api.deleteAllGames);
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
-/**
- * Start Server
- */
+// express.io
+// app.io.route('updateCards', function(req) {
+//     req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
+// })
+
+// app.io.route('join', function(req) {
+//     req.io.join(req.data);
+//     console.log('done joining');
+// })
+
+
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-server.listen(app.get('port'), function () {
+server.listen(process.env.PORT, function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
@@ -111,6 +100,14 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/auth/facebook')
 }
+
+
+// var http = require('http')
+// var port = process.env.PORT || 1337;
+// http.createServer(function(req, res) {
+//   res.writeHead(200, { 'Content-Type': 'text/plain' });
+//   res.end('Hello github\n');
+// }).listen(port);
 
 io.sockets.on('connection', function (socket) {
   console.log('sessionID '+socket.id+' connected!');
@@ -140,5 +137,6 @@ io.sockets.on('connection', function (socket) {
       results.push(clients[i].id);
     }
     socket.broadcast.to(data).emit('players', {message: results})
+    socket.emit('players', {message: results});
   });
 });

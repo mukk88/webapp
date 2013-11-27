@@ -8,8 +8,12 @@
 
 body{
 	background-image:url('../images/woodtable.jpg') !important; 
+	Touch-action: none;
 }
 
+#body{
+	Touch-action: none;
+}
 .draggable{
 	position:absolute; 
 	z-index:1;
@@ -104,13 +108,14 @@ input::-webkit-input-placeholder {
 .mats{
 	transition:height 1s;
 	width:100%;
-	height:500px;
+	height:1px;
 	/*background-color: #000000; */
 	background-color:rgba(242,242,242, 0.5);
 	position: fixed;
 	bottom:0px;
 	z-index: 998;
 	border: 2px solid;
+	Touch-action: none;
 }
 
 .mats:target{
