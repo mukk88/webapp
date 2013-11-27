@@ -143,6 +143,7 @@ $(document).ready(function() {
         $(".draggable").draggableTouch("disgroup");
     });
     $("#shuffle").click(function(){
+        console.log(io);
         shuffle();
         sendShuffle();
     })
