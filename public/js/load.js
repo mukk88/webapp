@@ -208,5 +208,5 @@ io.on('cardsUpdated', function(data) {
 
 io.on('players', function(data){
     console.log(data.length);
-    $('.viewbar').html(data.length);
+    $('.info').append(data.length);
 })
