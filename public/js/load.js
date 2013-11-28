@@ -32,10 +32,10 @@ jQuery.fn.minimize = function(){
             if (orig.targetTouches.length > 1){
                 return;
             }
-            if(orig.changedTouches[0].pageY - offset > 100){
+            if(orig.changedTouches[0].pageY - offset > 250){
                 element.height(70);
             }
-            if(orig.changedTouches[0].pageY - offset < 100){
+            if(orig.changedTouches[0].pageY - offset < 120){
                 element.height(height*0.6);
             }
         });
