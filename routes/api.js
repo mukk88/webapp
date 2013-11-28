@@ -56,20 +56,20 @@ exports.createGame = function (req, res) {
     var top = 199;
     var left = 564;
     var i = 0;
-    for(var k=0; k<4; k++){
-      for(var n=1; n<=13; n++){
-        var newCard = new Card();
-        newCard._id = n+kinds[k];
-        newCard.top = top++;
-        newCard.left = left++;
-        newCard.z = 1;
-        newCard.show = false;
-        newCard.gid = count;
-        newCard.save();
-        results[i] = newCard;
-        i++;
-      }
-    }
+    // for(var k=0; k<4; k++){
+    //   for(var n=1; n<=13; n++){
+    //     var newCard = new Card();
+    //     newCard._id = String(n+kinds[k]);
+    //     newCard.top = top++;
+    //     newCard.left = left++;
+    //     newCard.z = 1;
+    //     newCard.show = false;
+    //     newCard.gid = count;
+    //     newCard.save();
+    //     results[i] = newCard;
+    //     i++;
+    //   }
+    // }
     res.json(results);
   });
 };
