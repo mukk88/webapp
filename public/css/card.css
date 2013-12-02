@@ -8,15 +8,16 @@
 
 body{
 	background-image:url('../images/woodtable.jpg') !important; 
-	Touch-action: none;
 }
 
 #body{
-	Touch-action: none;
+	/*Touch-action: none;*/
 }
 .draggable{
 	position:absolute; 
 	z-index:1;
+	Touch-action: none;
+	
 }
 
 .button{
