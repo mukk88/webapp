@@ -58,7 +58,7 @@ jQuery.fn.selectMat = function(){
     });
 };
 
-jQuery.fn.sortSuit = function(){
+jQuery.fn.sortSuit = function(type){
     this.each(function(){
         $(this).bind('click', function(e){
             var matcards = $( "#mat" + $(this).attr('id')[10] + " > .draggable" ).sort(function(a,b){

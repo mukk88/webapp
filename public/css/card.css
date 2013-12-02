@@ -117,6 +117,7 @@ input::-webkit-input-placeholder {
 	z-index: 998;
 	border: 2px solid;
 	Touch-action: none;
+	-ms-touch-action:none;
 }
 
 .mats:target{
