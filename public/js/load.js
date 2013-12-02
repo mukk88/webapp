@@ -59,17 +59,19 @@ jQuery.fn.selectMat = function(){
 }
 jQuery.fn.sortSuit = function(){
     this.each(function(){
-        var matcards = $('.draggable').parent('mat' + $(this).attr('id')[10]).sort(function(a,b){
-            return $(a).attr('id').slice(-1) - $(b).attr('id').slice(-1)
-        });
-        var counter = 0;
-        $.each(matcards, function(i, val){
-            $(val).css({
-                top: 100,
-                left:100 + counter*20
+        $(this).bind('click', function(e){
+            var matcards = $('.draggable').parent('mat' + $(this).attr('id')[10]).sort(function(a,b){
+                return $(a).attr('id').slice(-1) - $(b).attr('id').slice(-1)
             });
-            counter++;
-        });
+            var counter = 0;
+            $.each(matcards, function(i, val){
+                $(val).css({
+                    top: 100,
+                    left:100 + counter*20
+                });
+                counter++;
+            });
+        }
     });
 }
 
