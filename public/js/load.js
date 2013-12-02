@@ -58,15 +58,20 @@ jQuery.fn.selectMat = function(){
     });
 };
 
-jQuery.fn.sortSuit = function(type){
+jQuery.fn.sortCard = function(type){
     this.each(function(){
         $(this).bind('click', function(e){
             var matcards = $( "#mat" + $(this).attr('id')[10] + " > .draggable" ).sort(function(a,b){
-                if($(a).attr('id').slice(-1).charCodeAt() == $(b).attr('id').slice(-1).charCodeAt()){
-                    return parseInt($(a).attr('id').substring(0, $(a).attr('id').length-1)) - 
-                    parseInt($(b).attr('id').substring(0, $(b).attr('id').length-1));
+                if(type=="suit"){
+                    if($(a).attr('id').slice(-1).charCodeAt() == $(b).attr('id').slice(-1).charCodeAt()){
+                        return parseInt($(a).attr('id').substring(0, $(a).attr('id').length-1)) - 
+                        parseInt($(b).attr('id').substring(0, $(b).attr('id').length-1));
+                    }else{
+                        return $(a).attr('id').slice(-1).charCodeAt() - $(b).attr('id').slice(-1).charCodeAt();
+                    }
                 }else{
-                    return $(a).attr('id').slice(-1).charCodeAt() - $(b).attr('id').slice(-1).charCodeAt();
+                    return parseInt($(a).attr('id').substring(0, $(a).attr('id').length-1)) - 
+                    parseInt($(b).attr('id').substring(0, $(b).attr('id').length-1));                    
                 }
             });
             var counter = 0;
@@ -132,11 +137,13 @@ function deal(people, cards){
     }
     for(i=0;i<people;i++){
         $('.matsbar').append('<div class = "mats" id = "mat'+i+'"><span class = "playernumber">Player '+(i+1)+'</span></div>');
-        $('#mat'+i).append('<button id="sortbutton'+i+'" class = "button sort" style="right:230px">Sort by suit</a>');
+        $('#mat'+i).append('<button id="sortbutton'+i+'" class = "button sort suit" style="right:200px">Sort by suit</a>');
+        $('#mat'+i).append('<button id="sortbutton'+i+'" class = "button sort num" style="right:315px">Sort by number</a>');
     }
     $('.mats').minimize();
     $('.view').selectMat();
-    $('.sort').sortSuit();
+    $('.suit').sortCard('suit');
+    $('.num').sortCard('num');
     $('.view').hide();
     $('#matbutton' + position).show();
     $('#tablebutton').show();
