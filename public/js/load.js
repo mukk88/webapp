@@ -72,7 +72,7 @@ jQuery.fn.sortSuit = function(){
                 });
                 counter++;
             });
-        };
+        });
     });
 };
 
