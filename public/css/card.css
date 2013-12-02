@@ -138,4 +138,8 @@ input::-webkit-input-placeholder {
 	font-weight: bold;
 }
 
+.sort{
+	margin-top: 50px;
+}
+
 @media (max-width: 400px)
