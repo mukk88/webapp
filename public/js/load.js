@@ -62,13 +62,13 @@ jQuery.fn.sortSuit = function(){
     this.each(function(){
         $(this).bind('click', function(e){
             var matcards = $( "#mat" + $(this).attr('id')[10] + " > .draggable" ).sort(function(a,b){
-                return $(a).attr('id').slice(-1) - $(b).attr('id').slice(-1)
+                return $(a).attr('id').slice(-1).charCodeAt() - $(b).attr('id').slice(-1).charCodeAt();
             });
             var counter = 0;
             $.each(matcards, function(i, val){
                 $(val).css({
                     top: 100,
-                    left:100 + counter*100
+                    left:100 + counter*30
                 });
                 counter++;
             });
