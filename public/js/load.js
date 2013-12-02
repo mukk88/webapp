@@ -62,7 +62,12 @@ jQuery.fn.sortSuit = function(type){
     this.each(function(){
         $(this).bind('click', function(e){
             var matcards = $( "#mat" + $(this).attr('id')[10] + " > .draggable" ).sort(function(a,b){
-                return $(a).attr('id').slice(-1).charCodeAt() - $(b).attr('id').slice(-1).charCodeAt();
+                if($(a).attr('id').slice(-1).charCodeAt() == $(b).attr('id').slice(-1).charCodeAt()){
+                    return parseInt($(a).attr('id').substring(0, $(a).attr('id').length-1)) - 
+                    parseInt($(b).attr('id').substring(0, $(b).attr('id').length-1));
+                }else{
+                    return $(a).attr('id').slice(-1).charCodeAt() - $(b).attr('id').slice(-1).charCodeAt();
+                }
             });
             var counter = 0;
             $.each(matcards, function(i, val){
