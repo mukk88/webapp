@@ -116,6 +116,7 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('updateCards', function (data) {
     console.log('updateCards '+data.gid + ' ' + data.card);
+    console.log(data);
     socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
   });
 
@@ -127,19 +128,21 @@ io.sockets.on('connection', function (socket) {
     for(var i=0; i<clients.length; i++){
       results.push(clients[i].id);
     }
-    socket.broadcast.to(data).emit('players', {message: results})
+    socket.broadcast.to(data).emit('players', {message: results});
     socket.emit('players', {message: results});
   });
 
-  socket.on('disconnect', function (data) {
+  socket.on('disconnect', function () {
     console.log('sessionID '+socket.id+' disconnected!');
+    rooms = io.sockets.manager.roomClients[socket.id];
+    console.log(Object.keys(rooms)[1].substring(1));
+    room = Object.keys(rooms)[1].substring(1);
+    socket.leave(room);
     var results = new Array();
-    var clients = io.sockets.clients(data);
+    var clients = io.sockets.clients(room);
     for(var i=0; i<clients.length; i++){
-      if(clients[i].id != socket.id){
-         results.push(clients[i].id);
-      }
+      results.push(clients[i].id);
     }
-    socket.broadcast.to(data).emit('players', {message: results})
+    socket.broadcast.to(room).emit('players', {message: results})
   });
 });

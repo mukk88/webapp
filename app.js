@@ -123,25 +123,27 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('join', function (data) {
     console.log('sessionID '+socket.id+' joined '+data);
-    console.log(data);
     socket.join(data);
     var results = new Array();
     var clients = io.sockets.clients(data);
     for(var i=0; i<clients.length; i++){
       results.push(clients[i].id);
     }
-    socket.broadcast.to(data).emit('players', {message: results})
+    socket.broadcast.to(data).emit('players', {message: results});
+    socket.emit('players', {message: results});
   });
 
-  socket.on('disconnect', function (data) {
+  socket.on('disconnect', function () {
     console.log('sessionID '+socket.id+' disconnected!');
+    rooms = io.sockets.manager.roomClients[socket.id];
+    console.log(Object.keys(rooms)[1].substring(1));
+    room = Object.keys(rooms)[1].substring(1);
+    socket.leave(room);
     var results = new Array();
-    var clients = io.sockets.clients(data);
+    var clients = io.sockets.clients(room);
     for(var i=0; i<clients.length; i++){
-      if(clients[i].id != socket.id){
-         results.push(clients[i].id);
-      }
+      results.push(clients[i].id);
     }
-    socket.broadcast.to(data).emit('players', {message: results})
+    socket.broadcast.to(room).emit('players', {message: results})
   });
 });
