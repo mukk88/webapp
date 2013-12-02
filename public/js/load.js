@@ -127,6 +127,7 @@ function deal(people, cards){
     }
     $('.mats').minimize();
     $('.view').selectMat();
+    $('.sort').sortSuit();
     $('.view').hide();
     $('#matbutton' + position).show();
     $('#tablebutton').show();
