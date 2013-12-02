@@ -33,8 +33,7 @@ var userSchema = mongoose.Schema({
 var gameSchema = mongoose.Schema({
   _id: Number,
   name: String,
-  // password: String,
-  max: Number
+  pwd: String
 });
 
 gameSchema.plugin(autoIncrement.plugin, { model: 'Game' });
@@ -50,7 +49,7 @@ exports.createGame = function (req, res) {
   var newGame = new Game();
   Game.nextCount(function(err, count) {
     newGame.name=req.query.name
-    newGame.max=req.query.max
+    newGame.pws=req.query.pws
     newGame.save()
     var results = new Array();
     var top = 199;

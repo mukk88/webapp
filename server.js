@@ -133,11 +133,12 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('disconnect', function (data) {
     console.log('sessionID '+socket.id+' disconnected!');
-    socket.leave(data);
     var results = new Array();
     var clients = io.sockets.clients(data);
     for(var i=0; i<clients.length; i++){
-      results.push(clients[i].id);
+      if(clients[i].id != socket.id){
+         results.push(clients[i].id);
+      }
     }
     socket.broadcast.to(data).emit('players', {message: results})
   });

@@ -117,11 +117,13 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('updateCards', function (data) {
     console.log('updateCards '+data.gid + ' ' + data.card);
+    console.log(data);
     socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
   });
 
   socket.on('join', function (data) {
     console.log('sessionID '+socket.id+' joined '+data);
+    console.log(data);
     socket.join(data);
     var results = new Array();
     var clients = io.sockets.clients(data);
@@ -133,11 +135,12 @@ io.sockets.on('connection', function (socket) {
 
   socket.on('disconnect', function (data) {
     console.log('sessionID '+socket.id+' disconnected!');
-    socket.leave(data);
     var results = new Array();
     var clients = io.sockets.clients(data);
     for(var i=0; i<clients.length; i++){
-      results.push(clients[i].id);
+      if(clients[i].id != socket.id){
+         results.push(clients[i].id);
+      }
     }
     socket.broadcast.to(data).emit('players', {message: results})
   });
