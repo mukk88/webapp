@@ -108,6 +108,7 @@ function deal(people, cards){
     }
     for(i=0;i<people;i++){
         $('.matsbar').append('<div class = "mats" id = "mat'+i+'"><span class = "playernumber">Player '+(i+1)+'</span></div>');
+        $('#mat'+i).append('<button id="sortbutton'+i+'" class = "button sort" style="right:230px">Sort by suit</a>');
     }
     $('.mats').minimize();
     $('.view').selectMat();
