@@ -56,7 +56,8 @@ jQuery.fn.selectMat = function(){
             $('#mat' + $(this).attr('id')[9]).css('height',height*0.6);
         });
     });
-}
+};
+
 jQuery.fn.sortSuit = function(){
     this.each(function(){
         $(this).bind('click', function(e){
@@ -71,9 +72,9 @@ jQuery.fn.sortSuit = function(){
                 });
                 counter++;
             });
-        }
+        };
     });
-}
+};
 
 // function sendCardData(me, top, left, z, parent){
 //     console.log('a');
