@@ -61,7 +61,7 @@ jQuery.fn.selectMat = function(){
 jQuery.fn.sortSuit = function(){
     this.each(function(){
         $(this).bind('click', function(e){
-            var matcards = $('.draggable').parent('mat' + $(this).attr('id')[10]).sort(function(a,b){
+            var matcards = $('.draggable').parent('#mat' + $(this).attr('id')[10]).sort(function(a,b){
                 return $(a).attr('id').slice(-1) - $(b).attr('id').slice(-1)
             });
             var counter = 0;
