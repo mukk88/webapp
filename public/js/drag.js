@@ -205,9 +205,3 @@ function sendCardData(id, top, left, z, parent, back){
         return this;
     };
 })(jQuery);
-
-$(".draggable").on('doubletap', function(){
-    console.log('double tapped!');
-    $(this).flip();
-    sendCardData($(this).attr('id'), $(this).css('top'),$(this).css('left'),$(this).css('zIndex'), $(this).parent().attr('id'), $(this).attr('back'));
-});
