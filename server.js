@@ -6,7 +6,13 @@ var express = require('express.io'),
     passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy;
 
-////////////////////////////////facebook stuff//////////////////////////
+var app = module.exports = express();
+app.http().io();
+
+
+/**
+ * facebook stuff
+ */
 var FACEBOOK_APP_ID = "708980782452903";
 var FACEBOOK_APP_SECRET = "695824078d253ad54d17e1beb59d29a8";
 
@@ -31,9 +37,14 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-var app = module.exports = express();
-app.http().io();
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/auth/facebook')
+}
 
+/**
+ * Configuration
+ */
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.use(express.logger('dev'));
@@ -77,51 +88,33 @@ app.post('/api/updateCards', api.updateCards);
 app.get('/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
-
-// express.io
-// app.io.route('updateCards', function(req) {
-//     req.io.room(req.data.gid).broadcast('cardsUpdated', {message: req.data.card});
-// })
-
-// app.io.route('join', function(req) {
-//     req.io.join(req.data);
-//     console.log('done joining');
-// })
+app.get('*', routes.splash);
 
 
+/**
+ * Start Server
+ */
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
 var port = process.env.PORT ||  3000; 
 server.listen(port, function () {
-  console.log('Express server listening on port ' + app.get('port'));
+  // console.log('Express server listening on port ' + app.get('port'));
 });
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/auth/facebook')
-}
 
-
-// var http = require('http')
-// var port = process.env.PORT || 1337;
-// http.createServer(function(req, res) {
-//   res.writeHead(200, { 'Content-Type': 'text/plain' });
-//   res.end('Hello github\n');
-// }).listen(port);
-
+/**
+ * Socket.io stuff
+ */
 io.sockets.on('connection', function (socket) {
-  console.log('sessionID '+socket.id+' connected!');
-
+  // console.log('sessionID '+socket.id+' connected!');
   socket.on('updateCards', function (data) {
-    console.log('updateCards '+data.gid + ' ' + data.card);
-    console.log(data);
+    // console.log('updateCards '+data.gid + ' ' + data.card);
     socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
   });
 
   socket.on('join', function (data) {
-    console.log('sessionID '+socket.id+' joined '+data);
+    // console.log('sessionID '+socket.id+' joined '+data);
     socket.join(data);
     var results = new Array();
     var clients = io.sockets.clients(data);
@@ -133,9 +126,8 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('disconnect', function () {
-    console.log('sessionID '+socket.id+' disconnected!');
+    // console.log('sessionID '+socket.id+' disconnected!');
     rooms = io.sockets.manager.roomClients[socket.id];
-    console.log(Object.keys(rooms)[1].substring(1));
     room = Object.keys(rooms)[1].substring(1);
     socket.leave(room);
     var results = new Array();

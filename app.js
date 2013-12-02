@@ -12,9 +12,13 @@ var express = require('express.io'),
     passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy;
 
+var app = module.exports = express();
+app.http().io();
 
 
-////////////////////////////////facebook stuff//////////////////////////
+/**
+ * facebook stuff
+ */
 var FACEBOOK_APP_ID = "708980782452903"
 var FACEBOOK_APP_SECRET = "695824078d253ad54d17e1beb59d29a8";
 
@@ -39,10 +43,10 @@ passport.use(new FacebookStrategy({
   }
 ));
 
-////////////////////////////////facebook stuff//////////////////////////
-
-var app = module.exports = express();
-app.http().io();
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/auth/facebook')
+}
 
 
 /**
@@ -95,7 +99,7 @@ app.post('/api/updateCards', api.updateCards);
 app.get('/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
+app.get('*', routes.splash);
 
 /**
  * Start Server
@@ -107,22 +111,19 @@ server.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/auth/facebook')
-}
 
+/**
+ * Socket.io stuff
+ */
 io.sockets.on('connection', function (socket) {
-  console.log('sessionID '+socket.id+' connected!');
-
+  // console.log('sessionID '+socket.id+' connected!');
   socket.on('updateCards', function (data) {
-    console.log('updateCards '+data.gid + ' ' + data.card);
-    console.log(data);
+    // console.log('updateCards '+data.gid + ' ' + data.card);
     socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
   });
 
   socket.on('join', function (data) {
-    console.log('sessionID '+socket.id+' joined '+data);
+    // console.log('sessionID '+socket.id+' joined '+data);
     socket.join(data);
     var results = new Array();
     var clients = io.sockets.clients(data);
@@ -134,9 +135,8 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('disconnect', function () {
-    console.log('sessionID '+socket.id+' disconnected!');
+    // console.log('sessionID '+socket.id+' disconnected!');
     rooms = io.sockets.manager.roomClients[socket.id];
-    console.log(Object.keys(rooms)[1].substring(1));
     room = Object.keys(rooms)[1].substring(1);
     socket.leave(room);
     var results = new Array();
