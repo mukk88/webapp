@@ -17,7 +17,8 @@ body{
 	position:absolute; 
 	z-index:1;
 	Touch-action: none;
-	
+	-ms-touch-action:none;
+	/*style="touch-action:none;-ms-touch-action: none;"*/
 }
 
 .button{
