@@ -68,7 +68,8 @@ jQuery.fn.sortSuit = function(){
             $.each(matcards, function(i, val){
                 $(val).css({
                     top: 100,
-                    left:100 + counter*30
+                    left:100 + counter*30,
+                    zIndex:counter
                 });
                 counter++;
             });
