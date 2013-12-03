@@ -88,7 +88,7 @@ app.post('/api/updateCards', api.updateCards);
 app.get('/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
-app.get('*', routes.splash);
+app.get('*', routes.index);
 
 
 /**
