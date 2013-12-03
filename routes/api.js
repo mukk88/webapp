@@ -36,7 +36,7 @@ var gameSchema = mongoose.Schema({
   pwd: String
 });
 
-gameSchema.plugin(autoIncrement.plugin, { model: 'Game' });
+gameSchema.plugin(autoIncrement.plugin, { model: 'Game', startAt:1 });
 
 var Card = mongoose.model('Card', cardSchema);
 var Game = mongoose.model('Game', gameSchema);
