@@ -72,37 +72,46 @@
 				<h3>Architecture</h3>
 				<p class = "bullet">We will use nodejs and express for the backend and angular for the front end. Instead of html we will use jade as a template engine. We will use mongo for a database. </p>
 				<h3>Interface</h3>
-				<li class = "bullet">Index page which is designed to be scrollable. The five buttons in the buttom are for users to share this app to their frineds though different social network.</li>
-				<img src="pitchImages/index-1.png" height="250" width="500" align="middle">
+				<p class = "bullet">Index page which is designed to be scrollable. The five buttons in the buttom are for users to share this app to their friends though different social network.</p>
+				<div style="text-align:center">
+					<img src="pitchImages/index-1.png" height="250" width="500" align="middle">
+					<br><br>
+					<img src="pitchImages/index-2.png" height="250" width="500" align="middle">
+					<br><br>
+					<img src="pitchImages/index-3.png" height="250" width="500" align="middle">
+					<br><br>
+					<img src="pitchImages/index-4.png" height="250" width="500" align="middle">
+					<br><br>
+					<img src="pitchImages/index-5.png" height="250" width="500" align="middle">
+					<br><br>
+				</div>
+				<p class = "bullet">After the users click "Play!" on the top right corner, they can either create their own games or join other user's game. The name of the game and the spaces left are shown for the games that are available.</p>
+				<div style="text-align:center"><img src="pitchImages/join.png" height="250" width="500" align="middle"></div>
 				<br><br>
-				<img src="pitchImages/index-2.png" height="250" width="500" align="middle">
+				<p class = "bullet">After the user clicks create game or join game, a deck of cards shows up on the table. The group and upgroup buttons allow players to choose between moving the entire deck or a single card.</p>
+				<div style="text-align:center"><img src="pitchImages/play.png" height="250" width="500" align="middle"></div>
 				<br><br>
-				<img src="pitchImages/index-3.png" height="250" width="500" align="middle">
+				<p class = "bullet">After the user clicks shuffle, the cards are shuffled. (optional)</p>
+				<div style="text-align:center"><img src="pitchImages/shuffle.png" height="250" width="500" align="middle"></div>
+				<br><br><br><br>
+				<p class = "bullet">The user is easily able to deal out the cards by inputing the number of players (now for testing purposes, will be eiminated in the future) and the number of cards that each player will recieve. The rest of the cards that are not dealed will just be on the table. After the player clicks deal, players are able to "pick up" and "put down" their cards by simply sliding up/down on the screen in the white area. Each user can see their own hand of cards in the white area. (Please ignore the five buttons, e.g., table, player1, ..., on top, they are for testing purposes)</p>
+				<div style="text-align:center">	<img src="pitchImages/hand.png" height="250" width="500" align="middle"></div>
 				<br><br>
-				<img src="pitchImages/index-4.png" height="250" width="500" align="middle">
+				<p class = "bullet">The rest of the cards that are not dealed will just be on the table.</p>
+				<div style="text-align:center"><img src="pitchImages/deal2.png" height="250" width="500" align="middle"></div>
 				<br><br>
-				<img src="pitchImages/index-5.png" height="250" width="500" align="middle">
-				<br><br><br><br>
-				<li class = "bullet">After the users click "Play!" on the top right corner, they can either create their own games or join other user's game. The name of the game and the spaces left are shown for the games that are available.</li>
-				<img src="pitchImages/join.png" height="250" width="500" align="middle">
-				<br><br><br><br>
-				<li class = "bullet">After the user clicks create game or join game, a deck of cards shows up on the table. The group and upgroup buttons allow players to choose between moving the entire deck or a single card.</li>
-				<img src="pitchImages/play.png" height="250" width="500" align="middle">
-				<br><br><br><br>
-				<li class = "bullet">After the user clicks shuffle, the cards are shuffled. (optional)</li>
-				<img src="pitchImages/shuffle.png" height="250" width="500" align="middle">
-				<br><br><br><br>
-				<li class = "bullet">The user is easily able to deal out the cards by inputing the number of players (now for testing purposes, will be eiminated in the future) and the number of cards that each player will recieve. The rest of the cards that are not dealed will just be on the table. After the player clicks deal, players are able to "pick up" and "put down" their cards by simply sliding up/down on the screen in the white area. Each user can see their own hand of cards in the white area. (Please ignore the five buttons, e.g., table, player1, ..., on top, they are for testing purposes)</li>
-				<img src="pitchImages/hand.png" height="250" width="500" align="middle">
-				<br><br><br><br>
-				<li class = "bullet">The rest of the cards that are not dealed will just be on the table.</li>
-				<img src="pitchImages/deal2.png" height="250" width="500" align="middle">
-				<br><br><br><br>
-				<li class = "bullet">When the user drags the card outside the white area, it will be shown to every other players on the table.</li>
-				<img src="pitchImages/go.png" height="250" width="500" align="middle">
-				<br><br>
-				<img src="pitchImages/table.png" height="250" width="500" align="middle">
+				<p class = "bullet">When the user drags the card outside the white area, it will be shown to every other players on the table.</p>
+				<div style="text-align:center">
+					<img src="pitchImages/go.png" height="250" width="500" align="middle">
+					<br><br>
+					<img src="pitchImages/table.png" height="250" width="500" align="middle">
+				</div>
 				<br>
+				<h3>Milestone 1</h3>
+				<p class="bullet">As I am preparing to leave the country early, our team did a significant portion of this project in this milestone. We currently have our project hosted on Windows Azure and it has the ability to allow several people to join a game. Each game is independent of other games. For the front end, when a player moves a card on his screen, the movement shows up on the screens of all the other players in the game. We implemented the ability for each person to deal n number of cards to each player. Each player is only able to view the cards that are in their hand, but everyone is able to view the cards that are on the table. Each player can take a card from the table into their hand or move a card from their hand onto the table. There is also an ability to shuffle to restart the game. 
+				Currently anyone is able to create a game and anyone with the link can join any game. We also did usability testing with our friends and created a list of features that are to be added. An example of such a feature would be to be able to tell which player placed a card.</p> 
+				<p class = "bullet">On the back end, we keep a database of all the games that are available and the state of each card in each game. When a player joins or leaves a game, all other players in that game are notified, so each player knows the number of players in the game. We use socketio and nodejs to push notifications whenever any player makes a change on their device.</p>
+				<p class = "bullet">In the next milestone we will add the ability to password protect a game and delete a game. We will also make the page where you create the game prettier. As we continue to do more testing and usability studies we will add features as demanded, bearing in mind that the app is designed to be used with a group of people who are physically together (not online) and we will thus not implement features that are strictly meant for online use, such as chatting. We also are disinclined to add rules to the app as we want it to be as free flowing as possible.</p>
 			</div>
 		</fieldset>
 	</div>
