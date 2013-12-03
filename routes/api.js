@@ -4,8 +4,8 @@
 
 //setup mongodb
 var mongoose = require('mongoose');
-var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
-// var connectionString = "mongodb://localhost/test"; 
+// var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
+var connectionString = "mongodb://localhost/test"; 
 mongoose.connect(connectionString);
 
 //setup auto+
@@ -49,7 +49,7 @@ exports.createGame = function (req, res) {
   var newGame = new Game();
   Game.nextCount(function(err, count) {
     newGame.name=req.query.name
-    newGame.pws=req.query.pws
+    newGame.pwd=req.query.pwd
     newGame.save()
     var results = new Array();
     var top = 199;
@@ -58,7 +58,6 @@ exports.createGame = function (req, res) {
     for(var k=0; k<4; k++){
       for(var n=1; n<=13; n++){
         var newCard = new Card();
-        // newCard._id = String(n+kinds[k]);
         newCard.top = top++;
         newCard.left = left++;
         newCard.z = 1;
@@ -73,6 +72,36 @@ exports.createGame = function (req, res) {
   });
 };
 
+exports.joinGame = function (req, res) {
+  var gid = req.query.gid;
+  var pwd = req.query.pwd;
+  Game.findOne({_id : gid, pwd : pwd}, function (err, game) {
+    if(game != null){
+      Card.find({gid : gid}, function (err, cards) {
+        res.json(cards);
+      });
+    }
+    else{
+      res.json(false);
+    }
+  });
+};
+
+exports.deleteGame = function (req, res) {
+  var gid = req.query.gid;
+  var pwd = req.query.pwd;
+  Game.findOne({_id : gid, pwd : pwd}, function (err, game) {
+    if(game != null){
+      Card.remove({gid : gid}, function (err, cards) {});
+      Game.remove({_id : gid}, function (err, cards) {});
+      res.json(true);
+    }
+    else{
+      res.json(false);
+    }
+  });
+};
+
 exports.getAllGames = function (req, res) {
   Game.find({}, function (err, games) {
     res.json(games);
@@ -83,19 +112,7 @@ exports.deleteAllGames = function (req, res) {
   Game.remove({}, function (err, games) {
     res.json(games);
   });
-  Card.remove({}, function (err, games) {
-    res.json(games);
-  });
-};
-
-exports.getCards = function (req, res) {
-  var gid = req.query.gid;
-  console.log(gid)
-  Card.find({gid : gid}, function (err, cards) {
+  Card.remove({}, function (err, cards) {
     res.json(cards);
   });
-};
-
-exports.updateCards = function (req, res) {
-  var gid = req.query.gid;
 };

@@ -4,7 +4,7 @@
  * Module dependencies
  */
 
-var express = require('express.io'),
+var express = require('express'),
     routes = require('./routes'),
     api = require('./routes/api'),
     http = require('http'),
@@ -13,8 +13,6 @@ var express = require('express.io'),
     FacebookStrategy = require('passport-facebook').Strategy;
 
 var app = module.exports = express();
-app.http().io();
-
 
 /**
  * facebook stuff
@@ -84,7 +82,7 @@ if (app.get('env') === 'production') {
 // serve index and view partials
 
 app.get('/', routes.splash);
-app.get('/index', routes.index);
+app.get('/index.html', routes.index);
 app.get('/play.html', routes.play);
 //app.get('/index', ensureAuthenticated, routes.index);
 app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
@@ -93,9 +91,9 @@ app.get('/logout', routes.logout);
 
 // JSON API
 app.get('/api/createGame', api.createGame);
+app.get('/api/deleteGame', api.deleteGame);
+app.get('/api/joinGame', api.joinGame);
 app.get('/api/getAllGames', api.getAllGames);
-app.get('/api/getCards', api.getCards);
-app.post('/api/updateCards', api.updateCards);
 app.get('/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
