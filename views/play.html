@@ -27,7 +27,8 @@
 			<!-- <form ng-submit="joinGame()"> -->
 				<div class="gamelist" >
 			      <h3>{{games.length}} games available</h3>
-			      	<span>Game Name</span>Password:
+			      	<span>Game Name</span><span>Password:</span>
+			      	<br><br>
 			        <div class ="games" ng-repeat="game in games">
 			          <span>{{game.name}}</span>
 			          <input ng-model="gameSize" style="width:200px">
