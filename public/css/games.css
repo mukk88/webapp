@@ -49,4 +49,5 @@ input::-webkit-input-placeholder {
 .join{
 	margin-right:30px;
 	float:right;
+	margin-top: -3px;
 }
