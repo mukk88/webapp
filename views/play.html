@@ -16,11 +16,11 @@
 			<h2>Create Game</h2>
 			<form ng-submit="addGame()">
 			    <span>Game Name:</span>
-			    <input ng-model="gameName" style="width:250px">
+			    <input ng-model="gameName" style="width:220px">
 			    <br>
 			    <br>
-				<span>Max Players:</span>
-			    <input ng-model="gameSize" style="width:50px">
+				<span>Password:</span>
+			    <input ng-model="gameSize" style="width:220px">
 				<button class="create btn" type="submit">Create Game</button>
 			</form>
 			<h2>Join Game</h2>
@@ -28,8 +28,9 @@
 				<div class="gamelist" >
 			      <h3>{{games.length}} games available</h3>
 			        <div class ="games" ng-repeat="game in games">
-			          <span>{{game.name}}</span>
-			          <span>Spaces: {{game.max-game.current}}</span>
+			          <span>{{game.name}}</span> Password:
+			          <input ng-model="gameSize" style="width:220px">
+			          <!-- <span>Password: {{game.max-game.current}}</span> -->
 			          <button ng-click="joinGame(game.id)" class=" join btn">Join Game</button>
 			        </div>
 			  	</div>
