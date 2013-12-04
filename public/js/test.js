@@ -6,8 +6,8 @@ if(gid!=undefined){
     io.emit('join',gid);  
 }
 
-var position;
-var total;
+var position = 0;
+var total = 0;
 
 io.on('players', function(data){
     var num = 0;

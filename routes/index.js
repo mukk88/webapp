@@ -16,6 +16,11 @@ exports.pitch = function(req, res){
   res.render('pitch.html');
 };
 
+exports.game = function(req, res){
+  res.render('game.html');
+};
+
+
 exports.authFacebook = function(req, res){
   // should never be called
 };

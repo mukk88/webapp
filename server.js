@@ -75,6 +75,7 @@ app.get('/', routes.splash);
 app.get('/index.html', routes.index);
 app.get('/play.html', routes.play);
 app.get('/pitch.html', routes.pitch);
+app.get('/game.html', routes.game);
 //app.get('/index', ensureAuthenticated, routes.index);
 app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }), routes.authFacebookCallback);
