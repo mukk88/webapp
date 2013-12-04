@@ -123,7 +123,7 @@ function shuffle(indexlist){
         });
         $(val).rotate(Math.round(Math.random()*5-2));
         var front = $(val).attr("src");
-        if(front!='images/back.jpg'){
+        if(front!='images/creativeimages/back.jpg'){
             $(val).flip();
         }
     })
