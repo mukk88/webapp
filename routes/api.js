@@ -33,10 +33,10 @@ var userSchema = mongoose.Schema({
 var gameSchema = mongoose.Schema({
   _id: Number,
   name: String,
-  pwd: String
+  pw: String
 });
 
-gameSchema.plugin(autoIncrement.plugin, { model: 'Game', startAt:1 });
+gameSchema.plugin(autoIncrement.plugin, { model: 'Game', startAt: 1 });
 
 var Card = mongoose.model('Card', cardSchema);
 var Game = mongoose.model('Game', gameSchema);
@@ -49,7 +49,7 @@ exports.createGame = function (req, res) {
   var newGame = new Game();
   Game.nextCount(function(err, count) {
     newGame.name=req.query.name
-    newGame.pwd=req.query.pwd
+    newGame.pw=req.query.pw
     newGame.save()
     var results = new Array();
     var top = 199;
@@ -74,8 +74,8 @@ exports.createGame = function (req, res) {
 
 exports.joinGame = function (req, res) {
   var gid = req.query.gid;
-  var pwd = req.query.pwd;
-  Game.findOne({_id : gid, pwd : pwd}, function (err, game) {
+  var pw = req.query.pw;
+  Game.findOne({_id : gid, pw : pw}, function (err, game) {
     if(game != null){
       Card.find({gid : gid}, function (err, cards) {
         res.json(cards);
@@ -89,8 +89,8 @@ exports.joinGame = function (req, res) {
 
 exports.deleteGame = function (req, res) {
   var gid = req.query.gid;
-  var pwd = req.query.pwd;
-  Game.findOne({_id : gid, pwd : pwd}, function (err, game) {
+  var pw = req.query.pw;
+  Game.findOne({_id : gid, pw : pw}, function (err, game) {
     if(game != null){
       Card.remove({gid : gid}, function (err, cards) {});
       Game.remove({_id : gid}, function (err, cards) {});
