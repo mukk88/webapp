@@ -24,11 +24,11 @@ var cardSchema = mongoose.Schema({
   gid: Number
 });
 
-var userSchema = mongoose.Schema({
-  _id: String,
-  display: String,
-  gid: Number
-});
+// var userSchema = mongoose.Schema({
+//   _id: String,
+//   display: String,
+//   gid: Number
+// });
 
 var gameSchema = mongoose.Schema({
   _id: Number,
@@ -40,7 +40,7 @@ gameSchema.plugin(autoIncrement.plugin, { model: 'Game', startAt: 1 });
 
 var Card = mongoose.model('Card', cardSchema);
 var Game = mongoose.model('Game', gameSchema);
-var User = mongoose.model('User', gameSchema);
+// var User = mongoose.model('User', gameSchema);
 
 
 var kinds = ["c","d","h","s"];
@@ -51,7 +51,7 @@ exports.createGame = function (req, res) {
     newGame.name=req.query.name
     newGame.pw=req.query.pw
     newGame.save()
-    var results = new Array();
+    var cards = new Array();
     var top = 199;
     var left = 564;
     var i = 0;
@@ -64,11 +64,11 @@ exports.createGame = function (req, res) {
         newCard.show = false;
         newCard.gid = count;
         newCard.save();
-        results[i] = newCard;
+        cards[i] = newCard;
         i++;
       }
     }
-    res.json(results);
+    res.json(cards);
   });
 };
 
