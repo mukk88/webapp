@@ -94,7 +94,7 @@ exports.deleteGame = function (req, res) {
   Game.findOne({_id : gid, pw : pw}, function (err, game) {
     if(game != null){
       // Card.remove({gid : gid}, function (err, cards) {});
-      Game.remove({_id : gid}, function (err, cards) {});
+      Game.remove({_id : gid}, function (err, games) {});
       res.json(true);
     }
     else{
