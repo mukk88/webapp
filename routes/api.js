@@ -14,15 +14,15 @@ var connection = mongoose.createConnection(connectionString);
 autoIncrement.initialize(connection);
 
 // models
-// var cardSchema = mongoose.Schema({
-//   cid: String,
-//   card: String,
-//   top: Number,
-//   left: Number,
-//   z: Number,
-//   show: Boolean,
-//   gid: Number
-// });
+var cardSchema = mongoose.Schema({
+  cid: String,
+  card: String,
+  top: Number,
+  left: Number,
+  z: Number,
+  show: Boolean,
+  gid: Number
+});
 
 // var userSchema = mongoose.Schema({
 //   _id: String,
@@ -38,7 +38,7 @@ var gameSchema = mongoose.Schema({
 
 gameSchema.plugin(autoIncrement.plugin, { model: 'Game', startAt: 1 });
 
-// var Card = mongoose.model('Card', cardSchema);
+var Card = mongoose.model('Card', cardSchema);
 var Game = mongoose.model('Game', gameSchema);
 // var User = mongoose.model('User', gameSchema);
 
@@ -51,24 +51,24 @@ exports.createGame = function (req, res) {
     newGame.name=req.query.name
     newGame.pw=req.query.pw
     newGame.save()
-    // var cards = new Array();
-    // var top = 199;
-    // var left = 564;
-    // var i = 0;
-    // for(var k=0; k<4; k++){
-    //   for(var n=1; n<=13; n++){
-    //     var newCard = new Card();
-    //     newCard.top = top++;
-    //     newCard.left = left++;
-    //     newCard.z = 1;
-    //     newCard.show = false;
-    //     newCard.gid = count;
-    //     newCard.save();
-    //     cards[i] = newCard;
-    //     i++;
-    //   }
-    // }
-    // res.json(cards);
+    var cards = new Array();
+    var top = 199;
+    var left = 564;
+    var i = 0;
+    for(var k=0; k<4; k++){
+      for(var n=1; n<=13; n++){
+        var newCard = new Card();
+        newCard.top = top++;
+        newCard.left = left++;
+        newCard.z = 1;
+        newCard.show = false;
+        newCard.gid = count;
+        // newCard.save();
+        cards[i] = newCard;
+        i++;
+      }
+    }
+    res.json(cards);
   });
 };
 
