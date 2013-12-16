@@ -38,17 +38,16 @@ function GameCtrl($scope) {
 	$scope.joinGame = function(gid){
 		console.log(gid);
 		var password = $('#input' + gid).val(); 
-		// console.log('game joined.');
 		$.ajax({
 		  url: "http://cardables.azurewebsites.net/api/joinGame?gid=" + gid+ "&pw=" +password ,
 		  type:'GET',
 		}).done(function(data) {
-			console.log(data);
+			if(data){
+				window.location.href = "http://cardables.azurewebsites.net/index.html:"+gid;
+			}else{
+				alert("wrong password, please try again");
+			}
 		});
-		//get the id of the game i am joining
-
-		// do a get request = /joinGame?pw=....&?gid=...
-		// window.location.href = "http://cardables.azurewebsites.net/index.html:"+gid;
 	}
 
 }
