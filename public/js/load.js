@@ -140,7 +140,13 @@ function deal(people, cards){
         $('#mat'+i).append('<button id="sortbutton'+i+'" class = "button sort suit" style="right:200px">Sort by suit</a>');
         $('#mat'+i).append('<button id="sortbutton'+i+'" class = "button sort num" style="right:315px">Sort by number</a>');
     }
-    $('.mats').minimize();
+    // $('.mats').minimize();
+    $('.mats').on('swipeup', function(){
+        element.height(height*0.6);
+    });
+    $('.mats').on('swipedown', function(){
+        element.height(70);
+    });
     $('.view').selectMat();
     $('.suit').sortCard('suit');
     $('.num').sortCard('num');
