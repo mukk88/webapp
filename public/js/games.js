@@ -4,7 +4,7 @@ function GameCtrl($scope) {
 
 	function create(name, max){
 		$.ajax({
-		  url: "http://cardables.azurewebsites.net/api/createGame?name=" + name+ "&max=" +max ,
+		  url: "http://cardables.azurewebsites.net/api/createGame?name=" + name+ "&pw=" +max ,
 		  type:'GET',
 		}).done(function(data) {
 			var gid = data[0].gid;
@@ -29,7 +29,7 @@ function GameCtrl($scope) {
  
 	$scope.addGame = function() {
 		console.log('game created');
-		$scope.games.push({id:1,name:$scope.gameName, max:$scope.gameSize, current:0});
+		$scope.games.push({id:1,name:$scope.gameName, pw:$scope.gameSize, current:0});
 		create($scope.gameName, $scope.gameSize);
 		$scope.gameName = '';
 		$scope.gameSize = '';
@@ -37,8 +37,11 @@ function GameCtrl($scope) {
  	
 	$scope.joinGame = function(gid){
 		console.log(gid);
+		console.log($('#' + input + gid).val());
 		console.log('game joined');
 		//get the id of the game i am joining
+
+		// do a get request = /joinGame?pw=....&?gid=...
 		window.location.href = "http://cardables.azurewebsites.net/index.html:"+gid;
 	}
 
