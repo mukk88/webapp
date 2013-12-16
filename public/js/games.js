@@ -43,8 +43,10 @@ function GameCtrl($scope) {
 		  type:'GET',
 		}).done(function(data) {
 			if(data){
+				//alow to hit enter
 				window.location.href = "http://cardables.azurewebsites.net/index.html:"+gid;
 			}else{
+				$('#input' + gid).val('');
 				alert("wrong password, please try again");
 			}
 		});
