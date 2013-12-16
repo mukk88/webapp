@@ -31,7 +31,7 @@
 			      	<br><br>
 			        <div class ="games" ng-repeat="game in games">
 			          <span>{{game.name}}</span>
-			          <input id = "input" + game.id style="width:200px">
+			          <input id = "input{{game.id}}" style="width:200px">
 			          <!-- <span>Password: {{game.max-game.current}}</span> -->
 			          <button ng-click="joinGame(game.id)" class=" join btn">Join Game</button>
 			        </div>
