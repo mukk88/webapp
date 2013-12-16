@@ -37,7 +37,7 @@ function GameCtrl($scope) {
  	
 	$scope.joinGame = function(gid){
 		console.log(gid);
-		console.log($('#' + input + gid).val());
+		console.log($('#input' + gid).val());
 		console.log('game joined.');
 		//get the id of the game i am joining
 
