@@ -41,18 +41,16 @@ input::-webkit-input-placeholder {
 }
 
 .middle{
-	margin-top: 70px;
+	margin-top: 60px;
 	width:40%;
 	margin-left: auto;
 	margin-right: auto;
 	border:1px solid;
 	min-width: 500px;
 	background-color: white;
-	-moz-box-shadow:    3px 3px 5px 6px #ccc;
-	-webkit-box-shadow: 3px 3px 5px 6px #ccc;
-	box-shadow:         3px 3px 5px 6px #ccc;
 	border-radius: 10px;
 	border: 2px solid;
+	margin-bottom: 50px;
 }
 
 .create,
@@ -62,7 +60,8 @@ input::-webkit-input-placeholder {
 	margin-top: -3px;
 }
 
-.middle h1{
+.middle h1,
+.middle h2{
 	font-family: 'Lobster Two'
 }
 
