@@ -14,37 +14,6 @@ jQuery.fn.flip = function() {
     $(this).height(246);
 };
 
-jQuery.fn.minimize = function(){
-    this.each(function(){
-        var element = $(this);
-        var offset = 0;
-        var height = $(window).height();
-        if(height==0){
-            height = window.innerHeight;
-        }
-        element.bind("touchstart", function(e){
-            var orig = e.originalEvent;
-            offset = orig.changedTouches[0].pageY;
-        });
-        element.bind("touchmove", function(e){
-            e.preventDefault();
-            var orig = e.originalEvent;
-            if (orig.targetTouches.length > 1){
-                return;
-            }
-            if(orig.changedTouches[0].pageY - offset > 250){
-                element.height(70);
-            }
-            if(orig.changedTouches[0].pageY - offset < 120){
-                element.height(height*0.6);
-            }
-        });
-        element.bind("touchend", function(e){
-
-        });
-    });
-}
-
 jQuery.fn.selectMat = function(){
     this.each(function(){
         var height = $(window).height();
@@ -140,7 +109,6 @@ function deal(people, cards){
         $('#mat'+i).append('<button id="sortbutton'+i+'" class = "button sort suit" style="right:200px">Sort by suit</a>');
         $('#mat'+i).append('<button id="sortbutton'+i+'" class = "button sort num" style="right:315px">Sort by number</a>');
     }
-    // $('.mats').minimize();
     $('.mats').on('swipeup', function(){
         $(this).height(height*0.6);
     });

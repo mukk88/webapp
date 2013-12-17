@@ -56,9 +56,11 @@ function sendCardData(id, top, left, z, parent, back){
             element.bind("touchstart", function(e) {
                 var orig = e.originalEvent;
                 var pos = $(this).position();
+                var that = this;
                 offsets = {};
                 offsetstop = {};
                 offsetsleft = {};
+
 
                 //bring to front
                 var highZ = 0;
@@ -79,7 +81,7 @@ function sendCardData(id, top, left, z, parent, back){
                     };
                     var draggables = $('.draggable');
                     $.each(draggables,function(i, val){
-                        if(  Math.abs(parseInt(val.style.top) - pos.top) < 100 && Math.abs(parseInt(val.style.left) - pos.left) < 100){
+                        if(  Math.abs(parseInt(val.style.top) - pos.top) < 100 && Math.abs(parseInt(val.style.left) - pos.left) < 100&& $(val).parent() ==  $(that).parent() ){
                             offsetstop[i] = orig.changedTouches[0].pageY - parseInt(val.style.top);
                             offsetsleft[i] = orig.changedTouches[0].pageX - parseInt(val.style.left);
                             offsets[i] = val;
