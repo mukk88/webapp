@@ -47,6 +47,12 @@ input::-webkit-input-placeholder {
 	margin-right: auto;
 	border:1px solid;
 	min-width: 500px;
+	background-color: white;
+	-moz-box-shadow:    3px 3px 5px 6px #ccc;
+	-webkit-box-shadow: 3px 3px 5px 6px #ccc;
+	box-shadow:         3px 3px 5px 6px #ccc;
+	border-radius: 10px;
+	border: 2px solid;
 }
 
 .create,
@@ -54,4 +60,15 @@ input::-webkit-input-placeholder {
 	margin-right:29px;
 	float:right;
 	margin-top: -3px;
+}
+
+.middle h1{
+	font-family: 'Lobster Two'
+}
+
+#icon{
+	top:20px;
+	left:20px;
+	position: fixed;;
+	z-index: 999;
 }
