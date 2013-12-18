@@ -116,6 +116,53 @@
 				<h3>Milestone 2</h3>
 				<li class = "bullet">Added password to protect games. Must enter password to join/delete games.</li>
 				<li class = "bullet">Figured out how to login with facebook. General login not implemented yet.</li>
+				<li class = "bullet">Made the create/join page prettier.</li>
+				<h2 style = "text-align:center">Report</h2>
+				<li style = "font-weight:bold;line-height:200%">Description:</li>
+				<p class = "bullet">This application will help those who have no real physical playing cards be able to play cards with each other. Often when people are travelling or in groups they either forgot or did not plan to bring cards with them. It is difficult to anticipate in advance when you will forget to bring cards. It is often more likely that each person has a smartphone or a tablet on them. People will use this app because it will provide them with a digital set of cards that can be brought up anywhere. </p>
+				<p class = "bullet">We currently have our project hosted on Windows Azure and it has the ability to allow several people to join a game. Each game is independent of other games and is protected by password.</p>
+				<p class = "bullet">For the front end, when a player moves a card on his screen, the movement shows up on the screens of all the other players in the game. We implemented the ability for each person to deal n number of cards to each player. Each player is only able to view the cards that are in their hand, but everyone is able to view the cards that are on the table. Each player can take a card from the table into their hand or move a card from their hand onto the table. There are also abilities to shuffle to restart the game, to group/upgroup when moving cards around, and to sort the cards in hands by number/suit.</p>
+				<p class = "bullet">On the back end, we keep a database of all the games that are available and the state of each card in each game. When a player joins or leaves a game, all other players in that game are notified, so each player knows the number of players in the game. We use socketio and nodejs to push notifications whenever any player makes a change on their device.</p>
+				<li style = "font-weight:bold;line-height:200%">Database Schema:</li>
+				<p class = "bullet">We are using mongodb for our database. Here are our schemas.</p>
+				<p class = "bullet">Game:</p>
+				<p class = "bullet">{</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;_id: Number,</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;name: String,</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;pw: String</p>
+				<p class = "bullet">}</p>
+				<p class = "bullet">Card:</p>
+				<p class = "bullet">{</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;_id: <ObjectId>,</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;cid: String,</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;card: String,</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;top: Number,</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;left: Number,</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;z: Number,</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;show: Boolean,</p>
+				<p class = "bullet">&nbsp;&nbsp;&nbsp;&nbsp;gid: Number,</p>
+				<p class = "bullet">}</p>
+				<li style = "font-weight:bold;line-height:200%">Contributions:</li>
+				<li class = "bullet">Mark: Front end
+					<p class = "bullet">Something</p></li>
+				<li class = "bullet">Paula: Back end
+					<p class = "bullet">I implemented the all APIs such as create/join/delete games. I designed the database and implements the interactions with the database. I put most of my efforts on making it a real time environment. I fisrt tried server-sent events but it seemed to push events to the clients including who sent the event, which makes the movement of the cards not smoothy. Then I tried express.io. It worked fine but I could not find out a way to keep track of the number of players in the room. I eventually used socket.io and was able to notify clients the state of room and cards. I also figured out how to login with facebook but due to the time limit, the login feature is not fully implemented yet.</p></li>
+				<li style = "font-weight:bold;line-height:200%">Future Work:</li>
+				<p class = "bullet">As we continue to do more testing and usability studies we will add features as demanded, bearing in mind that the app is designed to be used with a group of people who are physically together (not online) and we will thus not implement features that are strictly meant for online use, such as chatting. We also are disinclined to add rules to the app as we want.</p>
+				<p class = "bullet">Features we will implement in the future:
+					<li class = "bullet">Shuffle in discarded cards</li>
+					<li class = "bullet">Draw a card from a different players hand</li>
+					<li class = "bullet">Show which player lay down the card</li>
+					<li class = "bullet">Have multiple decks of cards</li>
+					<li class = "bullet">Add different card images to create games - such as UNO</li>
+					<li class = "bullet">Allow user to create rules for specific games</li>
+					<li class = "bullet">Save games</li>
+					<li class = "bullet">Log in as specific user using other services - such as Gmail or Facebook</li>
+					<li class = "bullet">Game statistics</li>
+					<li class = "bullet">Game specific scoring mechanisms</li>
+					<li class = "bullet">Game guides</li>
+					<li class = "bullet">Add avatars</li>
+					<li class = "bullet">Time limits</li></p>
 			</div>
 		</fieldset>
 	</div>
