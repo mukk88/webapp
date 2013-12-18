@@ -2,6 +2,8 @@
  * Serve JSON to our AngularJS client
  */
 
+var passwordHash = require('password-hash');
+
 //setup mongodb
 var mongoose = require('mongoose');
 var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI;
@@ -49,7 +51,8 @@ exports.createGame = function (req, res) {
   var newGame = new Game();
   Game.nextCount(function(err, count) {
     newGame.name=req.query.name
-    newGame.pw=req.query.pw
+    var hashedPassword = passwordHash.generate(req.query.pw);
+    newGame.pw=hashedPassword;
     newGame.save()
     var cards = new Array();
     var top = 199;
@@ -75,16 +78,8 @@ exports.createGame = function (req, res) {
 exports.joinGame = function (req, res) {
   var gid = req.query.gid;
   var pw = req.query.pw;
-  Game.findOne({_id : gid, pw : pw}, function (err, game) {
-    if(game != null){
-      // Card.find({gid : gid}, function (err, cards) {
-      //   res.json(cards);
-      // });
-      res.json(true);
-    }
-    else{
-      res.json(false);
-    }
+  Game.findOne({_id : gid}, function (err, game) {
+    res.json(passwordHash.verify(pw, game.pw));
   });
 };
 
