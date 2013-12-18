@@ -2,7 +2,7 @@
  * Serve JSON to our AngularJS client
  */
 
-var passwordHash = require('password-hash');
+// var passwordHash = require('password-hash');
 
 //setup mongodb
 var mongoose = require('mongoose');
