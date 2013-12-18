@@ -51,8 +51,9 @@ exports.createGame = function (req, res) {
   var newGame = new Game();
   Game.nextCount(function(err, count) {
     newGame.name=req.query.name
-    var hashedPassword = passwordHash.generate(req.query.pw);
-    newGame.pw=hashedPassword;
+    // var hashedPassword = passwordHash.generate(req.query.pw);
+    // newGame.pw=hashedPassword;
+    newGame.pw=req.query.pw;
     newGame.save()
     var cards = new Array();
     var top = 199;
@@ -78,9 +79,9 @@ exports.createGame = function (req, res) {
 exports.joinGame = function (req, res) {
   var gid = req.query.gid;
   var pw = req.query.pw;
-  Game.findOne({_id : gid}, function (err, game) {
-    res.json(passwordHash.verify(pw, game.pw));
-  });
+  // Game.findOne({_id : gid}, function (err, game) {
+  //   res.json(passwordHash.verify(pw, game.pw));
+  // });
 };
 
 exports.deleteGame = function (req, res) {
