@@ -92,12 +92,17 @@ exports.joinGame = function (req, res) {
 exports.deleteGame = function (req, res) {
   var gid = req.query.gid;
   var pw = req.query.pw;
-  Game.findOne({_id : gid, pw : pw}, function (err, game) {
+  Game.findOne({_id : gid}, function (err, game) {
     if(game != null){
       // Card.remove({gid : gid}, function (err, cards) {});
-      Game.remove({_id : gid}, function (err, games) {});
-      res.json(true);
-    }
+      if(passwordHash.verify(pw, game.pw)){
+        Game.remove({_id : gid}, function (err, games) {});
+        res.json(true);
+      }
+      else{
+        res.json(false);
+      }
+      res.json(true);    }
     else{
       res.json(false);
     }
