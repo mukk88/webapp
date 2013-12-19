@@ -10,7 +10,7 @@ function GameCtrl($scope) {
 			var gid = data[0].gid;
 			console.log(data[0].gid);
 			//redirect to the game
-			window.location.href = "http://cardables.azurewebsites.net/index.html:" + gid;
+			// window.location.href = "http://cardables.azurewebsites.net/index.html:" + gid;
 		});
 	}
 
@@ -45,6 +45,26 @@ function GameCtrl($scope) {
 			if(data){
 				//alow to hit enter
 				window.location.href = "http://cardables.azurewebsites.net/index.html:"+gid;
+			}else{
+				$('#input' + gid).val('');
+				alert("wrong password, please try again");
+			}
+		});
+	}
+
+	$scope.delGame = function(gid){
+		console.log(gid);
+		var password = $('#input' + gid).val(); 
+		$.ajax({
+		  url: "http://cardables.azurewebsites.net/api/deleteGame?gid=" + gid+ "&pw=" +password ,
+		  type:'GET',
+		}).done(function(data) {
+			if(data){
+				var oldGames = $scope.games;
+			    $scope.games = [];
+			    angular.forEach(oldGames, function(game) {
+			      if (game.gid!=gid) $scope.gamess.push(game);
+			    });
 			}else{
 				$('#input' + gid).val('');
 				alert("wrong password, please try again");

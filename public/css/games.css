@@ -55,7 +55,7 @@ input::-webkit-input-placeholder {
 
 .create,
 .join{
-	margin-right:29px;
+	margin-right:10px;
 	float:right;
 	margin-top: -3px;
 }
@@ -70,4 +70,11 @@ input::-webkit-input-placeholder {
 	left:20px;
 	position: fixed;;
 	z-index: 999;
+}
+
+.games .trash{
+	float:right;
+	margin-right:15px; 
+	margin-top: 5px;
+	cursor: pointer;
 }
