@@ -10,7 +10,7 @@ function GameCtrl($scope) {
 			var gid = data[0].gid;
 			console.log(data[0].gid);
 			//redirect to the game
-			// window.location.href = "http://cardables.azurewebsites.net/index.html:" + gid;
+			window.location.href = "http://cardables.azurewebsites.net/index.html:" + gid;
 		});
 	}
 
