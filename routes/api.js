@@ -102,7 +102,7 @@ exports.deleteGame = function (req, res) {
       else{
         res.json(false);
       }
-      res.json(true);    }
+    }
     else{
       res.json(false);
     }
