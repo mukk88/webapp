@@ -63,7 +63,7 @@ function GameCtrl($scope) {
 				var oldGames = $scope.games;
 			    $scope.games = [];
 			    angular.forEach(oldGames, function(game) {
-			      if (game.gid!=gid) $scope.gamess.push(game);
+			      if (game.gid!=gid) $scope.games.push(game);
 			    });
 			}else{
 				$('#input' + gid).val('');
