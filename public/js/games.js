@@ -14,6 +14,7 @@ function GameCtrl($scope) {
 		});
 	}
 
+	$('.gamelist').hide();
 	$.ajax({
 	 	url: "http://cardables.azurewebsites.net/api/getAllGames",
 	  	type:'GET',
@@ -24,7 +25,7 @@ function GameCtrl($scope) {
 				$scope.games.push({id:gameinfo[i]._id, name:gameinfo[i].name, max:gameinfo[i].max, current:1})
 			}
 		});
-		console.log(data)
+		$('.gamelist').show();
 	});
  
 	$scope.addGame = function() {

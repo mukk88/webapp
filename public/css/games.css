@@ -83,3 +83,10 @@ input::-webkit-input-placeholder {
 	border: 1px solid;
 	border-color: orange;
 }
+
+#loading{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	display: block;
+}
