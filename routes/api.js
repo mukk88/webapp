@@ -35,9 +35,9 @@ var cardSchema = mongoose.Schema({
 var gameSchema = mongoose.Schema({
   _id: Number,
   name: String,
-  // pw: String
-  pw: String,
-  pww: String
+  pw: String
+  // pw: String,
+  // pww: String
 });
 
 gameSchema.plugin(autoIncrement.plugin, { model: 'Game', startAt: 1 });
@@ -55,7 +55,7 @@ exports.createGame = function (req, res) {
   Game.nextCount(function(err, count) {
     newGame.name=req.query.name
     var hashedPassword = passwordHash.generate(req.query.pw);
-    newGame.pww=req.query.pw;
+    // newGame.pww=req.query.pw;
     newGame.pw=hashedPassword;
     // newGame.pw=req.query.pw;
     newGame.save()
