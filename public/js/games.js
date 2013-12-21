@@ -18,6 +18,7 @@ function GameCtrl($scope) {
 	$.ajax({
 	 	url: "http://cardables.azurewebsites.net/api/getAllGames",
 	  	type:'GET',
+	  	cache:false
 	}).done(function(data) {
 		gameinfo = data;
 		$scope.$apply(function(){
