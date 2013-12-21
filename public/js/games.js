@@ -65,7 +65,7 @@ function GameCtrl($scope) {
 			    angular.forEach(oldGames, function(game) {
 			      if (game.id!=gid) $scope.games.push(game);
 			    });
-				$('#game'+gid).hide();			    
+			    $scope.$apply();
 			}else{
 				$('#input' + gid).val('');
 				alert("wrong password, please try again");
