@@ -89,4 +89,5 @@ input::-webkit-input-placeholder {
 	margin-right: auto;
 	margin-top: 20px;
 	display: block;
+	margin-bottom: 20px;
 }

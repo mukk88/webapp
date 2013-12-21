@@ -25,6 +25,7 @@ function GameCtrl($scope) {
 				$scope.games.push({id:gameinfo[i]._id, name:gameinfo[i].name, max:gameinfo[i].max, current:1})
 			}
 		});
+		$('#loading').hide();
 		$('.gamelist').show();
 	});
  
