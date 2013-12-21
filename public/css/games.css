@@ -78,3 +78,8 @@ input::-webkit-input-placeholder {
 	margin-top: 5px;
 	cursor: pointer;
 }
+
+.games .trash:active{
+	border: 1px solid;
+	border-color: orange;
+}
