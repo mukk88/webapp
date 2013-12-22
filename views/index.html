@@ -4,6 +4,15 @@
     <link rel="shortcut icon" href="images/icon.ico">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/card.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="js/jquery.mobile-events.min.js"></script>
+    <script src="js/bootstrap.touchspin.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/test.js"></script>
+    <script src="js/drag.js"></script>
+    <script src="js/deck.js"></script>
+    <script src="js/load.js"></script>
 </head>
 <body id ="body"  bgcolor="#E6E6FA">
     <div id="header">
@@ -22,26 +31,6 @@
     <div class="info">haha</div>
     <div class = "viewbar"></div>
     <div class = "matsbar"></div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="js/jquery.mobile-events.min.js"></script>
-    <script src="js/bootstrap.touchspin.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="js/test.js"></script>
-    <script src="js/drag.js"></script>
-    <script src="js/deck.js"></script>
-    <script src="js/load.js"></script>
-    <script>
-        $("input[name='demo']").TouchSpin({
-            min: 0, // Minimum value.
-            max: 9, // Maximum value.
-            maxboostedstep: 1, // Maximum step when boosted.
-            prefix: 'players', // Text before the input.
-            step: 1, // Incremental/decremental step on up/down change.
-            stepinterval: 100, // Refresh rate of the spinner in milliseconds.
-            stepintervaldelay: 500 // Time in milliseconds before the spinner starts to spin.
-        });
-    </script>
 </body>
 </html>
 
