@@ -112,9 +112,9 @@ function deal(people, cards){
     $('.mats').on('swipeup', function(){
         $(this).height(height*0.6);
     });
-    $('.mats').on('swipedown', function(){
-        $(this).height(70);
-    });
+    // $('.mats').on('swipedown', function(){
+    //     $(this).height(70);
+    // });
     $('.view').selectMat();
     $('.suit').sortCard('suit');
     $('.num').sortCard('num');
