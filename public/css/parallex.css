@@ -82,42 +82,48 @@ h2{
 }
 
 #intro{
-	background:url(../images/save/belle.jpg) 5% 0 no-repeat fixed;
+	background:url(../images/save/tree2.jpg) 5% 0 no-repeat fixed;
 	background-size: 100% auto;
 	/*color: white;*/
 	height: 600px;
 	margin: 0 auto;
 	padding: 0;
+	z-index: 21;
+
 }
 
 #second{
-	/*background: url(../images/holiday.jpg) 50% 0 no-repeat fixed;*/
-	/*color: white;*/
-	height: 1300px;
+	height: 600px;
+	width: 100%;
 	margin: 0 auto;
 	overflow: hidden;
 	padding: 0;
 }
 
+
 #second .bg{
-	background: url(../images/10c.jpg) 50% 0 no-repeat fixed;
-	height: 2100px;
+	height: 600px;
 	margin: 0 0 10px 0;
 	padding: 0;
 	position: absolute;
 	width: 900px;
-	z-index: 200;
+	z-index: 20;
+	background-image: url(../images/save/fly2.jpg);
+	background-repeat: no-repeat;
+	background-position: 500px 500px;
+	background-size: 200px auto;	
 }
 
 #third{
-	background: url(images/thirdBG.jpg) 50% 0 no-repeat fixed;
-	color: white;
-	height: 650px;
+	background: url(../images/save/kiss2.jpg) 50% 0 no-repeat fixed;
+	/*color: white;*/
+	height: 600px;
+	background-size: 100% auto;
 	padding: 100px 0 0 0;	
+	z-index: 21;
 }
 
 #fifth{
-	background: #ccc;
 	height: 400px;
 	margin: 0 auto;
 	padding: 40px 0 0 0;
@@ -127,7 +133,7 @@ h2{
 	margin: 0 auto;
 	min-width: 980px;
 	overflow: auto;
-	width: 980px;
+	width: 80%;
 }
 
 .story .float-left, .story .float-right{
@@ -142,7 +148,7 @@ h2{
 
 #intro article{ 
 	color: #fff;
-	width: 545px;
+	width: 446px;
 	margin: 0 auto;
 	left:0;
 	right:0; 
@@ -154,4 +160,27 @@ h2{
 	/*margin-top: 450px;*/
 }
 
-article h2 { font-family: 'Lobster Two'; font-size: 80px; margin: 25px 0; line-height: 1em; }
+article h2{ 
+	font-family: 'Lobster Two';
+	font-size: 80px; 
+	margin: 25px 0; 
+	line-height: 1em;
+}
+
+#third, h2{
+	font-family: 'Lobster Two';
+	font-size: 50px;
+	margin: 25px 0; 
+	line-height: 1em;
+}
+
+#second article{
+	margin-top: 500px;
+	margin-left: 900px;
+}
+
+#intro, #third{
+	border-top: 1px solid rgba(255,255,255,0.3);
+	border-bottom: 1px solid rgba(0,0,0,0.4);
+	box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}

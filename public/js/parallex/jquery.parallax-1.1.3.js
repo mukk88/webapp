@@ -19,7 +19,7 @@ http://www.gnu.org/licenses/gpl.html
 		windowHeight = $window.height();
 	});
 
-	$.fn.parallax = function(xpos, speedFactor, outerHeight) {
+	$.fn.parallax = function(xpos, speedFactor, start, outerHeight) {
 		var $this = $(this);
 		var getHeight;
 		var firstTop;
@@ -43,7 +43,8 @@ http://www.gnu.org/licenses/gpl.html
 		// setup defaults if arguments aren't specified
 		if (arguments.length < 1 || xpos === null) xpos = "50%";
 		if (arguments.length < 2 || speedFactor === null) speedFactor = 0.1;
-		if (arguments.length < 3 || outerHeight === null) outerHeight = true;
+		if (arguments.length < 3 || start === null) start = 0;
+		if (arguments.length < 4 || outerHeight === null) outerHeight = true;
 		
 		// function to be called whenever the window is scrolled or resized
 		function update(){
@@ -59,7 +60,7 @@ http://www.gnu.org/licenses/gpl.html
 					return;
 				}
 
-				$this.css('backgroundPosition', xpos + " " + Math.round((firstTop - pos) * speedFactor) + "px");
+				$this.css('backgroundPosition', xpos + " " + Math.round(start+(firstTop - pos) * speedFactor) + "px");
 			});
 		}		
 
