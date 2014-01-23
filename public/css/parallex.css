@@ -83,7 +83,7 @@ h2{
 
 #intro{
 	background:url(../images/save/tree2.jpg) 5% 0 no-repeat fixed;
-	background-size: 100% auto;
+	background-size: 100% 600px;
 	/*color: white;*/
 	height: 600px;
 	margin: 0 auto;
@@ -148,7 +148,7 @@ h2{
 
 #intro article{ 
 	color: #fff;
-	width: 446px;
+	width: 450px;
 	margin: 0 auto;
 	left:0;
 	right:0; 
