@@ -245,4 +245,5 @@ h2{
 	text-align: center;
 	margin: 0 auto;
 	float:none;
+	min-width: 550px;
 }
