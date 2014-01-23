@@ -46,7 +46,7 @@ h2{
 
 .float-left{
 	float: left;	
-	margin: 0 0 0 20px;
+	margin: 80px 0 0 40px;
 }
 
 .float-right{
@@ -61,7 +61,7 @@ h2{
 }
 
 #second h2{
-	margin-top: 100px;
+	margin-top: 20px;
 	font-family: 'Loved by the King', cursive;
 }
 
@@ -81,9 +81,7 @@ h2{
 	line-height: 10px;
 }
 
-#second span,
-#second h3,
-#second p{
+span,h3,p{
 	float:right;
 	margin-right: 20%;
 	text-align: right;
@@ -153,7 +151,7 @@ h2{
 	z-index: 21;
 }
 
-#fifth{
+#last{
 	height: 400px;
 	margin: 0 auto;
 	padding: 40px 0 0 0;
@@ -172,13 +170,21 @@ h2{
 	width: 350px;	
 }
 
-#float-bottom{
+.float-bottom{
 	padding: 400px 0 0 0;
+}
+
+#last .float-bottom{
+	padding: 100px 0 0 0;
+}
+
+#last h2{
+	text-align: center;
 }
 
 #intro article{ 
 	color: #fff;
-	width: 450px;
+	width: 375px;
 	margin: 0 auto;
 	left:0;
 	right:0; 
@@ -191,15 +197,16 @@ h2{
 }
 
 article h2{ 
-	font-family: 'Lobster Two';
+	font-family: 'Loved by the King', cursive;
+	font-weight: bold;
 	font-size: 80px; 
 	margin: 25px 0; 
 	line-height: 1em;
 }
 
-#third, h2{
-	font-family: 'Lobster Two';
-	font-size: 50px;
+h2{
+	font-family: 'Loved by the King', cursive;
+	font-size: 60px;
 	margin: 25px 0; 
 	line-height: 1em;
 }
@@ -209,8 +216,33 @@ article h2{
 	margin-left: 900px;
 }
 
-#intro, #third{
+#intro, #third, #fifth{
 	border-top: 1px solid rgba(255,255,255,0.3);
 	border-bottom: 1px solid rgba(0,0,0,0.4);
 	box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+#fourth{
+	height: 600px;
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 0;
+}
+
+#fifth{
+	background: url(../images/save/titanic.jpg) 50% 0 no-repeat fixed;
+	/*color: white;*/
+	height: 600px;
+	background-size: 100% auto;
+	padding: 100px 0 0 0;	
+	z-index: 21;
+}
+
+#fourth p{
+	font-size: 20px;
+	width: 45%;
+	text-align: center;
+	margin: 0 auto;
+	float:none;
 }
