@@ -71,24 +71,25 @@ if (app.get('env') === 'production') {
  * Routes
  */
 // serve index and view partials
-app.get('/', routes.splash);
-app.get('/index.html', routes.index);
-app.get('/play.html', routes.play);
-app.get('/pitch.html', routes.pitch);
-app.get('/game.html', routes.game);
+app.get('/cardables/', routes.splash);
+app.get('/cardables/index.html', routes.index);
+app.get('/cardables/play.html', routes.play);
+app.get('/cardables/pitch.html', routes.pitch);
+app.get('/cardables/game.html', routes.game);
 //app.get('/index', ensureAuthenticated, routes.index);
 app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }), routes.authFacebookCallback);
 app.get('/logout', routes.logout);
 
 // JSON API
-app.get('/api/createGame', api.createGame);
-app.get('/api/deleteGame', api.deleteGame);
-app.get('/api/joinGame', api.joinGame);
-app.get('/api/getAllGames', api.getAllGames);
-app.get('/api/deleteAllGames',api.deleteAllGames);
+app.get('/cardables/api/createGame', api.createGame);
+app.get('/cardables/api/deleteGame', api.deleteGame);
+app.get('/cardables/api/joinGame', api.joinGame);
+app.get('/cardables/api/getAllGames', api.getAllGames);
+app.get('/cardables/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
+app.get('/savethedate', routes.saveTheDate)
 app.get('*', routes.index);
 
 

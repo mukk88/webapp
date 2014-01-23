@@ -4,8 +4,12 @@
  */
 
 exports.index = function(req, res){
-  res.render('index.html');
+  res.render('home.html');
 };
+
+exports.saveTheDate = function(req,res){
+	res.render('savedate.html');
+}
 
 
 exports.splash = function(req, res){
