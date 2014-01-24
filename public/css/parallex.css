@@ -155,6 +155,7 @@ span,h3,p{
 	height: 400px;
 	margin: 0 auto;
 	padding: 40px 0 0 0;
+	text-align: center;
 }
 
 .story{
@@ -246,4 +247,8 @@ h2{
 	margin: 0 auto;
 	float:none;
 	min-width: 550px;
+}
+
+#last input{
+	margin:0 auto;
 }
