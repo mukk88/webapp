@@ -4,6 +4,12 @@ body{
 
 li{
 	font-family:'Quicksand' sans-serif;
+	/*background-color: #fff9ef;*/
+	text-shadow:
+    -1px -1px 0 #fff9ef,  
+    1px -1px 0 #fff9ef,
+    -1px 1px 0 #fff9ef,
+    1px 1px 0 #fff9ef;
 }
 
 a{
@@ -19,7 +25,7 @@ a{
 
 .nav{
 	position: fixed;
-	width:200px;
+	width:150px;
 }
 
 .story{
@@ -29,7 +35,7 @@ a{
 
 .story-2{
 	height:600px;
-	background:url(../images/home/stardust.png);
+	background:url(../images/home/simple_dashed.png);
 	border-top: 1px solid rgba(255,255,255,0.3);
 	border-bottom: 1px solid rgba(0,0,0,0.4);
 	box-shadow: 0 0 50px rgba(0,0,0,0.8);
@@ -162,6 +168,8 @@ a{
 	display: inline;
 	float: left;
 	margin-top: -20px;
+	background-color: #fff9ef;
+	/*background: url(../images/home/purty_wood.png);*/
 }
 
 #work #inner p{
