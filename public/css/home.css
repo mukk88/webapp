@@ -10,7 +10,7 @@ li{
 	margin:0 auto;
 	min-width: 680px;
 	width: 80%;
-	overflow: auto;
+	overflow: hidden;
 }
 
 .nav{
@@ -31,6 +31,8 @@ li{
 .center{
 	margin:0 auto;
 	text-align: center;
+	display: block;
+	width: 100%;
 }
 
 .right{
@@ -70,27 +72,40 @@ li{
 	width:550px;
 }
 
-#contact #map,
-#contact #info{
-	background-color: #fff9ef;
-	border: 2px solid;
-	width:400px;
-	height:450px;
-	margin-top:3%; 
-}
 
 #contact h2{
-	margin:auto;
-	margin-top: 4%;
+	margin-top: 10%;
 	font-family: 'Rock Salt', cursive;
-	width:200px;
 	font-size: 34px;
+	margin-left: 200px;
+	white-space: normal;
+
 }
 
-#contact #map{
-	margin-left:120px;
+#contact .center{
+	text-align: left;
 }
 
-#contact #info{
-	margin-right: 120px;
+#contact #selftext{
+	margin-left:100px;
+	width:550px;
+}
+
+#contact p{
+	display: inline;
+	font-family: 'Josefin Slab', serif;
+	font-size: 20px;
+}
+
+#contact #first{
+	display: inline;
+	font-family: 'Josefin Slab', serif;
+	font-size:25px;
+}
+#contact img{
+	float:right;
+	vertical-align: top;
+	margin-top: 10%;
+	margin-right: 100px;
+
 }
