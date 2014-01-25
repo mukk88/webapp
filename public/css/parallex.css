@@ -144,7 +144,7 @@ span,h3,p{
 
 #third{
 	background: url(../images/save/kiss2.jpg) 50% 0 no-repeat fixed;
-	/*color: white;*/
+		/*color: white;*/
 	height: 600px;
 	background-size: 100% 600px;
 	padding: 100px 0 0 0;	
@@ -185,7 +185,8 @@ span,h3,p{
 
 #intro article{ 
 	color: #fff;
-	width: 375px;
+	width: 500px;
+	text-align: center;
 	margin: 0 auto;
 	left:0;
 	right:0; 
