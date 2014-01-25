@@ -7,6 +7,7 @@ $(document).ready(function() {
 		$('.story').height(h);
 		$('.story-2').height(h);
 	}else{
+		h=600;
 		$('#me').css('display','none');
 		$('#selftext').css('margin','0 auto');
 	}
