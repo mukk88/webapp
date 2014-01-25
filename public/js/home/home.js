@@ -8,7 +8,7 @@ $(document).ready(function() {
 		$('.story-2').height(h);
 	}else{
 		$('.story').height(1000);
-		$('.story-2').height(1000);		
+		$('#me').css('display','none');
 	}
 
 	$(window).scroll(function(){
