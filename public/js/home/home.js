@@ -8,7 +8,7 @@ $(document).ready(function() {
 		$('.story-2').height(h);
 	}else{
 		$('#me').css('display','none');
-		$('#selftext').css('margin','0 auto')l
+		$('#selftext').css('margin','0 auto');
 	}
 
 	$(window).scroll(function(){
