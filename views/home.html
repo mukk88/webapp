@@ -6,7 +6,16 @@
 	<link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>	
+    <script src="js/lib/instafeed.js"></script>
 	<script src="js/home/home.js"></script>
+	<script type="text/javascript">
+		var feed = new Instafeed({
+		    get: 'tagged',
+		    tagName: 'awesome',
+		    clientId: 'YOUR_CLIENT_ID'
+		});
+		feed.run();
+	</script>
 </head>
 <body>
 	<div class ="nav">
@@ -46,6 +55,7 @@
 			<div class="center">
 				<h2>Currently Under Construction</h2>
 				<p>Check back later for updates =)</p>
+				<div id = "instafeed"></div>
 			</div>
 		</div>
 	</div>
