@@ -5,11 +5,11 @@ body{
 li{
 	font-family:'Quicksand' sans-serif;
 	/*background-color: #fff9ef;*/
-	text-shadow:
+/*	text-shadow:
     -1px -1px 0 #fff9ef,  
     1px -1px 0 #fff9ef,
     -1px 1px 0 #fff9ef,
-    1px 1px 0 #fff9ef;
+    1px 1px 0 #fff9ef;*/
 }
 
 a{
@@ -39,6 +39,7 @@ a{
 	border-top: 1px solid rgba(255,255,255,0.3);
 	border-bottom: 1px solid rgba(0,0,0,0.4);
 	box-shadow: 0 0 50px rgba(0,0,0,0.8);
+	/*333131*/
 }
 
 .center{
@@ -118,7 +119,7 @@ a{
 #contact #first{
 	display: inline;
 	font-family: 'Josefin Slab', serif;
-	font-size:25px;
+	/*font-size:25px;*/
 }
 #contact img{
 	float:right;
