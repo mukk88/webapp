@@ -2,17 +2,17 @@
 <head>
 	<title>create game</title>
   	<link href='http://fonts.googleapis.com/css?family=Lobster+Two:700&v2' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/games.css">
+	<link rel="stylesheet" type="text/css" href="../css/games.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-	<script src="js/games.js"></script>
+	<script src="../js/games.js"></script>
 	<script>
 
 	</script>
 </head>
 <body>
-	<img id = "icon" src="images/icon.png" height = "64"> 
+	<img id = "icon" src="../images/icon.png" height = "64"> 
 	<div class="container">
 		<div class="middle" ng-controller="GameCtrl">
 			<h1 style="margin-left:26px">Almost there..</h1>			
@@ -27,7 +27,7 @@
 				<button class="create btn" type="submit">Create Game</button>
 			</form>
 			<h2>Join Game</h2>
-			<img id = "loading" src="images/ajax.gif">
+			<img id = "loading" src="../images/ajax.gif">
 			<!-- <form ng-submit="joinGame()"> -->
 				<div class="gamelist" >
 			      <h3>{{games.length}} games available</h3>
@@ -37,7 +37,7 @@
 			        	<div id = "game{{game.id}}">
 				          <span>{{game.name}}</span>
 				          <input type = "password" id = "input{{game.id}}" style="width:200px">
-				          <img class = "trash" ng-click="delGame(game.id)" src="images/trash.jpg">
+				          <img class = "trash" ng-click="delGame(game.id)" src="../images/trash.jpg">
 				          <button ng-click="joinGame(game.id)" class=" join btn">Join Game</button>
 			        	</div>
 			        </div>

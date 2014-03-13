@@ -26,28 +26,34 @@ var cardSchema = mongoose.Schema({
   gid: Number
 });
 
-// var userSchema = mongoose.Schema({
-//   _id: String,
-//   display: String,
-//   gid: Number
-// });
-
 var gameSchema = mongoose.Schema({
   _id: Number,
   name: String,
   pw: String
-  // pw: String,
-  // pww: String
 });
 
+var guestSchema = mongoose.Schema({
+  _id: Number,
+  name: String,
+  partySize: Number
+})
+
 gameSchema.plugin(autoIncrement.plugin, { model: 'Game', startAt: 1 });
+gameSchema.plugin(autoIncrement.plugin, { model: 'Guest', startAt: 1 });
 
 var Card = mongoose.model('Card', cardSchema);
 var Game = mongoose.model('Game', gameSchema);
-// var User = mongoose.model('User', gameSchema);
-
+var Guest = mongoose.model('Guest', guestSchema);
 
 var kinds = ["c","d","h","s"];
+
+exports.addGuest = function(req,res){
+  var guest = new Guest();
+  Guest.nextCount(function(){
+      guest.name=req.body.name;
+      guest.partySize= req.body.size;
+  });
+};
 
 exports.createGame = function (req, res) {
   console.log("nama is:"+req.query.name+" pw is:"+req.query.pw);

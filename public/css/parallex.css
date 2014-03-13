@@ -144,9 +144,9 @@ span,h3,p{
 
 #third{
 	background: url(../images/save/kiss2.jpg) 50% 0 no-repeat fixed;
-	/*color: white;*/
+		/*color: white;*/
 	height: 600px;
-	background-size: 100% auto;
+	background-size: 100% 600px;
 	padding: 100px 0 0 0;	
 	z-index: 21;
 }
@@ -185,7 +185,8 @@ span,h3,p{
 
 #intro article{ 
 	color: #fff;
-	width: 375px;
+	width: 500px;
+	text-align: center;
 	margin: 0 auto;
 	left:0;
 	right:0; 
@@ -217,7 +218,13 @@ h2{
 	margin-left: 900px;
 }
 
-#intro, #third, #fifth{
+/*#intro, #third, #fifth{
+	border-top: 1px solid rgba(255,255,255,0.3);
+	border-bottom: 1px solid rgba(0,0,0,0.4);
+	box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}*/
+
+#second, #fourth, #last{
 	border-top: 1px solid rgba(255,255,255,0.3);
 	border-bottom: 1px solid rgba(0,0,0,0.4);
 	box-shadow: 0 0 50px rgba(0,0,0,0.8);

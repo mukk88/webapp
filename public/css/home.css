@@ -4,6 +4,16 @@ body{
 
 li{
 	font-family:'Quicksand' sans-serif;
+	/*background-color: #fff9ef;*/
+/*	text-shadow:
+    -1px -1px 0 #fff9ef,  
+    1px -1px 0 #fff9ef,
+    -1px 1px 0 #fff9ef,
+    1px 1px 0 #fff9ef;*/
+}
+
+a{
+	color: inherit;
 }
 
 .container{
@@ -15,17 +25,21 @@ li{
 
 .nav{
 	position: fixed;
-	width:200px;
+	width:150px;
 }
 
 .story{
 	height:600px;
-	background-color:#fff9ef;
+	background-color:white;
 }
 
 .story-2{
 	height:600px;
 	background:url(../images/home/stardust.png);
+	border-top: 1px solid rgba(255,255,255,0.3);
+	border-bottom: 1px solid rgba(0,0,0,0.4);
+	box-shadow: 0 0 50px rgba(0,0,0,0.8);
+	/*333131*/
 }
 
 .center{
@@ -55,8 +69,9 @@ li{
 	cursor: pointer;
 }
 
+
 #home h2{
-	margin-top: 18%;
+	margin-top: 17%;
 	font-size: 100px;
 	font-family: 'Rock Salt', cursive;
 }
@@ -74,21 +89,25 @@ li{
 
 
 #contact h2{
-	margin-top: 10%;
+	margin-top: 8%;
 	font-family: 'Rock Salt', cursive;
 	font-size: 34px;
 	margin-left: 200px;
 	white-space: normal;
-
+	width:500px;
+	color: #fff9ef;
 }
 
 #contact .center{
 	text-align: left;
 }
-
+ #selftext,
 #contact #selftext{
 	margin-left:100px;
-	width:550px;
+	width:50%;
+	max-width:600px; 
+	min-width:400px;
+	color: #fff9ef;
 }
 
 #contact p{
@@ -100,12 +119,80 @@ li{
 #contact #first{
 	display: inline;
 	font-family: 'Josefin Slab', serif;
-	font-size:25px;
+	/*font-size:25px;*/
 }
 #contact img{
 	float:right;
 	vertical-align: top;
-	margin-top: 10%;
-	margin-right: 100px;
+	margin-top: 8%;
+	margin-right: 1%;
+	height:80%;
+}
 
+#work #inner{
+	margin-top: 12%;
+	margin-left: 10%;
+	width:80%;	
+}
+
+#work #inner h2{
+	font-weight: bold;
+	font-size: 50px;
+	font-family: 'Quicksand' sans-serif;
+	color: #fff9ef;
+}
+
+#work #inner a{
+	text-decoration: none;
+}
+
+#work #inner .project{
+	height:210px;
+	width: 500px;
+}
+
+#work #inner .project h2{
+	width: 600px;
+	margin-left: 200px;
+	line-height: 0px;
+	color: #fff9ef;
+	font-family: 'Quicksand' sans-serif;
+
+
+}
+
+#work #inner img{
+	height:150px;
+	width: 150px;
+	border: 2px solid;
+	margin-bottom: 50px;
+	display: inline;
+	float: left;
+	margin-top: -20px;
+	background-color: #fff9ef;
+	/*background: url(../images/home/purty_wood.png);*/
+}
+
+#work #inner p{
+	vertical-align: top;
+	margin-left: 200px;
+	font-family: 'Josefin Slab', serif;
+	font-size: 20px;
+	color: #fff9ef;
+	white-space: normal;
+	width: 600px;
+}
+
+#fun h2,
+#muse h2{
+	margin-top: 17%;
+	font-size: 50px;
+	font-family: 'Rock Salt', cursive;
+}
+
+
+#muse p,
+#fun p{
+	font-size: 20px;
+	font-family: 'Quicksand' sans-serif;
 }

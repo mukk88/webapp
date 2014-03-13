@@ -1,22 +1,31 @@
 <html>
 <head>
 	<title>mukk</title>
-	<link rel="stylesheet" type="text/css" href="../public/css/home.css">
+	<link rel="stylesheet" type="text/css" href="css/home.css">
 	<link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>	
-	<script src="../public/js/home/home.js"></script>
+    <script src="js/lib/instafeed.min.js"></script>
+	<script src="js/home/home.js"></script>
+	<script type="text/javascript">
+	// 	var feed = new Instafeed({
+	// 	    get: 'user',
+	// 	    userId: 297875328,
+	// 	    accessToken:'297875328.467ede5.e9e606f9999c42db9a2be091a0035a62',
+	// 	    clientId: '10ada4796d6c413596c34d30b093020e'
+	// 	});
+	// 	feed.run();
+	</script>
 </head>
 <body>
 	<div class ="nav">
 		<ul id="navs">
-			<li>HOME</li>
-			<li>CONTACT</li>
-			<li>MUSE</li>
-			<li>WORK</li>
-			<li>FUN</li>
+			<li id="li0">HOME</li>
+			<li id="li1">CONTACT</li>
+			<li id="li2">MUSE</li>
+			<li id="li3">WORK</li>
+			<li id="li4">FUN</li>
 		</ul>
 	</div>
 	<div id ="home" class="story">
@@ -31,30 +40,50 @@
 	</div>
 	<div id = "contact" class="story-2">
 		<div class ="container">
-			<img src="../public/images/home/me2.jpg">
+			<img id="me" src="images/home/me2.jpg">
 			<h2>Things About Me..</h2>
 			<div id="selftext">
 				<p id = "first">My name is Mark Woo and I am currently a Computer Science student at Brigham Young University. </p>	<br><br>
-				<p>This is some random tidbit of information about me that is taking up a decent amount of space. I will fill this in later as needed. I seem to do this alot. </p><br><br>
-				<p>This is some random tidbit of information about me that is taking up a decent amount of space. I will fill this in later as needed. I seem to do this alot. </p><br><br>
-				<p>This is some random tidbit of information about me that is taking up a decent amount of space. I will fill this in later as needed. I seem to do this alot. </p><br><br>
-				<p>This is some random tidbit of information about me that is taking up a decent amount of space. I will fill this in later as needed. I seem to do this alot. </p><br><br>
+				<p>I was born in Singapore and gew up on math puzzles and basketball. I enjoy basically anything geeky. I'm also game for most sports but mostly do triathlons and climbing now. </p><br><br>
+				<p>I am somewhat introverted and enjoy talking with people on an individual basis. I am spontaneous and easily take on the traits of the people that I associate with.</p><br><br>
+				<p>Connect with me at: <a target="blank" href="http://www.facebook.com/mukk.woo">facebook</a>, 
+					<a target="blank" href="http://www.linkedin.com/pub/mark-woo/56/9a5/13a/">linkedin</a>, <a target="blank" href="https://github.com/mukk88">github</a> or <a target="blank" href="mailto:markwoo@gmail.com">email.</a> I have yet to be converted to twitter :) </p> 
 			</div>
 		</div>
 	</div>
-	<div class="story">
+	<div id = "muse" class="story">
 		<div class ="container">
-
+			<div class="center">
+				<h2>Currently Under Construction</h2>
+				<p>Check back later for updates =)</p>
+				<div id = "instafeed"></div>
+			</div>
 		</div>
 	</div>
-	<div class="story-2">
+	<div id="work" class="story-2">
 		<div class ="container">
-			
+			<div id="inner">
+				<!-- <h2>.</h2> -->
+				<div class="project">
+					<a target="blank" href="/savethedate"><img src="images/save/kiss3.jpg"></a>
+					<a target="blank" href="/savethedate"><h2>Wedding website</h2></a>
+					<p>I happen to be getting married soon and so I'm working on my wedding website. Take a look and tell me how I can do better. </p>
+				</div>
+				<div class="project">
+					<a target="blank" href="/cardables"><img src="images/icon.png"></a>
+					<a target="blank" href="/cardables"><h2>Cardables</h2></a>
+					<p>My family plays quite a bit of bridge. I thought it would be a good idea to create an app that would allow people to play cards without cards. Its still rough and has lots of bugs, but its in the works. </p>
+				</div>
+				<!-- add a see more button some point in the future when I have more work :) -->
+			</div>
 		</div>
 	</div>
-	<div class="story">
+	<div id = "fun" class="story">
 		<div class ="container">
-
+			<div class="center">
+				<h2>Currently Under Construction</h2>
+				<p>Check back later for updates =)</p>
+			</div>
 		</div>
 	</div>
 </body>

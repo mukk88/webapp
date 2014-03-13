@@ -71,7 +71,7 @@ if (app.get('env') === 'production') {
  * Routes
  */
 // serve index and view partials
-app.get('/cardables/', routes.splash);
+app.get('/cardables', routes.splash);
 app.get('/cardables/index.html', routes.index);
 app.get('/cardables/play.html', routes.play);
 app.get('/cardables/pitch.html', routes.pitch);
