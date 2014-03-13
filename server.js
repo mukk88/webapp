@@ -90,6 +90,7 @@ app.get('/cardables/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
 app.get('/savethedate', routes.saveTheDate)
+app.get('/book', routes.book);
 app.get('*', routes.index);
 
 

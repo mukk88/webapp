@@ -11,6 +11,9 @@ exports.saveTheDate = function(req,res){
 	res.render('savedate.html');
 }
 
+exports.book = function(req,res){
+  res.render('book.html');
+}
 
 exports.splash = function(req, res){
   res.render('splash.html');
