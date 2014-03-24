@@ -144,7 +144,7 @@ span,h3,p{
 }
 
 #third{
-	background: url(../images/save/kiss2.jpg) 0 no-repeat fixed;
+	background: url(../images/save/kiss2.jpg) 50% 0 no-repeat fixed;
 		/*color: white;*/
 	height:500px;
 	background-size: 100% auto;
