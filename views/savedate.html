@@ -13,25 +13,18 @@
 <script>
 $(document).ready(function(){
 	$('#nav').localScroll(800);
-	function update(){
-		console.log('true');
-		if($(window).height() < $(window).width()){
-			// $('#intro').parallax("50%", 1);
-			// $('#second').parallax("50%", 0.1);
-			$('.bg').parallax("50%", 0.7,10);
-			// $('#third').parallax("100%", 0.3);
-		}else{
-			alert('hi');
-			$("#intro").css('background-attachment','scroll');
-			$("#third").css('background-attachment','scroll');
-			$("#third").css('background-size','auto 1000px');
-			$("#fifth").css('background-attachment','scroll');
-			$("#fifth").css('background-size','auto 1000px');
-		}
+	function gomobile(){
+		console.log('mobile');
+		$('#name').val('hi');
+		$("#intro").css('background-attachment','scroll');
+		$("#third").css('background-attachment','scroll');
+		$("#third").css('background-size','auto 1000px');
+		$("#fifth").css('background-attachment','scroll');
+		$("#fifth").css('background-size','auto 1000px');
 	}; 
-	update();
-
-
+	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+		gomobile();
+	};
 	$('#ty').css('opacity',0);
 	$('#submit').click(function(){
 		var name = $('#name').val();
