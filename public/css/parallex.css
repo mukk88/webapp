@@ -110,8 +110,7 @@ h2{
 }
 
 #intro{
-	background-position: 0 500;
-	background:url(../images/save/tree3.jpg) 50% no-repeat fixed;
+	background:url(../images/save/tree3.jpg) no-repeat fixed;
 	background-size: auto 870px;
 	/*color: white;*/
 	height: 650px;
@@ -176,7 +175,7 @@ h2{
 }
 
 #last .float-bottom{
-	padding: 40px 0 0 0;
+	padding: 60px 0 0 0;
 }
 
 #last h2{
@@ -305,7 +304,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 #ty{
-	margin-top: 100px;
 	-webkit-transition: opacity 1s ease-in-out;
   	-moz-transition: opacity 1s ease-in-out;
   	-o-transition: opacity 1s ease-in-out;
