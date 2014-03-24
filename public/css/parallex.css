@@ -110,8 +110,9 @@ span,h3,p{
 }
 
 #intro{
-	background:url(../images/save/tree3.jpg) 50% 0 no-repeat fixed;
-	background-size: 100% auto;
+	background-position: 0 500;
+	background:url(../images/save/tree3.jpg) 50% no-repeat fixed;
+	background-size: auto 850px;
 	/*color: white;*/
 	height: 650px;
 	margin: 0 auto;
