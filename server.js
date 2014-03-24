@@ -3,7 +3,7 @@
  */
 var express = require('express'),
     routes = require('./routes'),
-    api = require('./routes/api'),
+    // api = require('./routes/api'),
     http = require('http'),
     path = require('path'),
     passport = require('passport'),
@@ -71,26 +71,25 @@ if (app.get('env') === 'production') {
  * Routes
  */
 // serve index and view partials
-app.get('/cardables', routes.splash);
-app.get('/cardables/index.html', routes.index);
-app.get('/cardables/play.html', routes.play);
-app.get('/cardables/pitch.html', routes.pitch);
-app.get('/cardables/game.html', routes.game);
-//app.get('/index', ensureAuthenticated, routes.index);
-app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }), routes.authFacebookCallback);
-app.get('/logout', routes.logout);
+// app.get('/cardables', routes.splash);
+// app.get('/cardables/index.html', routes.index);
+// app.get('/cardables/play.html', routes.play);
+// app.get('/cardables/pitch.html', routes.pitch);
+// app.get('/cardables/game.html', routes.game);
+// app.get('/index', ensureAuthenticated, routes.index);
+// app.get('/auth/facebook', passport.authenticate('facebook'), routes.authFacebook);
+// app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }), routes.authFacebookCallback);
+// app.get('/logout', routes.logout);
 
-// JSON API
-app.get('/cardables/api/createGame', api.createGame);
-app.get('/cardables/api/deleteGame', api.deleteGame);
-app.get('/cardables/api/joinGame', api.joinGame);
-app.get('/cardables/api/getAllGames', api.getAllGames);
-app.get('/cardables/api/deleteAllGames',api.deleteAllGames);
+// // JSON API
+// app.get('/cardables/api/createGame', api.createGame);
+// app.get('/cardables/api/deleteGame', api.deleteGame);
+// app.get('/cardables/api/joinGame', api.joinGame);
+// app.get('/cardables/api/getAllGames', api.getAllGames);
+// app.get('/cardables/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
 app.get('/savethedate', routes.saveTheDate)
-app.get('/book', routes.book);
 app.get('*', routes.index);
 
 
@@ -98,46 +97,46 @@ app.get('*', routes.index);
  * Start Server
  */
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+// var io = require('socket.io').listen(server);
 
 var port = process.env.PORT ||  3000; 
 server.listen(port, function () {
-  // console.log('Express server listening on port ' + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });
 
 
 /**
  * Socket.io stuff
  */
-io.sockets.on('connection', function (socket) {
-  // console.log('sessionID '+socket.id+' connected!');
-  socket.on('updateCards', function (data) {
-    // console.log('updateCards '+data.gid + ' ' + data.card);
-    socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
-  });
+// io.sockets.on('connection', function (socket) {
+//   // console.log('sessionID '+socket.id+' connected!');
+//   socket.on('updateCards', function (data) {
+//     // console.log('updateCards '+data.gid + ' ' + data.card);
+//     socket.broadcast.to(data.gid).emit('cardsUpdated', {message: data.card})
+//   });
 
-  socket.on('join', function (data) {
-    // console.log('sessionID '+socket.id+' joined '+data);
-    socket.join(data);
-    var results = new Array();
-    var clients = io.sockets.clients(data);
-    for(var i=0; i<clients.length; i++){
-      results.push(clients[i].id);
-    }
-    socket.broadcast.to(data).emit('players', {message: results});
-    socket.emit('players', {message: results});
-  });
+//   socket.on('join', function (data) {
+//     // console.log('sessionID '+socket.id+' joined '+data);
+//     socket.join(data);
+//     var results = new Array();
+//     var clients = io.sockets.clients(data);
+//     for(var i=0; i<clients.length; i++){
+//       results.push(clients[i].id);
+//     }
+//     socket.broadcast.to(data).emit('players', {message: results});
+//     socket.emit('players', {message: results});
+//   });
 
-  socket.on('disconnect', function () {
-    // console.log('sessionID '+socket.id+' disconnected!');
-    rooms = io.sockets.manager.roomClients[socket.id];
-    room = Object.keys(rooms)[1].substring(1);
-    socket.leave(room);
-    var results = new Array();
-    var clients = io.sockets.clients(room);
-    for(var i=0; i<clients.length; i++){
-      results.push(clients[i].id);
-    }
-    socket.broadcast.to(room).emit('players', {message: results})
-  });
-});
+//   socket.on('disconnect', function () {
+//     // console.log('sessionID '+socket.id+' disconnected!');
+//     rooms = io.sockets.manager.roomClients[socket.id];
+//     room = Object.keys(rooms)[1].substring(1);
+//     socket.leave(room);
+//     var results = new Array();
+//     var clients = io.sockets.clients(room);
+//     for(var i=0; i<clients.length; i++){
+//       results.push(clients[i].id);
+//     }
+//     socket.broadcast.to(room).emit('players', {message: results})
+//   });
+// });
