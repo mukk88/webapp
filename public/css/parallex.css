@@ -147,7 +147,7 @@ span,h3,p{
 	background: url(../images/save/kiss2.jpg) 50% 0 no-repeat fixed;
 		/*color: white;*/
 	height:500px;
-	background-size: 100% auto;
+	background-size: auto 850px;
 	padding: 100px 0 0 0;	
 	z-index: 21;
 }
