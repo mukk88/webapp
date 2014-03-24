@@ -35,7 +35,7 @@ $(document).ready(function(){
 		var size = $('#size').val();
         $.ajax({
             type:"POST",
-            url:"http://cardable.azurewebsites.net/rsvp",
+            url:"http://cardables.azurewebsites.net/rsvp",
             data: {name:name, size:size}
         })
 		$('#ty').css('opacity',1);
