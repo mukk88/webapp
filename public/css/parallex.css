@@ -259,3 +259,9 @@ h2{
 #last input{
 	margin:0 auto;
 }
+
+@media (max-width: 600px){
+	#intro{
+		background-size: 100% 650px;
+	}
+} 
