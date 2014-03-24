@@ -91,6 +91,7 @@ if (app.get('env') === 'production') {
 
 // redirect all others to the index (HTML5 history)
 app.post('/rsvp', save.addGuest);
+app.get('/guests/all', save.allGuests);
 app.get('/savethedate', routes.saveTheDate);
 app.get('*', routes.index);
 

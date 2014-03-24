@@ -43,3 +43,13 @@ exports.addGuest = function(req,res){
     res.send('1')
   });
 };
+
+exports.allGuests = function(req,res){
+  Guest.find({}, function (err, guests) {
+    if(err) {
+      res.send('there was a problem getting guests, pls try again later.');
+      return;
+    }
+    res.json(guests);
+  });
+};
