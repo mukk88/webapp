@@ -3,45 +3,46 @@
  */
 var express = require('express'),
     routes = require('./routes'),
+    save = require('./routes/save'),
     // api = require('./routes/api'),
     http = require('http'),
-    path = require('path'),
-    passport = require('passport'),
-    FacebookStrategy = require('passport-facebook').Strategy;
+    path = require('path')
+    // passport = require('passport'),
+    // FacebookStrategy = require('passport-facebook').Strategy;
 
 var app = module.exports = express();
 
 /**
  * facebook stuff
  */
-var FACEBOOK_APP_ID = "708980782452903";
-var FACEBOOK_APP_SECRET = "695824078d253ad54d17e1beb59d29a8";
+// var FACEBOOK_APP_ID = "708980782452903";
+// var FACEBOOK_APP_SECRET = "695824078d253ad54d17e1beb59d29a8";
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
+// passport.serializeUser(function(user, done) {
+//   done(null, user);
+// });
 
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
+// passport.deserializeUser(function(obj, done) {
+//   done(null, obj);
+// });
 
-passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://cardables.azurewebsites.net/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-    //   return done(err, user);
-    // });
-    return done(null, profile);
-  }
-));
+// passport.use(new FacebookStrategy({
+//     clientID: FACEBOOK_APP_ID,
+//     clientSecret: FACEBOOK_APP_SECRET,
+//     callbackURL: "http://cardables.azurewebsites.net/auth/facebook/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     // User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+//     //   return done(err, user);
+//     // });
+//     return done(null, profile);
+//   }
+// ));
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/auth/facebook')
-}
+// function ensureAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) { return next(); }
+//   res.redirect('/auth/facebook')
+// }
 
 /**
  * Configuration
@@ -52,8 +53,8 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 app.use(app.router);
 app.engine('html', require('ejs').renderFile);
 
@@ -89,7 +90,8 @@ if (app.get('env') === 'production') {
 // app.get('/cardables/api/deleteAllGames',api.deleteAllGames);
 
 // redirect all others to the index (HTML5 history)
-app.get('/savethedate', routes.saveTheDate)
+app.post('/rsvp', save.addGuest);
+app.get('/savethedate', routes.saveTheDate);
 app.get('*', routes.index);
 
 

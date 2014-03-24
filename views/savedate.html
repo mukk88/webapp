@@ -13,11 +13,6 @@
 <script>
 $(document).ready(function(){
 	$('#nav').localScroll(800);
-	
-	//.parallax(xPosition, speedFactor, outerHeight) options:
-	//xPosition - Horizontal position of the element
-	//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
-	//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
 	function update(){
 		console.log('true');
 		if($(window).height() < $(window).width()){
@@ -32,19 +27,29 @@ $(document).ready(function(){
 			$("#fifth").css('background-attachment','scroll');
 			$("#fifth").css('background-size','auto 1000px');
 		}
-	} 
-	update();
-	// $(window).resize(update);
-	// update whenever window height/width cahnges. 
+	}; 
 
-})
+	$('#ty').css('opacity',0);
+	$('#submit').click(function(){
+		var name = $('#name').val();
+		var size = $('#size').val();
+        $.ajax({
+            type:"POST",
+            url:"http://cardable.azurewebsites.net/rsvp",
+            data: {name:name, size:size}
+        })
+		$('#ty').css('opacity',1);
+		$('#rsvp').hide();
+	});
+
+});
 </script>
 </head>
 <body>	
 	<div id="intro">
 		<div class ="float-bottom">
 			<article>
-				<h2>Save ther Date!</h2>
+				<h2>Save the Date!</h2>
 			</article>
 		</div>
 	</div> 
@@ -91,8 +96,16 @@ $(document).ready(function(){
 	<div id="last">
 		<div class="story">
 			<div class = "float-bottom">
-				<!-- <input type="text"> -->
-				<h2>Thank You</h2>
+				<fieldset id ="rsvp">
+					<legend>RSVP!</legend>
+					<span id ="blurb">Let us know you are coming!</span>
+					Name:
+					<input id = "name" type="text">
+					Party Size:
+					<input id = "size" type="number">
+					<button id="submit">Submit</button>
+				</fieldset>
+				<h2 id = "ty">Thank You</h2>
 			</div>
 	    </div> 
 	</div> 

@@ -81,7 +81,7 @@ h2{
 	line-height: 10px;
 }
 
-span,h3,p{
+#last, #second span,h3,p{
 	float:right;
 	margin-right: 20%;
 	text-align: right;
@@ -112,7 +112,7 @@ span,h3,p{
 #intro{
 	background-position: 0 500;
 	background:url(../images/save/tree3.jpg) 50% no-repeat fixed;
-	background-size: auto 850px;
+	background-size: auto 870px;
 	/*color: white;*/
 	height: 650px;
 	margin: 0 auto;
@@ -176,7 +176,7 @@ span,h3,p{
 }
 
 #last .float-bottom{
-	padding: 100px 0 0 0;
+	padding: 40px 0 0 0;
 }
 
 #last h2{
@@ -258,4 +258,56 @@ h2{
 
 #last input{
 	margin:0 auto;
+	padding:5px;
+	display: block;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#last fieldset{
+	-moz-box-shadow:    3px 3px 5px 3px #ccc;
+  	-webkit-box-shadow: 3px 3px 5px 3px #ccc;
+ 	box-shadow:         3px 3px 5px 3px #ccc;
+	width:400px;
+	position: center;
+	margin-right: auto;
+	margin-left: auto;
+	border: 3px solid;
+	text-align: center;
+	padding: 10px
+}
+
+#last fieldset legend{
+	font-weight: bold;
+}
+
+#last button{
+	padding-left:5px;
+	padding-right:5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	width:70px;
+	margin-top: 10px;
+}
+
+#last #blurb{
+	display: block;
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+#last #submit{
+	margin-top: 15px;
+}
+
+#ty{
+	margin-top: 100px;
+	-webkit-transition: opacity 1s ease-in-out;
+  	-moz-transition: opacity 1s ease-in-out;
+  	-o-transition: opacity 1s ease-in-out;
+  	transition: opacity 1s ease-in-out;
 }
