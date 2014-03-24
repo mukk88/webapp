@@ -146,7 +146,7 @@ h2{
 	background: url(../images/save/kiss2.jpg) 50% 0 no-repeat fixed;
 		/*color: white;*/
 	height:600px;
-	background-size: 100% auto;
+	background-size: auto 1200px;
 	z-index: 21;
 }
 
