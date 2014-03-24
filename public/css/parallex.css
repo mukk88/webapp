@@ -110,7 +110,7 @@ h2{
 }
 
 #intro{
-	background:url(../images/save/tree3.jpg) 50% no-repeat fixed;
+	background:url(../images/save/tree3.jpg) 50% 0 no-repeat fixed;
 	background-size: 100% auto;
 	/*color: white;*/
 	height: 650px;
