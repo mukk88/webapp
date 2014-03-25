@@ -33,6 +33,7 @@ $(document).ready(function(){
 	$('#submit').click(function(){
 		var name = $('#name').val();
 		var size = $('#size').val();
+		$('#submit').html('Saving, please wait..');
         $.ajax({
             type:"POST",
             url:"http://cardables.azurewebsites.net/rsvp",
@@ -43,6 +44,7 @@ $(document).ready(function(){
 				$('#ty').css('opacity',1);
 				$('#rsvp').hide();
         	}else{
+        		$('#submit').html('Submit');
 				$('#size').val('');
         		$('#name').val('');
         		alert('sorry did not work, please try again');
@@ -51,6 +53,7 @@ $(document).ready(function(){
         .error(function(){
         	$('#size').val('');
         	$('#name').val('');
+        	$('#submit').html('Submit');
         	alert('sorry did not work, please try again');
         });
 	});
