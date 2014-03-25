@@ -39,9 +39,13 @@ $(document).ready(function(){
             url:"http://cardables.azurewebsites.net/rsvp",
             data: {name:name, size:size}
         })
-        .success(function(){
-			$('#ty').css('opacity',1);
-			$('#rsvp').hide();
+        .success(function(msg){
+        	if(msg=='1'){
+				$('#ty').css('opacity',1);
+				$('#rsvp').hide();
+        	}else{
+        		alert('sorry did not work, please try again');
+        	}
         })
         .error(function(){
         	alert('sorry did not work, please try again');
