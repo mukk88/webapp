@@ -44,10 +44,14 @@ $(document).ready(function(){
 				$('#ty').css('opacity',1);
 				$('#rsvp').hide();
         	}else{
+				$('#size').val('');
+        		$('#name').val('');
         		alert('sorry did not work, please try again');
         	}
         })
         .error(function(){
+        	$('#size').val('');
+        	$('#name').val('');
         	alert('sorry did not work, please try again');
         });
 	});
@@ -88,7 +92,7 @@ $(document).ready(function(){
 		<div class="story">
 			<div class="center">
 				<h2>about us</h2>
-				<p>We officially met for the first time over a game of Settlers. Due some strategic planning on our part, we ended up on the same team. We didn't win the game, but we both took home something special. That was in 2008.</p>
+				<p>We officially met for the first time over a game of Settlers. Due to some strategic planning on our part, we ended up on the same team. We didn't win the game, but we both took home something special. That was in 2008.</p>
 				<br>
 				<p>Since then we have been on a journey that has taken us all over the world. While it seems like we have travelled far, we know this is just the beginning. We are excited for you to join us to celebrate the start of the rest! As such, you are coordially invited to our wedding..</p>
 			</div>
